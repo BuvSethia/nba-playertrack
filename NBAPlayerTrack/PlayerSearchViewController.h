@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PlayerSearchResultsViewController.h"
 
-@interface PlayerSearchViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate>
+@interface PlayerSearchViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating>
 
 @property NSArray *playerArray;
-@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong,nonatomic) NSMutableArray *filteredPlayerArray;
+@property (nonatomic, strong) UISearchController *searchController;
+@property (nonatomic, strong) PlayerSearchResultsViewController *resultsTableController;
 
 @end
