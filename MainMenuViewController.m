@@ -13,6 +13,7 @@
 
 -(void)viewDidLoad
 {
+    [super viewDidLoad];
     SWRevealViewController *revealViewController = self.revealViewController;
     if ( revealViewController )
     {
@@ -22,6 +23,7 @@
     }
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-}
+    
+    }
 
 @end

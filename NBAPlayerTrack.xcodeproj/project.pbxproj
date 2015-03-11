@@ -12,12 +12,15 @@
 		39A100AF1AA4EA0D0092F5CF /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 39A100AD1AA4EA0D0092F5CF /* menu.png */; };
 		39A100B01AA4EA0D0092F5CF /* menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39A100AE1AA4EA0D0092F5CF /* menu@2x.png */; };
 		39A100B31AA4F0A70092F5CF /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A100B21AA4F0A70092F5CF /* NavigationViewController.m */; };
+		39A3D8DC1AB0D5D4006E9393 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A3D8DB1AB0D5D4006E9393 /* Player.m */; };
+		39A3D8DF1AB0E4FD006E9393 /* PlayerSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A3D8DE1AB0E4FD006E9393 /* PlayerSearchViewController.m */; };
 		39A7D2501AA25731005210F9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A7D24F1AA25731005210F9 /* main.m */; };
 		39A7D2531AA25731005210F9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A7D2521AA25731005210F9 /* AppDelegate.m */; };
 		39A7D2591AA25731005210F9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39A7D2571AA25731005210F9 /* Main.storyboard */; };
 		39A7D25B1AA25731005210F9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39A7D25A1AA25731005210F9 /* Images.xcassets */; };
 		39A7D25E1AA25731005210F9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39A7D25C1AA25731005210F9 /* LaunchScreen.xib */; };
 		39A7D26A1AA25731005210F9 /* NBAPlayerTrackTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A7D2691AA25731005210F9 /* NBAPlayerTrackTests.m */; };
+		39ABF1FC1AA63990001FFF8D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39ABF1FB1AA6398F001FFF8D /* Security.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +42,10 @@
 		39A100AE1AA4EA0D0092F5CF /* menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu@2x.png"; sourceTree = "<group>"; };
 		39A100B11AA4F0A70092F5CF /* NavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
 		39A100B21AA4F0A70092F5CF /* NavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationViewController.m; sourceTree = "<group>"; };
+		39A3D8DA1AB0D5D4006E9393 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		39A3D8DB1AB0D5D4006E9393 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
+		39A3D8DD1AB0E4FD006E9393 /* PlayerSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerSearchViewController.h; sourceTree = "<group>"; };
+		39A3D8DE1AB0E4FD006E9393 /* PlayerSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerSearchViewController.m; sourceTree = "<group>"; };
 		39A7D24A1AA25731005210F9 /* NBAPlayerTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NBAPlayerTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39A7D24E1AA25731005210F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		39A7D24F1AA25731005210F9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -50,6 +57,7 @@
 		39A7D2631AA25731005210F9 /* NBAPlayerTrackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NBAPlayerTrackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		39A7D2681AA25731005210F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		39A7D2691AA25731005210F9 /* NBAPlayerTrackTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBAPlayerTrackTests.m; sourceTree = "<group>"; };
+		39ABF1FB1AA6398F001FFF8D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39ABF1FC1AA63990001FFF8D /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +91,7 @@
 		39A7D2411AA25731005210F9 = {
 			isa = PBXGroup;
 			children = (
+				39ABF1FB1AA6398F001FFF8D /* Security.framework */,
 				39A7D24C1AA25731005210F9 /* NBAPlayerTrack */,
 				39A7D2661AA25731005210F9 /* NBAPlayerTrackTests */,
 				39A7D24B1AA25731005210F9 /* Products */,
@@ -103,11 +113,15 @@
 				39A100A61AA4E4340092F5CF /* SWRevealViewController */,
 				39A7D2511AA25731005210F9 /* AppDelegate.h */,
 				39A7D2521AA25731005210F9 /* AppDelegate.m */,
+				39A3D8DA1AB0D5D4006E9393 /* Player.h */,
+				39A3D8DB1AB0D5D4006E9393 /* Player.m */,
 				39A100AB1AA4E5B40092F5CF /* MainMenuViewController.m */,
 				39A100AA1AA4E5B40092F5CF /* MainMenuViewController.h */,
 				39A100B11AA4F0A70092F5CF /* NavigationViewController.h */,
 				39A100B21AA4F0A70092F5CF /* NavigationViewController.m */,
 				39A7D2571AA25731005210F9 /* Main.storyboard */,
+				39A3D8DD1AB0E4FD006E9393 /* PlayerSearchViewController.h */,
+				39A3D8DE1AB0E4FD006E9393 /* PlayerSearchViewController.m */,
 				39A7D25A1AA25731005210F9 /* Images.xcassets */,
 				39A7D25C1AA25731005210F9 /* LaunchScreen.xib */,
 				39A7D24D1AA25731005210F9 /* Supporting Files */,
@@ -246,9 +260,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				39A100AC1AA4E5B40092F5CF /* MainMenuViewController.m in Sources */,
+				39A3D8DF1AB0E4FD006E9393 /* PlayerSearchViewController.m in Sources */,
 				39A7D2531AA25731005210F9 /* AppDelegate.m in Sources */,
 				39A100B31AA4F0A70092F5CF /* NavigationViewController.m in Sources */,
 				39A7D2501AA25731005210F9 /* main.m in Sources */,
+				39A3D8DC1AB0D5D4006E9393 /* Player.m in Sources */,
 				39A100A91AA4E4340092F5CF /* SWRevealViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -371,8 +387,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/include/libxml2,
+				);
 				INFOPLIST_FILE = NBAPlayerTrack/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -381,8 +407,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/include/libxml2,
+				);
 				INFOPLIST_FILE = NBAPlayerTrack/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

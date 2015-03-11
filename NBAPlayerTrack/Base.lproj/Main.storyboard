@@ -46,31 +46,31 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="1003" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="C8E-na-Dce">
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="1003" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PTS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="C8E-na-Dce">
                                             <rect key="frame" x="109" y="57" width="42" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="1005" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="l23-fQ-tTe">
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="1005" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REB" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="l23-fQ-tTe">
                                             <rect key="frame" x="189" y="57" width="42" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="1007" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="P6u-aD-Te3">
+                                        <imageView userInteractionEnabled="NO" tag="1000" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu.png" id="XjL-gy-3Sc">
+                                            <rect key="frame" x="8" y="8" width="90" height="73"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="1007" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AST" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="P6u-aD-Te3">
                                             <rect key="frame" x="270" y="57" width="42" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" tag="1000" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu.png" id="XjL-gy-3Sc">
-                                            <rect key="frame" x="8" y="0.0" width="93" height="86"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -82,7 +82,11 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="TyL-JA-Uqq">
                         <barButtonItem key="leftBarButtonItem" image="menu.png" id="j9Y-CO-ARc"/>
-                        <barButtonItem key="rightBarButtonItem" title="Add Player" id="Hdt-eH-VZB"/>
+                        <barButtonItem key="rightBarButtonItem" title="Add Player" id="Hdt-eH-VZB">
+                            <connections>
+                                <segue destination="hhz-es-Srz" kind="push" id="gJg-RC-b0t"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="sidebarButton" destination="j9Y-CO-ARc" id="YF0-Nv-8b4"/>
@@ -136,31 +140,53 @@
             </objects>
             <point key="canvasLocation" x="1154" y="386"/>
         </scene>
-        <!--Table View Controller-->
-        <scene sceneID="zq9-CU-bXV">
+        <!--Add Player-->
+        <scene sceneID="v2h-Lo-0J6">
             <objects>
-                <tableViewController id="Ym4-Vz-u1Q" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="iRt-iA-OM5">
+                <tableViewController title="Add Player" id="hhz-es-Srz" customClass="PlayerSearchViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Yef-eo-9F5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search for a Player" id="uIU-qI-kCc">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                            <connections>
+                                <outlet property="delegate" destination="hhz-es-Srz" id="Vpp-IM-lkf"/>
+                            </connections>
+                        </searchBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ResultCell" id="DQU-TX-ASS">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProtoCell" id="EUj-Kl-KA2">
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DQU-TX-ASS" id="Mii-y2-u2B">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EUj-Kl-KA2" id="Y1i-L7-KNx">
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="Ym4-Vz-u1Q" id="p9X-2N-QYk"/>
-                            <outlet property="delegate" destination="Ym4-Vz-u1Q" id="ZrN-Ve-mbB"/>
+                            <outlet property="dataSource" destination="hhz-es-Srz" id="KxD-vo-LhK"/>
+                            <outlet property="delegate" destination="hhz-es-Srz" id="Lba-jf-Kz1"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="NBC-td-LAD"/>
+                    <connections>
+                        <outlet property="searchBar" destination="uIU-qI-kCc" id="bBi-7s-bG2"/>
+                        <outlet property="searchDisplayController" destination="9bd-g7-7v9" id="0LV-eX-Ypa"/>
+                    </connections>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fmT-cn-wlJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LEW-JW-Sfo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="9bd-g7-7v9">
+                    <connections>
+                        <outlet property="delegate" destination="hhz-es-Srz" id="36o-zF-gig"/>
+                        <outlet property="searchBar" destination="uIU-qI-kCc" id="PZc-Ik-IGO"/>
+                        <outlet property="searchContentsController" destination="hhz-es-Srz" id="aft-DG-d7l"/>
+                        <outlet property="searchResultsDataSource" destination="hhz-es-Srz" id="o1H-3g-8ME"/>
+                        <outlet property="searchResultsDelegate" destination="hhz-es-Srz" id="KbL-B0-3SF"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="1756" y="455"/>
+            <point key="canvasLocation" x="1748" y="442"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0uG-fy-6p5">
