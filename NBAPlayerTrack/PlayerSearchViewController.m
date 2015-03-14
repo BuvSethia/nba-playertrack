@@ -10,6 +10,8 @@
 
 #import "PlayerSearchViewController.h"
 #import "Player.h"
+#import "Utility.h"
+#import "MainMenuViewController.h"
 
 @implementation PlayerSearchViewController
 
@@ -67,6 +69,19 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"%ld", (long)indexPath.row);
+    Player *player;
+    if(tableView == self.tableView)
+    {
+        player = self.playerArray[indexPath.row];
+    }
+    else
+    {
+        player = self.filteredPlayerArray[indexPath.row];
+    }
+    
+    Player *newPlayer = [Utility generateObjectForPlayer:player];
+    [[MainMenuViewController userPlayers] addObject:newPlayer];
+    
 }
 
 #pragma mark - UISearchBarDelegate

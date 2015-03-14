@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MainMenuViewController : UITableViewController
+@interface MainMenuViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
++(NSMutableArray*)userPlayers;
 
 @end

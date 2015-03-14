@@ -12,6 +12,7 @@
 		39A100AF1AA4EA0D0092F5CF /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 39A100AD1AA4EA0D0092F5CF /* menu.png */; };
 		39A100B01AA4EA0D0092F5CF /* menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39A100AE1AA4EA0D0092F5CF /* menu@2x.png */; };
 		39A100B31AA4F0A70092F5CF /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A100B21AA4F0A70092F5CF /* NavigationViewController.m */; };
+		39A2BA201AB36F34001C905E /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A2BA1F1AB36F34001C905E /* Utility.m */; };
 		39A3D8DC1AB0D5D4006E9393 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A3D8DB1AB0D5D4006E9393 /* Player.m */; };
 		39A3D8DF1AB0E4FD006E9393 /* PlayerSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A3D8DE1AB0E4FD006E9393 /* PlayerSearchViewController.m */; };
 		39A3D8E21AB0F871006E9393 /* PlayerSearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A3D8E11AB0F871006E9393 /* PlayerSearchResultsViewController.m */; };
@@ -43,6 +44,8 @@
 		39A100AE1AA4EA0D0092F5CF /* menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu@2x.png"; sourceTree = "<group>"; };
 		39A100B11AA4F0A70092F5CF /* NavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
 		39A100B21AA4F0A70092F5CF /* NavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationViewController.m; sourceTree = "<group>"; };
+		39A2BA1E1AB36F34001C905E /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utility.h; path = ../Utility.h; sourceTree = "<group>"; };
+		39A2BA1F1AB36F34001C905E /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Utility.m; path = ../Utility.m; sourceTree = "<group>"; };
 		39A3D8DA1AB0D5D4006E9393 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		39A3D8DB1AB0D5D4006E9393 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		39A3D8DD1AB0E4FD006E9393 /* PlayerSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerSearchViewController.h; sourceTree = "<group>"; };
@@ -118,8 +121,8 @@
 				39A7D2521AA25731005210F9 /* AppDelegate.m */,
 				39A3D8DA1AB0D5D4006E9393 /* Player.h */,
 				39A3D8DB1AB0D5D4006E9393 /* Player.m */,
-				39A100AB1AA4E5B40092F5CF /* MainMenuViewController.m */,
 				39A100AA1AA4E5B40092F5CF /* MainMenuViewController.h */,
+				39A100AB1AA4E5B40092F5CF /* MainMenuViewController.m */,
 				39A100B11AA4F0A70092F5CF /* NavigationViewController.h */,
 				39A100B21AA4F0A70092F5CF /* NavigationViewController.m */,
 				39A7D2571AA25731005210F9 /* Main.storyboard */,
@@ -127,6 +130,8 @@
 				39A3D8DE1AB0E4FD006E9393 /* PlayerSearchViewController.m */,
 				39A3D8E01AB0F871006E9393 /* PlayerSearchResultsViewController.h */,
 				39A3D8E11AB0F871006E9393 /* PlayerSearchResultsViewController.m */,
+				39A2BA1E1AB36F34001C905E /* Utility.h */,
+				39A2BA1F1AB36F34001C905E /* Utility.m */,
 				39A7D25A1AA25731005210F9 /* Images.xcassets */,
 				39A7D25C1AA25731005210F9 /* LaunchScreen.xib */,
 				39A7D24D1AA25731005210F9 /* Supporting Files */,
@@ -268,6 +273,7 @@
 				39A3D8DF1AB0E4FD006E9393 /* PlayerSearchViewController.m in Sources */,
 				39A3D8E21AB0F871006E9393 /* PlayerSearchResultsViewController.m in Sources */,
 				39A7D2531AA25731005210F9 /* AppDelegate.m in Sources */,
+				39A2BA201AB36F34001C905E /* Utility.m in Sources */,
 				39A100B31AA4F0A70092F5CF /* NavigationViewController.m in Sources */,
 				39A7D2501AA25731005210F9 /* main.m in Sources */,
 				39A3D8DC1AB0D5D4006E9393 /* Player.m in Sources */,

@@ -13,9 +13,24 @@
 
 @interface Player : NSObject
 
-@property (nonatomic, copy) NSString *ID;
-@property (nonatomic, copy) NSString *name;
-@property (nonatomic, copy) NSString *webLink;
+@property NSString *ID;
+@property NSString *name;
+@property NSString *webLink;
+@property NSString *updateDate;
+@property NSString *DOB;
+@property NSString *position;
+@property NSString *jNumber;
+@property NSString *height;
+@property NSString *weight;
+@property NSString *yearsPro;
+@property NSString *team;
+
+@property NSDictionary *perGameStats;
+@property NSDictionary *per36Stats;
+@property NSDictionary *careerPerGameStats;
+@property NSDictionary *advancedStats;
+@property NSDictionary *careerAdvancedStats;
+
 
 + (id)generatePlayerList;
 

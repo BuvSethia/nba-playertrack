@@ -40,6 +40,7 @@
             NSDictionary *inner = [playerDictionary objectForKey:key];
             player.name = [inner objectForKey:@"PlayerName"];
             player.webLink = [inner objectForKey:@"WebLink"];
+            player.updateDate = @"-1";
             [playerArray addObject:player];
             NSLog(@"%@,%@,%@", player.ID, player.name, player.webLink);
         }
