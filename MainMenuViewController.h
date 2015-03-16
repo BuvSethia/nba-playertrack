@@ -12,5 +12,6 @@
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
 +(NSMutableArray*)userPlayers;
++(bool)containsPlayer:(NSString*)playerID;
 
 @end

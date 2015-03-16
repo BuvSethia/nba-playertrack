@@ -62,9 +62,42 @@ static NSMutableArray *userPlayers = nil;
     aLabel = (UILabel *)[cell.contentView viewWithTag:1006];
     aLabel.text = [stats objectForKey:@"AST"];
     
+    UIImage *image = [UIImage imageNamed:@"menu.png"];
+    UIImageView *imageView = (UIImageView *)[cell.contentView viewWithTag:1000];
+    CGSize imageSize = imageView.frame.size;
+    NSLog(@"%lf", imageSize.height);
+    UIImage *resized = [self resizeImage:image imageSize:imageSize];
+    
+    imageView.image = resized;
+    
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     
     return cell;
+}
+
+//http://stackoverflow.com/questions/12552785/resizing-image-to-fit-uiimageview	
+-(UIImage*)resizeImage:(UIImage *)image imageSize:(CGSize)size
+{
+    UIGraphicsBeginImageContext(size);
+    [image drawInRect:CGRectMake(0,0,size.width,size.height)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    //here is the scaled image which has been changed to the size specified
+    UIGraphicsEndImageContext();
+    return newImage;
+    
+}
+
++(bool)containsPlayer:(NSString*)playerID
+{
+    for(Player *p in userPlayers)
+    {
+        if([playerID isEqualToString:p.ID])
+        {
+            return YES;
+        }
+    }
+    
+    return NO;
 }
 
 @end

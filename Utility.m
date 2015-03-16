@@ -13,6 +13,15 @@
 
 +(Player*)generateObjectForPlayer:(Player*)player
 {
+    //Save ourselves a call to a service and the database and check in-app if stats for this player have already been updated today
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
+    NSInteger day = [components day];
+    NSInteger playerDay = [player.updateDate integerValue];
+    if(day == playerDay)
+    {
+        return player;
+    }
+    
     NSString *url = [NSString stringWithFormat:@"http://ec2-52-10-76-24.us-west-2.compute.amazonaws.com/Service.svc/UpdateDBMethod/%@/%@", player.updateDate, player.ID];
     NSData *request = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
     if(request == Nil)
