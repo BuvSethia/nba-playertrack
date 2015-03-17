@@ -34,7 +34,6 @@
     player = [self.filteredPlayerArray objectAtIndex:indexPath.row];
     // Configure the cell
     cell.textLabel.text = player.name;
-    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     
     return cell;
 }

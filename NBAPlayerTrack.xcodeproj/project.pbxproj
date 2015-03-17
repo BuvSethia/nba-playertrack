@@ -22,6 +22,7 @@
 		39A7D25B1AA25731005210F9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39A7D25A1AA25731005210F9 /* Images.xcassets */; };
 		39A7D25E1AA25731005210F9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39A7D25C1AA25731005210F9 /* LaunchScreen.xib */; };
 		39A7D26A1AA25731005210F9 /* NBAPlayerTrackTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A7D2691AA25731005210F9 /* NBAPlayerTrackTests.m */; };
+		39AC2E021AB8ADCE0077D31E /* PlayerTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39AC2E011AB8ADCE0077D31E /* PlayerTabBarController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,8 @@
 		39A7D2631AA25731005210F9 /* NBAPlayerTrackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NBAPlayerTrackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		39A7D2681AA25731005210F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		39A7D2691AA25731005210F9 /* NBAPlayerTrackTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBAPlayerTrackTests.m; sourceTree = "<group>"; };
+		39AC2E001AB8ADCE0077D31E /* PlayerTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerTabBarController.h; sourceTree = "<group>"; };
+		39AC2E011AB8ADCE0077D31E /* PlayerTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerTabBarController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +125,8 @@
 				39A100B11AA4F0A70092F5CF /* NavigationViewController.h */,
 				39A100B21AA4F0A70092F5CF /* NavigationViewController.m */,
 				39A7D2571AA25731005210F9 /* Main.storyboard */,
+				39AC2E001AB8ADCE0077D31E /* PlayerTabBarController.h */,
+				39AC2E011AB8ADCE0077D31E /* PlayerTabBarController.m */,
 				39A3D8DD1AB0E4FD006E9393 /* PlayerSearchViewController.h */,
 				39A3D8DE1AB0E4FD006E9393 /* PlayerSearchViewController.m */,
 				39A3D8E01AB0F871006E9393 /* PlayerSearchResultsViewController.h */,
@@ -269,6 +274,7 @@
 				39A3D8DF1AB0E4FD006E9393 /* PlayerSearchViewController.m in Sources */,
 				39A3D8E21AB0F871006E9393 /* PlayerSearchResultsViewController.m in Sources */,
 				39A7D2531AA25731005210F9 /* AppDelegate.m in Sources */,
+				39AC2E021AB8ADCE0077D31E /* PlayerTabBarController.m in Sources */,
 				39A2BA201AB36F34001C905E /* Utility.m in Sources */,
 				39A100B31AA4F0A70092F5CF /* NavigationViewController.m in Sources */,
 				39A7D2501AA25731005210F9 /* main.m in Sources */,
