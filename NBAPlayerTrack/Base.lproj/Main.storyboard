@@ -67,7 +67,7 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView autoresizesSubviews="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1000" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="XjL-gy-3Sc">
+                                        <imageView autoresizesSubviews="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1000" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="XjL-gy-3Sc">
                                             <rect key="frame" x="8" y="8" width="70" height="70"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                             <accessibility key="accessibilityConfiguration">
