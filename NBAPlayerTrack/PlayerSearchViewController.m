@@ -83,6 +83,7 @@
     {
         Player *newPlayer = [Utility generateObjectForPlayer:player];
         [[MainMenuViewController userPlayers] addObject:newPlayer];
+        [MainMenuViewController saveUserPlayers];
     }
     else
     {

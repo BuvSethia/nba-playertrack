@@ -13,5 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
 +(NSMutableArray*)userPlayers;
 +(bool)containsPlayer:(NSString*)playerID;
++(NSString*)userPlayersFilePath;
++(bool)saveUserPlayers;
 
 @end

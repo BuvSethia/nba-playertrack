@@ -40,7 +40,7 @@
             NSDictionary *inner = [playerDictionary objectForKey:key];
             player.name = [inner objectForKey:@"PlayerName"];
             player.webLink = [inner objectForKey:@"WebLink"];
-            player.updateDate = @"-1";
+            player.updateDate = @"0";
             [playerArray addObject:player];
             NSLog(@"%@,%@,%@", player.ID, player.name, player.webLink);
         }
@@ -48,6 +48,50 @@
         return playerArray;
     }
 
+}
+
+#pragma mark NSCoding
+-(id)initWithCoder:(NSCoder*)decoder{
+    if ((self = [super init])) {
+        self.ID = [decoder decodeObjectForKey:@"ID"];
+        self.name = [decoder decodeObjectForKey:@"Name"];
+        self.webLink = [decoder decodeObjectForKey:@"webLink"];
+        self.updateDate = [decoder decodeObjectForKey:@"updateDate"];
+        self.DOB = [decoder decodeObjectForKey:@"DOB"];
+        self.position = [decoder decodeObjectForKey:@"Position"];
+        self.height = [decoder decodeObjectForKey:@"Height"];
+        self.weight = [decoder decodeObjectForKey:@"Weight"];
+        self.yearsPro = [decoder decodeObjectForKey:@"yearsPro"];
+        self.team = [decoder decodeObjectForKey:@"Team"];
+        self.jNumber = [decoder decodeObjectForKey:@"jNumber"];
+        self.perGameStats = [decoder decodeObjectForKey:@"perGame"];
+        self.per36Stats = [decoder decodeObjectForKey:@"per36"];
+        self.advancedStats = [decoder decodeObjectForKey:@"Advanced"];
+        self.careerPerGameStats = [decoder decodeObjectForKey:@"careerPer"];
+        self.careerAdvancedStats = [decoder decodeObjectForKey:@"careerAdvanced"];
+    }
+    return self;
+}
+
+
+
+-(void)encodeWithCoder:(NSCoder*)encoder{
+    [encoder encodeObject:self.ID forKey:@"ID"];
+    [encoder encodeObject:self.name forKey:@"Name"];
+    [encoder encodeObject:self.webLink forKey:@"webLink"];
+    [encoder encodeObject:self.updateDate forKey:@"updateDate"];
+    [encoder encodeObject:self.DOB forKey:@"DOB"];
+    [encoder encodeObject:self.position forKey:@"Position"];
+    [encoder encodeObject:self.height forKey:@"Height"];
+    [encoder encodeObject:self.weight forKey:@"Weight"];
+    [encoder encodeObject:self.yearsPro forKey:@"yearsPro"];
+    [encoder encodeObject:self.team forKey:@"Team"];
+    [encoder encodeObject:self.jNumber forKey:@"jNumber"];
+    [encoder encodeObject:self.perGameStats forKey:@"perGame"];
+    [encoder encodeObject:self.per36Stats forKey:@"per36"];
+    [encoder encodeObject:self.advancedStats forKey:@"Advanced"];
+    [encoder encodeObject:self.careerPerGameStats forKey:@"careerPer"];
+    [encoder encodeObject:self.careerAdvancedStats forKey:@"careerAdvanced"];
 }
 
 @end

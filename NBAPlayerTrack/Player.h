@@ -11,7 +11,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Player : NSObject
+@interface Player : NSObject<NSCoding>
 
 @property NSString *ID;
 @property NSString *name;

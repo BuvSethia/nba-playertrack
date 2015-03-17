@@ -9,6 +9,7 @@
 #import "MainMenuViewController.h"
 #import "SWRevealViewController.h"
 #import "Player.h"
+#import "Utility.h"
 
 @implementation MainMenuViewController
 
@@ -27,6 +28,20 @@ static NSMutableArray *userPlayers = nil;
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
+    if(userPlayers == Nil && [[NSFileManager defaultManager] fileExistsAtPath:[MainMenuViewController userPlayersFilePath]])
+    {
+        userPlayers = [NSKeyedUnarchiver unarchiveObjectWithFile:[MainMenuViewController userPlayersFilePath]];
+        NSLog(@"Loading players from file");
+        for(int i = 0; i < userPlayers.count; i++)
+        {
+            userPlayers[i] = [Utility generateObjectForPlayer:userPlayers[i]];
+        }
+    }
+    else
+    {
+        NSLog(@"userPlayersFile DNE");
+    }
+    
     
 }
 
@@ -36,7 +51,7 @@ static NSMutableArray *userPlayers = nil;
     return userPlayers;
 }
 
-#pragma Table View Controller
+#pragma mark Table View Controller
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [userPlayers count];
@@ -65,7 +80,6 @@ static NSMutableArray *userPlayers = nil;
     UIImage *image = [UIImage imageNamed:@"menu.png"];
     UIImageView *imageView = (UIImageView *)[cell.contentView viewWithTag:1000];
     CGSize imageSize = imageView.frame.size;
-    NSLog(@"%lf", imageSize.height);
     UIImage *resized = [self resizeImage:image imageSize:imageSize];
     
     imageView.image = resized;
@@ -98,6 +112,24 @@ static NSMutableArray *userPlayers = nil;
     }
     
     return NO;
+}
+
++(bool)saveUserPlayers
+{
+    [NSKeyedArchiver archiveRootObject:userPlayers toFile:[MainMenuViewController userPlayersFilePath]];
+    if([[NSFileManager defaultManager] fileExistsAtPath:[MainMenuViewController userPlayersFilePath]])
+    {
+        NSLog(@"User players saved to file");
+    }
+    return YES;
+}
+
++(NSString*)userPlayersFilePath
+{
+    NSArray *initPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentFolder = [initPath objectAtIndex:0];
+    NSString *path = [documentFolder stringByAppendingFormat:@"/userPlayers.plist"];
+    return path;
 }
 
 @end

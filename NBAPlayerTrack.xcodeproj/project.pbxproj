@@ -22,7 +22,6 @@
 		39A7D25B1AA25731005210F9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39A7D25A1AA25731005210F9 /* Images.xcassets */; };
 		39A7D25E1AA25731005210F9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39A7D25C1AA25731005210F9 /* LaunchScreen.xib */; };
 		39A7D26A1AA25731005210F9 /* NBAPlayerTrackTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A7D2691AA25731005210F9 /* NBAPlayerTrackTests.m */; };
-		39ABF1FC1AA63990001FFF8D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39ABF1FB1AA6398F001FFF8D /* Security.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,7 +62,6 @@
 		39A7D2631AA25731005210F9 /* NBAPlayerTrackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NBAPlayerTrackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		39A7D2681AA25731005210F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		39A7D2691AA25731005210F9 /* NBAPlayerTrackTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBAPlayerTrackTests.m; sourceTree = "<group>"; };
-		39ABF1FB1AA6398F001FFF8D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,7 +69,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				39ABF1FC1AA63990001FFF8D /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,7 +94,6 @@
 		39A7D2411AA25731005210F9 = {
 			isa = PBXGroup;
 			children = (
-				39ABF1FB1AA6398F001FFF8D /* Security.framework */,
 				39A7D24C1AA25731005210F9 /* NBAPlayerTrack */,
 				39A7D2661AA25731005210F9 /* NBAPlayerTrackTests */,
 				39A7D24B1AA25731005210F9 /* Products */,

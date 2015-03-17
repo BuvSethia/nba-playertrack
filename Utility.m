@@ -13,12 +13,14 @@
 
 +(Player*)generateObjectForPlayer:(Player*)player
 {
+    NSLog(@"Player being updated: %@", player.ID);
     //Save ourselves a call to a service and the database and check in-app if stats for this player have already been updated today
     NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
     NSInteger day = [components day];
     NSInteger playerDay = [player.updateDate integerValue];
     if(day == playerDay)
     {
+        NSLog(@"Precheck results: No update to player necessary. Not calling updateDBMethod service.");
         return player;
     }
     
