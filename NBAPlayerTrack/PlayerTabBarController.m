@@ -11,26 +11,4 @@
 
 @implementation PlayerTabBarController
 
--(id)init
-{
-    NSLog(@"Hello from tab controller");
-    self = [super init];
-    if(self)
-    {
-        SWRevealViewController *revealViewController = self.revealViewController;
-        if ( revealViewController )
-        {
-            [self.sidebarButton setTarget: self.revealViewController];
-            [self.sidebarButton setAction: @selector( revealToggle: )];
-            [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
-        }
-    }
-    
-    return self;
-    
-}
-
-- (IBAction)playerMenuPressed:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
-}
 @end

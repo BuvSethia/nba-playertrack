@@ -30,12 +30,15 @@ static NSMutableArray *userPlayers = nil;
     
     if(userPlayers == Nil && [[NSFileManager defaultManager] fileExistsAtPath:[MainMenuViewController userPlayersFilePath]])
     {
+        
         userPlayers = [NSKeyedUnarchiver unarchiveObjectWithFile:[MainMenuViewController userPlayersFilePath]];
         NSLog(@"Loading players from file");
         for(int i = 0; i < userPlayers.count; i++)
         {
             userPlayers[i] = [Utility generateObjectForPlayer:userPlayers[i]];
         }
+        
+        //[MainMenuViewController removePlayerFile];
     }
     else
     {
@@ -133,14 +136,14 @@ static NSMutableArray *userPlayers = nil;
 }
 
 //Method used for debugging purposes only
-+(void)removeImage:(NSString *)fileName
++(void)removePlayerFile
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSError *error;
     BOOL success = [fileManager removeItemAtPath:[MainMenuViewController userPlayersFilePath] error:&error];
     if (success) {
-        UIAlertView *removeSuccessFulAlert=[[UIAlertView alloc]initWithTitle:@"Congratulation:" message:@"Successfully removed" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
-        [removeSuccessFulAlert show];
+        /*UIAlertView *removeSuccessFulAlert=[[UIAlertView alloc]initWithTitle:@"Congratulation:" message:@"Successfully removed" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
+        [removeSuccessFulAlert show];*/
     }
     else
     {

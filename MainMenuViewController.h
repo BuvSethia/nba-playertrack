@@ -15,5 +15,6 @@
 +(bool)containsPlayer:(NSString*)playerID;
 +(NSString*)userPlayersFilePath;
 +(bool)saveUserPlayers;
++(void)removePlayerFile;
 
 @end

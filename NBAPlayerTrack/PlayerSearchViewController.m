@@ -72,10 +72,12 @@
     if(tableView == self.tableView)
     {
         player = self.playerArray[indexPath.row];
+        NSLog(@"Selecting from main table %@", player.ID);
     }
     else
     {
         player = self.filteredPlayerArray[indexPath.row];
+        NSLog(@"Selecting from search table %@", player.ID);
     }
     
     if(![MainMenuViewController containsPlayer:player.ID])

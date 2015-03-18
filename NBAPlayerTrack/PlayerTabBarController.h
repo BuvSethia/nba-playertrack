@@ -10,6 +10,4 @@
 
 @interface PlayerTabBarController : UITabBarController
 
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
-
 @end
