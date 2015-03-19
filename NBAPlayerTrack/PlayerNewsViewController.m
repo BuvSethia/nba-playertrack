@@ -15,13 +15,13 @@
 
 -(void)viewDidLoad
 {
-    self.articles = nil;
+    self.articles = [[NSMutableArray alloc] initWithArray:[[NSArray alloc] initWithObjects:@"hello", @"goodbye", nil]];
     SWRevealViewController *revealViewController = self.revealViewController;
     if ( revealViewController )
     {
-        revealViewController.navigationItem.rightBarButtonItem = self.playerMenuButton;
-        [revealViewController.navigationItem.leftBarButtonItem setTarget: self.revealViewController];
-        [revealViewController.navigationItem.leftBarButtonItem setAction: @selector( revealToggle: )];
+        self.navigationItem.leftBarButtonItem = self.tabBarController.navigationItem.leftBarButtonItem;
+        [self.tabBarController.navigationItem.leftBarButtonItem setTarget: self.revealViewController];
+        [self.tabBarController.navigationItem.leftBarButtonItem setAction: @selector( revealToggle: )];
     }
 }
 
@@ -31,6 +31,7 @@
     {
         [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     }
+    self.tabBarController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Player Menu" style:UIBarButtonItemStylePlain target:self action:@selector(playerMenuPressed)];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -40,17 +41,17 @@
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"PlayerCell";
+    static NSString *CellIdentifier = @"ArticleCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if ( cell == nil ) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
+    cell.textLabel.text = self.articles[indexPath.row];
     return cell;
 }
 
-- (IBAction)playerMenuButtonPressed:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
-    //[self.navigationController pushViewController:[[MainMenuViewController alloc] init] animated:YES];
+- (void)playerMenuPressed{
+    [self.tabBarController.navigationController popViewControllerAnimated:YES];
 }
 
 @end

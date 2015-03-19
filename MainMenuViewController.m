@@ -15,6 +15,14 @@
 
 static NSMutableArray *userPlayers = nil;
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    if(self.revealViewController)
+    {
+        [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
+    }
+}
+
 -(void)viewDidLoad
 {
     [super viewDidLoad];
@@ -23,7 +31,6 @@ static NSMutableArray *userPlayers = nil;
     {
         [self.sidebarButton setTarget: self.revealViewController];
         [self.sidebarButton setAction: @selector( revealToggle: )];
-        [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     }
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];

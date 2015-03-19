@@ -8,10 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PlayerNewsViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface PlayerNewsViewController : UITableViewController<UITableViewDataSource, UITableViewDelegate>
 
 @property NSMutableArray *articles;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *playerMenuButton;
 
 @end
