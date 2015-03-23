@@ -10,5 +10,6 @@
 
 @interface ArticleViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property NSString *url;
 
 @end

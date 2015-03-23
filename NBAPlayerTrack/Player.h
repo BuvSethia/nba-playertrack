@@ -31,6 +31,8 @@
 @property NSDictionary *advancedStats;
 @property NSDictionary *careerAdvancedStats;
 
+@property NSMutableArray *articles;
+
 
 + (id)generatePlayerList;
 

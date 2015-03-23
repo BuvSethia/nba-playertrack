@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Player.h"
 
 @interface PlayerTabBarController : UITabBarController
+
+@property Player *player;
 
 @end

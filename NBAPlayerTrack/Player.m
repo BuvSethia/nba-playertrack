@@ -69,6 +69,7 @@
         self.advancedStats = [decoder decodeObjectForKey:@"Advanced"];
         self.careerPerGameStats = [decoder decodeObjectForKey:@"careerPer"];
         self.careerAdvancedStats = [decoder decodeObjectForKey:@"careerAdvanced"];
+        self.articles = [decoder decodeObjectForKey:@"Articles"];
     }
     return self;
 }
@@ -92,6 +93,8 @@
     [encoder encodeObject:self.advancedStats forKey:@"Advanced"];
     [encoder encodeObject:self.careerPerGameStats forKey:@"careerPer"];
     [encoder encodeObject:self.careerAdvancedStats forKey:@"careerAdvanced"];
+    [encoder encodeObject:self.articles forKey:@"Articles"];
+    
 }
 
 @end

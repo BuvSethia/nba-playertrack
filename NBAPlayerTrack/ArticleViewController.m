@@ -22,8 +22,7 @@
         [self.tabBarController.navigationItem.leftBarButtonItem setAction: @selector( revealToggle: )];
     }
     
-    NSString *url = @"http://www.reddit.com/";
-    NSURL *urlU = [NSURL URLWithString:url];
+    NSURL *urlU = [NSURL URLWithString:self.url];
     NSURLRequest *request = [NSURLRequest requestWithURL:urlU];
     [self.webView loadRequest:request];
 }

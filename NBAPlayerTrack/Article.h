@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Article : NSObject
+@interface Article : NSObject<NSCoding>
+
+@property NSString *title;
+@property NSString *url;
 
 @end

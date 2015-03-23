@@ -8,6 +8,7 @@
 
 #import "Utility.h"
 #import "Player.h"
+#import "Article.h"
 
 @implementation Utility
 
@@ -23,6 +24,8 @@
         NSLog(@"Precheck results: No update to player necessary. Not calling updateDBMethod service.");
         return player;
     }
+    
+    NSLog(@"Updated: %@", player.updateDate);
     
     NSString *url = [NSString stringWithFormat:@"http://ec2-52-10-76-24.us-west-2.compute.amazonaws.com/Service.svc/UpdateDBMethod/%@/%@", player.updateDate, player.ID];
     NSData *request = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
@@ -59,7 +62,7 @@
         {
             NSLog(@"Change to player stats via internet and database");
             NSString *url = @"http://ec2-52-10-76-24.us-west-2.compute.amazonaws.com/Service.svc/UpdateDBForPlayer";
-            NSString *playerData = [NSString stringWithFormat:@"{\"playerID\":\"%@\", \"html\":\"%@\"}", player.ID, player.webLink];
+            NSString *playerData = [NSString stringWithFormat:@"{\"playerID\":\"%@\", \"html\":\"%@\", \"name\":\"%@\"}", player.ID, player.webLink, player.name];
             [[Utility new] UpdateDBForPlayer:playerData url:url];
             Player *newPlayer = [[Utility new] createPlayerFromDB:player.ID];
             return newPlayer;
@@ -112,6 +115,7 @@
         newPlayer.advancedStats = [playerInfo objectForKey:@"AdvancedStats"];
         newPlayer.careerPerGameStats = [playerInfo objectForKey:@"CareerStats"];
         newPlayer.careerAdvancedStats = [playerInfo objectForKey:@"CareerAdvancedStats"];
+        newPlayer.articles = [[Utility new] getArticlesForPlayer:playerID];
         
         return newPlayer;
         
@@ -145,6 +149,44 @@
     
     
     return returnData;
+}
+
+-(NSMutableArray*)getArticlesForPlayer:(NSString*)playerID
+{
+    NSString *url = [NSString stringWithFormat:@"http://ec2-52-10-76-24.us-west-2.compute.amazonaws.com/Service.svc/GetArticles/%@", playerID];
+    NSData *request = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+    if(request == nil)
+    {
+        NSLog(@"No data received");
+        return nil;
+    }
+    else
+    {
+        NSLog(@"Articles for player %@", playerID);
+        //Convert request result into JSON dictionary
+        NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:request
+                                                                   options:NSJSONReadingMutableContainers
+                                                                     error:nil];
+        NSString *innerString = [dictionary objectForKey:@"GetArticlesResult"];
+        NSData *objectData = [innerString dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary *articles = [NSJSONSerialization JSONObjectWithData:objectData
+                                                               options:NSJSONReadingMutableContainers
+                                                                 error:nil];
+        NSMutableArray *playerArticles = [[NSMutableArray alloc] init];
+        for(id key in articles)
+        {
+            NSDictionary *articleInfo = [articles objectForKey:key];
+            Article *newArticle = [[Article alloc] init];
+            newArticle.title = [articleInfo objectForKey:@"title"];
+            NSLog(@"%@", newArticle.title);
+            newArticle.url = [articleInfo objectForKey:@"url"];
+            [playerArticles addObject:newArticle];
+        }
+        
+        
+        return playerArticles;
+        
+    }
 }
 
 @end

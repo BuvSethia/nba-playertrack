@@ -10,4 +10,23 @@
 
 @implementation Article
 
+#pragma mark NSCoding
+-(id)initWithCoder:(NSCoder *)decoder
+{
+    self = [super init];
+    if(self)
+    {
+        self.title = [decoder decodeObjectForKey:@"Title"];
+        self.url = [decoder decodeObjectForKey:@"URL"];
+    }
+    
+    return self;
+}
+
+-(void)encodeWithCoder:(NSCoder *)encoder
+{
+    [encoder encodeObject:self.title forKey:@"Title"];
+    [encoder encodeObject:self.url forKey:@"URL"];
+}
+
 @end

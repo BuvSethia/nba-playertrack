@@ -7,7 +7,6 @@
 //
 
 #import "PlayerTabBarController.h"
-#import "SWRevealViewController.h"
 
 @implementation PlayerTabBarController
 

@@ -10,8 +10,12 @@
 #import "SWRevealViewController.h"
 #import "Player.h"
 #import "Utility.h"
+#import "PlayerTabBarController.h"
 
 @implementation MainMenuViewController
+
+//To make my life easy
+NSInteger selectedCell = -1;
 
 static NSMutableArray *userPlayers = nil;
 
@@ -87,19 +91,23 @@ static NSMutableArray *userPlayers = nil;
     aLabel = (UILabel *)[cell.contentView viewWithTag:1006];
     aLabel.text = [stats objectForKey:@"AST"];
     
-    UIImage *image = [UIImage imageNamed:@"menu.png"];
+    /*UIImage *image = [UIImage imageNamed:@"menu.png"];
     UIImageView *imageView = (UIImageView *)[cell.contentView viewWithTag:1000];
     CGSize imageSize = imageView.frame.size;
     UIImage *resized = [self resizeImage:image imageSize:imageSize];
     
-    imageView.image = resized;
+    imageView.image = resized;*/
     
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     
     return cell;
 }
 
-//http://stackoverflow.com/questions/12552785/resizing-image-to-fit-uiimageview	
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    selectedCell = indexPath.row;
+}
+
+//http://stackoverflow.com/questions/12552785/resizing-image-to-fit-uiimageview
 -(UIImage*)resizeImage:(UIImage *)image imageSize:(CGSize)size
 {
     UIGraphicsBeginImageContext(size);
@@ -155,6 +163,17 @@ static NSMutableArray *userPlayers = nil;
     else
     {
         NSLog(@"Could not delete file -:%@ ",[error localizedDescription]);
+    }
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:@"PlayerDetailSegue"])
+    {
+        PlayerTabBarController *dest = (PlayerTabBarController*)segue.destinationViewController;
+        NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
+        Player *p = [userPlayers objectAtIndex:selectedIndexPath.row];
+        dest.player = p;
     }
 }
 

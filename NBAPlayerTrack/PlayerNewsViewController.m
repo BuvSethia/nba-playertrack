@@ -9,13 +9,19 @@
 #import "PlayerNewsViewController.h"
 #import "SWRevealViewController.h"
 #import "PlayerTabBarController.h"
-#import "MainMenuViewController.h"
+#import "ArticleViewController.h"
+#import "Article.h"
 
 @implementation PlayerNewsViewController
 
+//Make my life easy
+NSInteger selected = -1;
+
 -(void)viewDidLoad
 {
-    self.articles = [[NSMutableArray alloc] initWithArray:[[NSArray alloc] initWithObjects:@"hello", @"goodbye", nil]];
+    PlayerTabBarController *tabController = (PlayerTabBarController*)self.tabBarController;
+    self.articles = tabController.player.articles;
+    [self.tableView reloadData];
     SWRevealViewController *revealViewController = self.revealViewController;
     if ( revealViewController )
     {
@@ -46,12 +52,26 @@
     if ( cell == nil ) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    cell.textLabel.text = self.articles[indexPath.row];
+    Article *article = (Article*)self.articles[indexPath.row];
+    cell.textLabel.text = article.title;
     return cell;
+}
+ -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    selected = indexPath.row;
 }
 
 - (void)playerMenuPressed{
     [self.tabBarController.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
+    Article *article = [self.articles objectAtIndex:selectedIndexPath.row];
+    ArticleViewController *dest = (ArticleViewController*)segue.destinationViewController;
+    dest.url = article.url;
+    
 }
 
 @end
