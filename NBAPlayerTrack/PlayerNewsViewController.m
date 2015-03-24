@@ -14,8 +14,6 @@
 
 @implementation PlayerNewsViewController
 
-//Make my life easy
-NSInteger selected = -1;
 
 -(void)viewDidLoad
 {
@@ -58,7 +56,6 @@ NSInteger selected = -1;
 }
  -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    selected = indexPath.row;
 }
 
 - (void)playerMenuPressed{

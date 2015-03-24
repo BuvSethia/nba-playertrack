@@ -24,6 +24,7 @@
 @property NSString *weight;
 @property NSString *yearsPro;
 @property NSString *team;
+@property NSString *twitterID;
 
 @property NSDictionary *perGameStats;
 @property NSDictionary *per36Stats;

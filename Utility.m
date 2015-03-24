@@ -16,7 +16,7 @@
 {
     NSLog(@"Player being updated: %@", player.ID);
     //Save ourselves a call to a service and the database and check in-app if stats for this player have already been updated today
-    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[[NSDate alloc] init]];
     NSInteger day = [components day];
     NSInteger playerDay = [player.updateDate integerValue];
     if(day == playerDay)
@@ -110,6 +110,7 @@
         newPlayer.weight = [playerInfo objectForKey:@"Weight"];
         newPlayer.yearsPro = [playerInfo objectForKey:@"YearsPro"];
         newPlayer.team = [playerInfo objectForKey:@"TeamName"];
+        newPlayer.twitterID = [playerInfo objectForKey:@"TwitterID"];
         newPlayer.perGameStats = [playerInfo objectForKey:@"PerGame"];
         newPlayer.per36Stats = [playerInfo objectForKey:@"Per36"];
         newPlayer.advancedStats = [playerInfo objectForKey:@"AdvancedStats"];

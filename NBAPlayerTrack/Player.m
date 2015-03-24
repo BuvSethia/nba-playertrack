@@ -70,6 +70,7 @@
         self.careerPerGameStats = [decoder decodeObjectForKey:@"careerPer"];
         self.careerAdvancedStats = [decoder decodeObjectForKey:@"careerAdvanced"];
         self.articles = [decoder decodeObjectForKey:@"Articles"];
+        self.twitterID = [decoder decodeObjectForKey:@"Twitter"];
     }
     return self;
 }
@@ -94,6 +95,7 @@
     [encoder encodeObject:self.careerPerGameStats forKey:@"careerPer"];
     [encoder encodeObject:self.careerAdvancedStats forKey:@"careerAdvanced"];
     [encoder encodeObject:self.articles forKey:@"Articles"];
+    [encoder encodeObject:self.twitterID forKey:@"Twitter"];
     
 }
 

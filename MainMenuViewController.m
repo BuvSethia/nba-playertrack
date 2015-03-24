@@ -48,7 +48,7 @@ static NSMutableArray *userPlayers = nil;
         {
             userPlayers[i] = [Utility generateObjectForPlayer:userPlayers[i]];
         }
-        
+        [MainMenuViewController saveUserPlayers];
         //[MainMenuViewController removePlayerFile];
     }
     else
@@ -90,6 +90,11 @@ static NSMutableArray *userPlayers = nil;
     aLabel.text = [stats objectForKey:@"TRB"];
     aLabel = (UILabel *)[cell.contentView viewWithTag:1006];
     aLabel.text = [stats objectForKey:@"AST"];
+    
+    NSString *imageURL = [NSString stringWithFormat:@"http://ec2-52-10-76-24.us-west-2.compute.amazonaws.com/PlayerImages/%@.png", player.ID];
+    NSData *data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:imageURL]];
+    cell.imageView.image = [[UIImage alloc] initWithData:data];
+    
     
     /*UIImage *image = [UIImage imageNamed:@"menu.png"];
     UIImageView *imageView = (UIImageView *)[cell.contentView viewWithTag:1000];
