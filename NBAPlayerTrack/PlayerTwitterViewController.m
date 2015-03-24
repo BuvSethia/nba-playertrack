@@ -72,6 +72,7 @@ static NSString * const TweetTableReuseIdentifier = @"TweetCell";
         [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     }
     self.tabBarController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Player Menu" style:UIBarButtonItemStylePlain target:self action:@selector(playerMenuPressed)];
+    self.tabBarController.tabBar.barTintColor = [UIColor blueColor];
 }
 
 - (void)playerMenuPressed{

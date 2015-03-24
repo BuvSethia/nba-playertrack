@@ -57,7 +57,7 @@ static NSMutableArray *userPlayers = nil;
         NSLog(@"userPlayersFile DNE");
     }
     
-    [self.tableView registerNib:[UINib nibWithNibName:@"PlayerCell" bundle:nil] forCellReuseIdentifier:@"PlayerCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"PlayerCell" bundle:nil] forCellReuseIdentifier:@"menuCell"];
     
 }
 
@@ -75,7 +75,7 @@ static NSMutableArray *userPlayers = nil;
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"PlayerCell";
+    static NSString *CellIdentifier = @"menuCell";
     PlayerCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     /*UIImage *image = [UIImage imageNamed:@"menu.png"];
@@ -103,7 +103,7 @@ static NSMutableArray *userPlayers = nil;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    selectedCell = indexPath.row;
+    [self performSegueWithIdentifier:@"PlayerDetailSegue" sender:tableView];
 }
 
 //http://stackoverflow.com/questions/12552785/resizing-image-to-fit-uiimageview
