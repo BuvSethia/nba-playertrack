@@ -17,6 +17,8 @@
 		39A3890C1AC11DCD009FA8B6 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 39A389091AC11DCD009FA8B6 /* TwitterKitResources.bundle */; };
 		39A3890D1AC11DCD009FA8B6 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39A3890A1AC11DCD009FA8B6 /* Fabric.framework */; };
 		39A389101AC11E53009FA8B6 /* PlayerTwitterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A3890F1AC11E53009FA8B6 /* PlayerTwitterViewController.m */; };
+		39A389121AC1504F009FA8B6 /* PlayerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39A389111AC1504F009FA8B6 /* PlayerCell.xib */; };
+		39A389151AC150FD009FA8B6 /* PlayerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A389141AC150FD009FA8B6 /* PlayerCell.m */; };
 		39A3D23C1ABB6EDD00AC65E2 /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A3D23B1ABB6EDD00AC65E2 /* Article.m */; };
 		39A3D8DC1AB0D5D4006E9393 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A3D8DB1AB0D5D4006E9393 /* Player.m */; };
 		39A3D8DF1AB0E4FD006E9393 /* PlayerSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A3D8DE1AB0E4FD006E9393 /* PlayerSearchViewController.m */; };
@@ -58,6 +60,9 @@
 		39A3890A1AC11DCD009FA8B6 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
 		39A3890E1AC11E53009FA8B6 /* PlayerTwitterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerTwitterViewController.h; sourceTree = "<group>"; };
 		39A3890F1AC11E53009FA8B6 /* PlayerTwitterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerTwitterViewController.m; sourceTree = "<group>"; };
+		39A389111AC1504F009FA8B6 /* PlayerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerCell.xib; sourceTree = "<group>"; };
+		39A389131AC150FD009FA8B6 /* PlayerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerCell.h; sourceTree = "<group>"; };
+		39A389141AC150FD009FA8B6 /* PlayerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerCell.m; sourceTree = "<group>"; };
 		39A3D23A1ABB6EDD00AC65E2 /* Article.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Article.h; sourceTree = "<group>"; };
 		39A3D23B1ABB6EDD00AC65E2 /* Article.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Article.m; sourceTree = "<group>"; };
 		39A3D8DA1AB0D5D4006E9393 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
@@ -150,6 +155,9 @@
 				39A100B11AA4F0A70092F5CF /* NavigationViewController.h */,
 				39A100B21AA4F0A70092F5CF /* NavigationViewController.m */,
 				39A7D2571AA25731005210F9 /* Main.storyboard */,
+				39A389111AC1504F009FA8B6 /* PlayerCell.xib */,
+				39A389131AC150FD009FA8B6 /* PlayerCell.h */,
+				39A389141AC150FD009FA8B6 /* PlayerCell.m */,
 				39BA58121ABA7520007E5F9E /* ArticleViewController.h */,
 				39BA58131ABA7520007E5F9E /* ArticleViewController.m */,
 				39AC2E031AB8C8DA0077D31E /* PlayerNewsViewController.h */,
@@ -284,6 +292,7 @@
 				39A100AF1AA4EA0D0092F5CF /* menu.png in Resources */,
 				39A7D2591AA25731005210F9 /* Main.storyboard in Resources */,
 				39A100B01AA4EA0D0092F5CF /* menu@2x.png in Resources */,
+				39A389121AC1504F009FA8B6 /* PlayerCell.xib in Resources */,
 				39A7D25E1AA25731005210F9 /* LaunchScreen.xib in Resources */,
 				39A3890C1AC11DCD009FA8B6 /* TwitterKitResources.bundle in Resources */,
 				39A7D25B1AA25731005210F9 /* Images.xcassets in Resources */,
@@ -333,6 +342,7 @@
 				39A7D2501AA25731005210F9 /* main.m in Sources */,
 				39A3D8DC1AB0D5D4006E9393 /* Player.m in Sources */,
 				39AC2E051AB8C8DA0077D31E /* PlayerNewsViewController.m in Sources */,
+				39A389151AC150FD009FA8B6 /* PlayerCell.m in Sources */,
 				39A100A91AA4E4340092F5CF /* SWRevealViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

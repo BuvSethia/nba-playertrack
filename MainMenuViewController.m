@@ -11,6 +11,7 @@
 #import "Player.h"
 #import "Utility.h"
 #import "PlayerTabBarController.h"
+#import "PlayerCell.h"
 
 @implementation MainMenuViewController
 
@@ -56,6 +57,7 @@ static NSMutableArray *userPlayers = nil;
         NSLog(@"userPlayersFile DNE");
     }
     
+    [self.tableView registerNib:[UINib nibWithNibName:@"PlayerCell" bundle:nil] forCellReuseIdentifier:@"PlayerCell"];
     
 }
 
@@ -74,27 +76,7 @@ static NSMutableArray *userPlayers = nil;
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *CellIdentifier = @"PlayerCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if ( cell == nil ) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
-    // Create a new Player Object
-    Player *player = [userPlayers objectAtIndex:indexPath.row];
-    UILabel *aLabel = (UILabel *)[cell.contentView viewWithTag:1001];
-    aLabel.text = player.name;
-    
-    NSDictionary *stats = player.perGameStats;
-    aLabel = (UILabel *)[cell.contentView viewWithTag:1002];
-    aLabel.text = [stats objectForKey:@"PTS"];
-    aLabel = (UILabel *)[cell.contentView viewWithTag:1004];
-    aLabel.text = [stats objectForKey:@"TRB"];
-    aLabel = (UILabel *)[cell.contentView viewWithTag:1006];
-    aLabel.text = [stats objectForKey:@"AST"];
-    
-    NSString *imageURL = [NSString stringWithFormat:@"http://ec2-52-10-76-24.us-west-2.compute.amazonaws.com/PlayerImages/%@.png", player.ID];
-    NSData *data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:imageURL]];
-    cell.imageView.image = [[UIImage alloc] initWithData:data];
-    
+    PlayerCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     /*UIImage *image = [UIImage imageNamed:@"menu.png"];
     UIImageView *imageView = (UIImageView *)[cell.contentView viewWithTag:1000];
@@ -103,9 +85,21 @@ static NSMutableArray *userPlayers = nil;
     
     imageView.image = resized;*/
     
-    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-    
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(PlayerCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Create a new Player Object
+    Player *player = [userPlayers objectAtIndex:indexPath.row];
+    
+    NSString *imageURL = [NSString stringWithFormat:@"http://ec2-52-10-76-24.us-west-2.compute.amazonaws.com/PlayerImages/%@.png", player.ID];
+    NSData *data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:imageURL]];
+    cell.image.image = [[UIImage alloc] initWithData:data];
+    cell.nameLabel.text = player.name;
+    cell.pointsLabel.text = [player.perGameStats objectForKey:@"PTS"];
+    cell.rebLabel.text = [player.perGameStats objectForKey:@"TRB"];
+    cell.astLabel.text = [player.perGameStats objectForKey:@"AST"];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
