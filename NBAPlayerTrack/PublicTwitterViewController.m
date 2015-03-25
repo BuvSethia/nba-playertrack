@@ -39,7 +39,7 @@ static NSString * const TweetTableReuseIdentifier = @"TweetCell";
     
     
     
-    //[self loadTweetsFromTwitter];
+    [self loadTweetsFromTwitter];
     
 }
 

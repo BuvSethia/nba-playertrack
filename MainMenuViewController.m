@@ -105,6 +105,17 @@ static NSMutableArray *userPlayers = nil;
     [self performSegueWithIdentifier:@"PlayerDetailSegue" sender:tableView];
 }
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Delete the row from the data source
+        [userPlayers removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
+        [MainMenuViewController saveUserPlayers];
+        
+    }
+}
+
 //http://stackoverflow.com/questions/12552785/resizing-image-to-fit-uiimageview
 -(UIImage*)resizeImage:(UIImage *)image imageSize:(CGSize)size
 {
