@@ -28,12 +28,17 @@ static NSString * const TweetTableReuseIdentifier = @"TweetCell";
     if(self.tweets == Nil && [[NSFileManager defaultManager] fileExistsAtPath:[self playerTwitterFilePath]] && ![self updateTwitterFile])
     {
         NSLog(@"Loading tweets from file");
-        self.tweets = [[NSArray alloc] initWithContentsOfFile:[self playerTwitterFilePath]];
+        // reading back in...
+        NSInputStream *is = [[NSInputStream alloc] initWithFileAtPath:[self playerTwitterFilePath]];
+        
+        [is open];
+        self.tweets = [NSJSONSerialization JSONObjectWithStream:is options:NSJSONReadingMutableLeaves error:nil];
+        [is close];
         [self.tableView reloadData];
     }
     else
     {
-        //[self loadTweetsFromTwitter];
+        [self loadTweetsFromTwitter];
     }
     
     UIImage *image = [UIImage imageWithData:self.player.playerImage];
@@ -42,6 +47,10 @@ static NSString * const TweetTableReuseIdentifier = @"TweetCell";
     [[[self.tabBarController.viewControllers objectAtIndex:0] tabBarItem] setImage:[self resizeImage:image imageSize:size]];
     NSString *title = [NSString stringWithFormat:@"%@'s Twitter", self.player.name];
     [[[self.tabBarController.viewControllers objectAtIndex:0] tabBarItem] setTitle:title];
+    NSString *title2 = [NSString stringWithFormat:@"Tweets about %@", self.player.name];
+    [[[self.tabBarController.viewControllers objectAtIndex:1] tabBarItem] setTitle:title2];
+    UIImage *image2 = [UIImage imageNamed:@"Crowd.png" ];
+    [[[self.tabBarController.viewControllers objectAtIndex:1] tabBarItem] setImage:[self resizeImage:image2 imageSize:size]];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -105,13 +114,6 @@ static NSString * const TweetTableReuseIdentifier = @"TweetCell";
                      NSLog(@"We got data");
                      self.tweets = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
                      [self saveTwitter];
-                     /*NSError *jsonError;
-                      NSDictionary *json = [NSJSONSerialization
-                      JSONObjectWithData:data
-                      options:0
-                      error:&jsonError];
-                      NSLog(@"%@", [json allValues]);
-                      self.tweets = json;*/
                      [self.tableView reloadData];
                  }
                  else {
@@ -126,7 +128,11 @@ static NSString * const TweetTableReuseIdentifier = @"TweetCell";
 
 -(bool)saveTwitter
 {
-    [self.tweets writeToFile:[self playerTwitterFilePath] atomically:YES];
+    NSOutputStream *os = [[NSOutputStream alloc] initToFileAtPath:[self playerTwitterFilePath] append:NO];
+    
+    [os open];
+    [NSJSONSerialization writeJSONObject:self.tweets toStream:os options:0 error:nil];
+    [os close];
     if([[NSFileManager defaultManager] fileExistsAtPath:[self playerTwitterFilePath]])
     {
         NSLog(@"Twitter saved");
@@ -142,7 +148,7 @@ static NSString * const TweetTableReuseIdentifier = @"TweetCell";
 {
     NSArray *initPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentFolder = [initPath objectAtIndex:0];
-    NSString *fileName = [NSString stringWithFormat:@"/%@PlayerTwitter.plist", self.player.ID];
+    NSString *fileName = [NSString stringWithFormat:@"/%@PlayerTwitter.dat", self.player.ID];
     NSString *path = [documentFolder stringByAppendingFormat:fileName];
     return path;
 }

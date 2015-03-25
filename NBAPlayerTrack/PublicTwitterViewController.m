@@ -37,10 +37,9 @@ static NSString * const TweetTableReuseIdentifier = @"TweetCell";
         [self loadTweetsFromTwitter];
     }*/
     
-    NSString *title = [NSString stringWithFormat:@"Tweets about %@", self.player.name];
-    [[[self.tabBarController.viewControllers objectAtIndex:0] tabBarItem] setTitle:title];
     
-    [self loadTweetsFromTwitter];
+    
+    //[self loadTweetsFromTwitter];
     
 }
 
@@ -51,7 +50,7 @@ static NSString * const TweetTableReuseIdentifier = @"TweetCell";
         [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     }
     self.tabBarController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Player Menu" style:UIBarButtonItemStylePlain target:self action:@selector(playerMenuPressed)];
-    self.tabBarController.tabBar.barTintColor = [UIColor blueColor];
+    //self.tabBarController.tabBar.barTintColor = [UIColor blueColor];
 }
 
 - (void)playerMenuPressed{
