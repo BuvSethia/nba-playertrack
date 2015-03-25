@@ -48,6 +48,7 @@ static NSMutableArray *userPlayers = nil;
         for(int i = 0; i < userPlayers.count; i++)
         {
             userPlayers[i] = [Utility generateObjectForPlayer:userPlayers[i]];
+
         }
         [MainMenuViewController saveUserPlayers];
         //[MainMenuViewController removePlayerFile];
@@ -93,9 +94,7 @@ static NSMutableArray *userPlayers = nil;
     // Create a new Player Object
     Player *player = [userPlayers objectAtIndex:indexPath.row];
     
-    NSString *imageURL = [NSString stringWithFormat:@"http://ec2-52-10-76-24.us-west-2.compute.amazonaws.com/PlayerImages/%@.png", player.ID];
-    NSData *data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:imageURL]];
-    cell.image.image = [[UIImage alloc] initWithData:data];
+    cell.image.image = [[UIImage alloc] initWithData:player.playerImage];
     cell.nameLabel.text = player.name;
     cell.pointsLabel.text = [player.perGameStats objectForKey:@"PTS"];
     cell.rebLabel.text = [player.perGameStats objectForKey:@"TRB"];

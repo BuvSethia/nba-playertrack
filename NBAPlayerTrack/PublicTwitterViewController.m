@@ -1,17 +1,17 @@
 //
-//  PlayerTwitterViewController.m
+//  PublicTwitterViewController.m
 //  NBAPlayerTrack
 //
-//  Created by Buv Sethia on 3/23/15.
+//  Created by Buv Sethia on 3/24/15.
 //  Copyright (c) 2015 ___Sethia___. All rights reserved.
 //
 
-#import "PlayerTwitterViewController.h"
+#import "PublicTwitterViewController.h"
 #import "SWRevealViewController.h"
 #import "PlayerTabBarController.h"
 #import <TwitterKit/TwitterKit.h>
 
-@implementation PlayerTwitterViewController
+@implementation PublicTwitterViewController
 
 static NSString * const TweetTableReuseIdentifier = @"TweetCell";
 
@@ -25,7 +25,8 @@ static NSString * const TweetTableReuseIdentifier = @"TweetCell";
     self.tableView.rowHeight = UITableViewAutomaticDimension; // Explicitly set on iOS 8 if using automatic row height calculation
     self.tableView.allowsSelection = NO;
     [self.tableView registerClass:[TWTRTweetTableViewCell class] forCellReuseIdentifier:TweetTableReuseIdentifier];
-    if(self.tweets == Nil && [[NSFileManager defaultManager] fileExistsAtPath:[self playerTwitterFilePath]] && ![self updateTwitterFile])
+    
+    /*if(self.tweets == Nil && [[NSFileManager defaultManager] fileExistsAtPath:[self playerTwitterFilePath]] && ![self updateTwitterFile])
     {
         NSLog(@"Loading tweets from file");
         self.tweets = [[NSArray alloc] initWithContentsOfFile:[self playerTwitterFilePath]];
@@ -33,15 +34,14 @@ static NSString * const TweetTableReuseIdentifier = @"TweetCell";
     }
     else
     {
-        //[self loadTweetsFromTwitter];
-    }
+        [self loadTweetsFromTwitter];
+    }*/
     
-    UIImage *image = [UIImage imageWithData:self.player.playerImage];
-    CGSize size = CGSizeMake(30, 30);
-    
-    [[[self.tabBarController.viewControllers objectAtIndex:0] tabBarItem] setImage:[self resizeImage:image imageSize:size]];
-    NSString *title = [NSString stringWithFormat:@"%@'s Twitter", self.player.name];
+    NSString *title = [NSString stringWithFormat:@"Tweets about %@", self.player.name];
     [[[self.tabBarController.viewControllers objectAtIndex:0] tabBarItem] setTitle:title];
+    
+    [self loadTweetsFromTwitter];
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -51,7 +51,7 @@ static NSString * const TweetTableReuseIdentifier = @"TweetCell";
         [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     }
     self.tabBarController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Player Menu" style:UIBarButtonItemStylePlain target:self action:@selector(playerMenuPressed)];
-    //self.tabBarController.tabBar.barTintColor = [UIColor blueColor];
+    self.tabBarController.tabBar.barTintColor = [UIColor blueColor];
 }
 
 - (void)playerMenuPressed{
@@ -87,14 +87,15 @@ static NSString * const TweetTableReuseIdentifier = @"TweetCell";
     // Load tweets
     [TwitterKit logInGuestWithCompletion:^(TWTRGuestSession *guestSession, NSError *error) {
         if (guestSession) {
-            NSString *statusesShowEndpoint = @"https://api.twitter.com/1.1/statuses/user_timeline.json";
-            NSDictionary *params = @{@"user_id" : self.player.twitterID};
+            NSString *statusesShowEndpoint = @"https://api.twitter.com/1.1/search/tweets.json";
+            NSDictionary *params = @{@"q" : self.player.name, @"count" : @"60"};
             NSError *clientError;
             NSURLRequest *request = [[[Twitter sharedInstance] APIClient]
                                      URLRequestWithMethod:@"GET"
                                      URL:statusesShowEndpoint
                                      parameters:params
                                      error:&clientError];
+            NSLog(@"%@", request.URL);
             [[[Twitter sharedInstance] APIClient]
              sendTwitterRequest:request
              completion:^(NSURLResponse *response,
@@ -103,15 +104,13 @@ static NSString * const TweetTableReuseIdentifier = @"TweetCell";
                  if (data) {
                      // handle the response data e.g.
                      NSLog(@"We got data");
-                     self.tweets = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                     [self saveTwitter];
-                     /*NSError *jsonError;
-                      NSDictionary *json = [NSJSONSerialization
-                      JSONObjectWithData:data
-                      options:0
-                      error:&jsonError];
-                      NSLog(@"%@", [json allValues]);
-                      self.tweets = json;*/
+                     NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data
+                                                                            options:NSJSONReadingMutableContainers
+                                                                              error:nil];
+                     NSDictionary *tweets = [result objectForKey:@"statuses"];
+                     NSData *tweetsData = [NSJSONSerialization dataWithJSONObject:tweets options:NSJSONWritingPrettyPrinted error:nil];
+                     self.tweets = [NSJSONSerialization JSONObjectWithData:tweetsData options:NSJSONReadingMutableLeaves error:nil];
+                     //[self saveTwitter];
                      [self.tableView reloadData];
                  }
                  else {
@@ -124,16 +123,14 @@ static NSString * const TweetTableReuseIdentifier = @"TweetCell";
     }];
 }
 
+//These methods are currently not in use. Save them for a rainy day
+#pragma mark Saving and loading tweet file
 -(bool)saveTwitter
 {
     [self.tweets writeToFile:[self playerTwitterFilePath] atomically:YES];
     if([[NSFileManager defaultManager] fileExistsAtPath:[self playerTwitterFilePath]])
     {
-        NSLog(@"Twitter saved");
-    }
-    else
-    {
-    NSLog(@"Twitter not saved");
+        NSLog(@"User players saved to file");
     }
     return YES;
 }
@@ -142,7 +139,7 @@ static NSString * const TweetTableReuseIdentifier = @"TweetCell";
 {
     NSArray *initPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentFolder = [initPath objectAtIndex:0];
-    NSString *fileName = [NSString stringWithFormat:@"/%@PlayerTwitter.plist", self.player.ID];
+    NSString *fileName = [NSString stringWithFormat:@"/%@PublicTwitter.plist", self.player.ID];
     NSString *path = [documentFolder stringByAppendingFormat:fileName];
     return path;
 }
@@ -153,29 +150,16 @@ static NSString * const TweetTableReuseIdentifier = @"TweetCell";
     NSDate *result = [fileAttribs objectForKey:NSFileModificationDate]; //or NSFileModificationDate
     NSDate *now = [NSDate date];
     NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitHour
-                                               fromDate:result
-                                                 toDate:now
-                                                options:0];
+                                                                   fromDate:result
+                                                                     toDate:now
+                                                                    options:0];
     NSInteger timeDifference = [components hour];
-    NSLog(@"Time since player Twitter was updated is %ld", (long)timeDifference);
     if(timeDifference >= 1)
     {
         return YES;
     }
     
     return NO;
-}
-
-//http://stackoverflow.com/questions/12552785/resizing-image-to-fit-uiimageview
--(UIImage*)resizeImage:(UIImage *)image imageSize:(CGSize)size
-{
-    UIGraphicsBeginImageContext(size);
-    [image drawInRect:CGRectMake(0,0,size.width,size.height)];
-    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
-    //here is the scaled image which has been changed to the size specified
-    UIGraphicsEndImageContext();
-    return newImage;
-    
 }
 
 @end

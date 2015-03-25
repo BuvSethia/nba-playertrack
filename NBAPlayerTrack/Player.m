@@ -71,6 +71,7 @@
         self.careerAdvancedStats = [decoder decodeObjectForKey:@"careerAdvanced"];
         self.articles = [decoder decodeObjectForKey:@"Articles"];
         self.twitterID = [decoder decodeObjectForKey:@"Twitter"];
+        self.playerImage = [decoder decodeObjectForKey:@"Image"];
     }
     return self;
 }
@@ -96,6 +97,7 @@
     [encoder encodeObject:self.careerAdvancedStats forKey:@"careerAdvanced"];
     [encoder encodeObject:self.articles forKey:@"Articles"];
     [encoder encodeObject:self.twitterID forKey:@"Twitter"];
+    [encoder encodeObject:self.playerImage forKey:@"Image"];
     
 }
 

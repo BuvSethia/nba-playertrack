@@ -26,6 +26,8 @@
 @property NSString *team;
 @property NSString *twitterID;
 
+@property NSData *playerImage;
+
 @property NSDictionary *perGameStats;
 @property NSDictionary *per36Stats;
 @property NSDictionary *careerPerGameStats;

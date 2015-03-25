@@ -29,6 +29,7 @@
 		39A7D25B1AA25731005210F9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39A7D25A1AA25731005210F9 /* Images.xcassets */; };
 		39A7D25E1AA25731005210F9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39A7D25C1AA25731005210F9 /* LaunchScreen.xib */; };
 		39A7D26A1AA25731005210F9 /* NBAPlayerTrackTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A7D2691AA25731005210F9 /* NBAPlayerTrackTests.m */; };
+		39A9CB451AC2446400C9CF3A /* PublicTwitterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A9CB441AC2446400C9CF3A /* PublicTwitterViewController.m */; };
 		39AC2E021AB8ADCE0077D31E /* PlayerTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39AC2E011AB8ADCE0077D31E /* PlayerTabBarController.m */; };
 		39AC2E051AB8C8DA0077D31E /* PlayerNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39AC2E041AB8C8DA0077D31E /* PlayerNewsViewController.m */; };
 		39BA58141ABA7520007E5F9E /* ArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39BA58131ABA7520007E5F9E /* ArticleViewController.m */; };
@@ -82,6 +83,8 @@
 		39A7D2631AA25731005210F9 /* NBAPlayerTrackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NBAPlayerTrackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		39A7D2681AA25731005210F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		39A7D2691AA25731005210F9 /* NBAPlayerTrackTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBAPlayerTrackTests.m; sourceTree = "<group>"; };
+		39A9CB431AC2446400C9CF3A /* PublicTwitterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicTwitterViewController.h; sourceTree = "<group>"; };
+		39A9CB441AC2446400C9CF3A /* PublicTwitterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicTwitterViewController.m; sourceTree = "<group>"; };
 		39AC2E001AB8ADCE0077D31E /* PlayerTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerTabBarController.h; sourceTree = "<group>"; };
 		39AC2E011AB8ADCE0077D31E /* PlayerTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerTabBarController.m; sourceTree = "<group>"; };
 		39AC2E031AB8C8DA0077D31E /* PlayerNewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerNewsViewController.h; sourceTree = "<group>"; };
@@ -155,6 +158,8 @@
 				39A100B11AA4F0A70092F5CF /* NavigationViewController.h */,
 				39A100B21AA4F0A70092F5CF /* NavigationViewController.m */,
 				39A7D2571AA25731005210F9 /* Main.storyboard */,
+				39A9CB431AC2446400C9CF3A /* PublicTwitterViewController.h */,
+				39A9CB441AC2446400C9CF3A /* PublicTwitterViewController.m */,
 				39A389111AC1504F009FA8B6 /* PlayerCell.xib */,
 				39A389131AC150FD009FA8B6 /* PlayerCell.h */,
 				39A389141AC150FD009FA8B6 /* PlayerCell.m */,
@@ -338,6 +343,7 @@
 				39A3D23C1ABB6EDD00AC65E2 /* Article.m in Sources */,
 				39BA58141ABA7520007E5F9E /* ArticleViewController.m in Sources */,
 				39A2BA201AB36F34001C905E /* Utility.m in Sources */,
+				39A9CB451AC2446400C9CF3A /* PublicTwitterViewController.m in Sources */,
 				39A100B31AA4F0A70092F5CF /* NavigationViewController.m in Sources */,
 				39A7D2501AA25731005210F9 /* main.m in Sources */,
 				39A3D8DC1AB0D5D4006E9393 /* Player.m in Sources */,

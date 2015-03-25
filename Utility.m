@@ -118,6 +118,10 @@
         newPlayer.careerAdvancedStats = [playerInfo objectForKey:@"CareerAdvancedStats"];
         newPlayer.articles = [[Utility new] getArticlesForPlayer:playerID];
         
+        NSString *imageURL = [NSString stringWithFormat:@"http://ec2-52-10-76-24.us-west-2.compute.amazonaws.com/PlayerImages/%@.png", playerID];
+        NSData *data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:imageURL]];
+        newPlayer.playerImage = data;
+        
         return newPlayer;
         
     }
