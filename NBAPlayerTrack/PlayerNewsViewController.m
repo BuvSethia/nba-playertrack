@@ -51,6 +51,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     Article *article = (Article*)self.articles[indexPath.row];
+    cell.textLabel.numberOfLines = 0;
     cell.textLabel.text = article.title;
     return cell;
 }

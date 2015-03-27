@@ -10,4 +10,6 @@
 
 @interface NavigationViewController : UITableViewController
 
+@property NSArray *menuItems;
+
 @end

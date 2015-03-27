@@ -19,6 +19,17 @@
 {
     [super viewDidLoad];
     self.playerArray = [NSArray arrayWithArray:[Player generatePlayerList]];
+    //Sort the players alphabetically by first name
+    //http://stackoverflow.com/questions/805547/how-to-sort-an-nsmutablearray-with-custom-objects-in-it
+    NSArray *sortedArray;
+    sortedArray = [self.playerArray sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+        NSString *first = [(Player*)a name];
+        NSString *second = [(Player*)b name];
+        return [first compare:second];
+    }];
+    self.playerArray = sortedArray;
+    [self.tableView reloadData];
+    
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     // Initialize the filteredCandyArray with a capacity equal to the candyArray's capacity
