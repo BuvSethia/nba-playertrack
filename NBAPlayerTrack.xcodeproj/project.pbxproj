@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		399F9BA11B52514A00DF89A0 /* PlayerInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 399F9BA01B52514900DF89A0 /* PlayerInfoViewController.m */; };
+		399F9BA41B525FBE00DF89A0 /* PlayerStatsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 399F9BA31B525FBE00DF89A0 /* PlayerStatsViewController.m */; };
 		39A100A91AA4E4340092F5CF /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A100A81AA4E4340092F5CF /* SWRevealViewController.m */; };
 		39A100AC1AA4E5B40092F5CF /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A100AB1AA4E5B40092F5CF /* MainMenuViewController.m */; };
 		39A100AF1AA4EA0D0092F5CF /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 39A100AD1AA4EA0D0092F5CF /* menu.png */; };
@@ -47,6 +49,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		399F9B9F1B52514900DF89A0 /* PlayerInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerInfoViewController.h; sourceTree = "<group>"; };
+		399F9BA01B52514900DF89A0 /* PlayerInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerInfoViewController.m; sourceTree = "<group>"; };
+		399F9BA21B525FBE00DF89A0 /* PlayerStatsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerStatsViewController.h; sourceTree = "<group>"; };
+		399F9BA31B525FBE00DF89A0 /* PlayerStatsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerStatsViewController.m; sourceTree = "<group>"; };
 		39A100A71AA4E4340092F5CF /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		39A100A81AA4E4340092F5CF /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		39A100AA1AA4E5B40092F5CF /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainMenuViewController.h; path = ../MainMenuViewController.h; sourceTree = "<group>"; };
@@ -160,6 +166,10 @@
 				39A100B11AA4F0A70092F5CF /* NavigationViewController.h */,
 				39A100B21AA4F0A70092F5CF /* NavigationViewController.m */,
 				39A7D2571AA25731005210F9 /* Main.storyboard */,
+				399F9B9F1B52514900DF89A0 /* PlayerInfoViewController.h */,
+				399F9BA01B52514900DF89A0 /* PlayerInfoViewController.m */,
+				399F9BA21B525FBE00DF89A0 /* PlayerStatsViewController.h */,
+				399F9BA31B525FBE00DF89A0 /* PlayerStatsViewController.m */,
 				39A9CB431AC2446400C9CF3A /* PublicTwitterViewController.h */,
 				39A9CB441AC2446400C9CF3A /* PublicTwitterViewController.m */,
 				39A389111AC1504F009FA8B6 /* PlayerCell.xib */,
@@ -351,7 +361,9 @@
 				39A100B31AA4F0A70092F5CF /* NavigationViewController.m in Sources */,
 				39A7D2501AA25731005210F9 /* main.m in Sources */,
 				39A3D8DC1AB0D5D4006E9393 /* Player.m in Sources */,
+				399F9BA11B52514A00DF89A0 /* PlayerInfoViewController.m in Sources */,
 				39AC2E051AB8C8DA0077D31E /* PlayerNewsViewController.m in Sources */,
+				399F9BA41B525FBE00DF89A0 /* PlayerStatsViewController.m in Sources */,
 				39A389151AC150FD009FA8B6 /* PlayerCell.m in Sources */,
 				39A100A91AA4E4340092F5CF /* SWRevealViewController.m in Sources */,
 			);
