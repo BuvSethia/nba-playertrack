@@ -57,4 +57,23 @@
     }
 }
 
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.player.perGameStats.count;
+}
+
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *identifier = @"Cell";
+    
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+    
+    UILabel *statName = (UILabel *)[cell viewWithTag:100];
+    statName.text = [self.player.perGameStats.allKeys objectAtIndex:indexPath.row];
+    
+    UILabel *statValue = (UILabel *)[cell viewWithTag:101];
+    statValue.text = [self.player.perGameStats.allValues objectAtIndex:indexPath.row];
+    
+    return cell;
+}
+
 @end

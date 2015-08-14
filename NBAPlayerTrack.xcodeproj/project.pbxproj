@@ -49,10 +49,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		399F9B9F1B52514900DF89A0 /* PlayerInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerInfoViewController.h; sourceTree = "<group>"; };
-		399F9BA01B52514900DF89A0 /* PlayerInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerInfoViewController.m; sourceTree = "<group>"; };
-		399F9BA21B525FBE00DF89A0 /* PlayerStatsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerStatsViewController.h; sourceTree = "<group>"; };
-		399F9BA31B525FBE00DF89A0 /* PlayerStatsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerStatsViewController.m; sourceTree = "<group>"; };
+		399F9B9F1B52514900DF89A0 /* PlayerInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerInfoViewController.h; path = NBAPlayerTrack/PlayerInfoViewController.h; sourceTree = "<group>"; };
+		399F9BA01B52514900DF89A0 /* PlayerInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerInfoViewController.m; path = NBAPlayerTrack/PlayerInfoViewController.m; sourceTree = "<group>"; };
+		399F9BA21B525FBE00DF89A0 /* PlayerStatsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerStatsViewController.h; path = NBAPlayerTrack/PlayerStatsViewController.h; sourceTree = "<group>"; };
+		399F9BA31B525FBE00DF89A0 /* PlayerStatsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerStatsViewController.m; path = NBAPlayerTrack/PlayerStatsViewController.m; sourceTree = "<group>"; };
 		39A100A71AA4E4340092F5CF /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		39A100A81AA4E4340092F5CF /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		39A100AA1AA4E5B40092F5CF /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainMenuViewController.h; path = ../MainMenuViewController.h; sourceTree = "<group>"; };
@@ -66,13 +66,13 @@
 		39A389081AC11DCD009FA8B6 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = SOURCE_ROOT; };
 		39A389091AC11DCD009FA8B6 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle; sourceTree = SOURCE_ROOT; };
 		39A3890A1AC11DCD009FA8B6 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
-		39A3890E1AC11E53009FA8B6 /* PlayerTwitterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerTwitterViewController.h; sourceTree = "<group>"; };
-		39A3890F1AC11E53009FA8B6 /* PlayerTwitterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerTwitterViewController.m; sourceTree = "<group>"; };
+		39A3890E1AC11E53009FA8B6 /* PlayerTwitterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerTwitterViewController.h; path = NBAPlayerTrack/PlayerTwitterViewController.h; sourceTree = "<group>"; };
+		39A3890F1AC11E53009FA8B6 /* PlayerTwitterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerTwitterViewController.m; path = NBAPlayerTrack/PlayerTwitterViewController.m; sourceTree = "<group>"; };
 		39A389111AC1504F009FA8B6 /* PlayerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerCell.xib; sourceTree = "<group>"; };
 		39A389131AC150FD009FA8B6 /* PlayerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerCell.h; sourceTree = "<group>"; };
 		39A389141AC150FD009FA8B6 /* PlayerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerCell.m; sourceTree = "<group>"; };
-		39A3D23A1ABB6EDD00AC65E2 /* Article.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Article.h; sourceTree = "<group>"; };
-		39A3D23B1ABB6EDD00AC65E2 /* Article.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Article.m; sourceTree = "<group>"; };
+		39A3D23A1ABB6EDD00AC65E2 /* Article.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Article.h; path = NBAPlayerTrack/Article.h; sourceTree = "<group>"; };
+		39A3D23B1ABB6EDD00AC65E2 /* Article.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Article.m; path = NBAPlayerTrack/Article.m; sourceTree = "<group>"; };
 		39A3D8DA1AB0D5D4006E9393 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		39A3D8DB1AB0D5D4006E9393 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		39A3D8DD1AB0E4FD006E9393 /* PlayerSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerSearchViewController.h; sourceTree = "<group>"; };
@@ -90,15 +90,15 @@
 		39A7D2631AA25731005210F9 /* NBAPlayerTrackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NBAPlayerTrackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		39A7D2681AA25731005210F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		39A7D2691AA25731005210F9 /* NBAPlayerTrackTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBAPlayerTrackTests.m; sourceTree = "<group>"; };
-		39A9CB431AC2446400C9CF3A /* PublicTwitterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicTwitterViewController.h; sourceTree = "<group>"; };
-		39A9CB441AC2446400C9CF3A /* PublicTwitterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicTwitterViewController.m; sourceTree = "<group>"; };
+		39A9CB431AC2446400C9CF3A /* PublicTwitterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PublicTwitterViewController.h; path = NBAPlayerTrack/PublicTwitterViewController.h; sourceTree = "<group>"; };
+		39A9CB441AC2446400C9CF3A /* PublicTwitterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PublicTwitterViewController.m; path = NBAPlayerTrack/PublicTwitterViewController.m; sourceTree = "<group>"; };
 		39A9CB481AC26A1600C9CF3A /* Crowd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Crowd.png; sourceTree = "<group>"; };
 		39AC2E001AB8ADCE0077D31E /* PlayerTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerTabBarController.h; sourceTree = "<group>"; };
 		39AC2E011AB8ADCE0077D31E /* PlayerTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerTabBarController.m; sourceTree = "<group>"; };
-		39AC2E031AB8C8DA0077D31E /* PlayerNewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerNewsViewController.h; sourceTree = "<group>"; };
-		39AC2E041AB8C8DA0077D31E /* PlayerNewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerNewsViewController.m; sourceTree = "<group>"; };
-		39BA58121ABA7520007E5F9E /* ArticleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleViewController.h; sourceTree = "<group>"; };
-		39BA58131ABA7520007E5F9E /* ArticleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleViewController.m; sourceTree = "<group>"; };
+		39AC2E031AB8C8DA0077D31E /* PlayerNewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerNewsViewController.h; path = NBAPlayerTrack/PlayerNewsViewController.h; sourceTree = "<group>"; };
+		39AC2E041AB8C8DA0077D31E /* PlayerNewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerNewsViewController.m; path = NBAPlayerTrack/PlayerNewsViewController.m; sourceTree = "<group>"; };
+		39BA58121ABA7520007E5F9E /* ArticleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticleViewController.h; path = NBAPlayerTrack/ArticleViewController.h; sourceTree = "<group>"; };
+		39BA58131ABA7520007E5F9E /* ArticleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArticleViewController.m; path = NBAPlayerTrack/ArticleViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +121,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		399F9BA51B7E8EDF00DF89A0 /* Twitter */ = {
+			isa = PBXGroup;
+			children = (
+				39A389081AC11DCD009FA8B6 /* TwitterKit.framework */,
+				39A389091AC11DCD009FA8B6 /* TwitterKitResources.bundle */,
+				39A3890A1AC11DCD009FA8B6 /* Fabric.framework */,
+				39A3890E1AC11E53009FA8B6 /* PlayerTwitterViewController.h */,
+				39A3890F1AC11E53009FA8B6 /* PlayerTwitterViewController.m */,
+				39A9CB431AC2446400C9CF3A /* PublicTwitterViewController.h */,
+				39A9CB441AC2446400C9CF3A /* PublicTwitterViewController.m */,
+			);
+			name = Twitter;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		399F9BA61B7E8F1600DF89A0 /* Stats View */ = {
+			isa = PBXGroup;
+			children = (
+				399F9B9F1B52514900DF89A0 /* PlayerInfoViewController.h */,
+				399F9BA01B52514900DF89A0 /* PlayerInfoViewController.m */,
+				399F9BA21B525FBE00DF89A0 /* PlayerStatsViewController.h */,
+				399F9BA31B525FBE00DF89A0 /* PlayerStatsViewController.m */,
+			);
+			name = "Stats View";
+			path = ..;
+			sourceTree = "<group>";
+		};
+		399F9BA71B7E8F3C00DF89A0 /* Player News */ = {
+			isa = PBXGroup;
+			children = (
+				39A3D23A1ABB6EDD00AC65E2 /* Article.h */,
+				39A3D23B1ABB6EDD00AC65E2 /* Article.m */,
+				39BA58121ABA7520007E5F9E /* ArticleViewController.h */,
+				39BA58131ABA7520007E5F9E /* ArticleViewController.m */,
+				39AC2E031AB8C8DA0077D31E /* PlayerNewsViewController.h */,
+				39AC2E041AB8C8DA0077D31E /* PlayerNewsViewController.m */,
+			);
+			name = "Player News";
+			path = ..;
+			sourceTree = "<group>";
+		};
 		39A100A61AA4E4340092F5CF /* SWRevealViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,14 +192,12 @@
 		39A7D24C1AA25731005210F9 /* NBAPlayerTrack */ = {
 			isa = PBXGroup;
 			children = (
-				39A389081AC11DCD009FA8B6 /* TwitterKit.framework */,
-				39A389091AC11DCD009FA8B6 /* TwitterKitResources.bundle */,
-				39A3890A1AC11DCD009FA8B6 /* Fabric.framework */,
+				399F9BA71B7E8F3C00DF89A0 /* Player News */,
+				399F9BA61B7E8F1600DF89A0 /* Stats View */,
+				399F9BA51B7E8EDF00DF89A0 /* Twitter */,
 				39A100A61AA4E4340092F5CF /* SWRevealViewController */,
 				39A7D2511AA25731005210F9 /* AppDelegate.h */,
 				39A7D2521AA25731005210F9 /* AppDelegate.m */,
-				39A3890E1AC11E53009FA8B6 /* PlayerTwitterViewController.h */,
-				39A3890F1AC11E53009FA8B6 /* PlayerTwitterViewController.m */,
 				39A3D8DA1AB0D5D4006E9393 /* Player.h */,
 				39A3D8DB1AB0D5D4006E9393 /* Player.m */,
 				39A100AA1AA4E5B40092F5CF /* MainMenuViewController.h */,
@@ -166,19 +205,9 @@
 				39A100B11AA4F0A70092F5CF /* NavigationViewController.h */,
 				39A100B21AA4F0A70092F5CF /* NavigationViewController.m */,
 				39A7D2571AA25731005210F9 /* Main.storyboard */,
-				399F9B9F1B52514900DF89A0 /* PlayerInfoViewController.h */,
-				399F9BA01B52514900DF89A0 /* PlayerInfoViewController.m */,
-				399F9BA21B525FBE00DF89A0 /* PlayerStatsViewController.h */,
-				399F9BA31B525FBE00DF89A0 /* PlayerStatsViewController.m */,
-				39A9CB431AC2446400C9CF3A /* PublicTwitterViewController.h */,
-				39A9CB441AC2446400C9CF3A /* PublicTwitterViewController.m */,
 				39A389111AC1504F009FA8B6 /* PlayerCell.xib */,
 				39A389131AC150FD009FA8B6 /* PlayerCell.h */,
 				39A389141AC150FD009FA8B6 /* PlayerCell.m */,
-				39BA58121ABA7520007E5F9E /* ArticleViewController.h */,
-				39BA58131ABA7520007E5F9E /* ArticleViewController.m */,
-				39AC2E031AB8C8DA0077D31E /* PlayerNewsViewController.h */,
-				39AC2E041AB8C8DA0077D31E /* PlayerNewsViewController.m */,
 				39AC2E001AB8ADCE0077D31E /* PlayerTabBarController.h */,
 				39AC2E011AB8ADCE0077D31E /* PlayerTabBarController.m */,
 				39A3D8DD1AB0E4FD006E9393 /* PlayerSearchViewController.h */,
@@ -187,8 +216,6 @@
 				39A3D8E11AB0F871006E9393 /* PlayerSearchResultsViewController.m */,
 				39A2BA1E1AB36F34001C905E /* Utility.h */,
 				39A2BA1F1AB36F34001C905E /* Utility.m */,
-				39A3D23A1ABB6EDD00AC65E2 /* Article.h */,
-				39A3D23B1ABB6EDD00AC65E2 /* Article.m */,
 				39A7D25A1AA25731005210F9 /* Images.xcassets */,
 				39A7D25C1AA25731005210F9 /* LaunchScreen.xib */,
 				39A7D24D1AA25731005210F9 /* Supporting Files */,
@@ -501,6 +528,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -522,6 +550,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

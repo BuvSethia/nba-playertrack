@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Player.h"
 
-@interface PlayerStatsViewController : UIViewController
+@interface PlayerStatsViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic, strong) Player *player;
 

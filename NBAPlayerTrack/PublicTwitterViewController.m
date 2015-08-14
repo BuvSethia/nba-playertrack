@@ -14,6 +14,7 @@
 @implementation PublicTwitterViewController
 
 static NSString * const TweetTableReuseIdentifier = @"TweetCell";
+bool retriedTwitterLoad = NO;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -114,6 +115,11 @@ static NSString * const TweetTableReuseIdentifier = @"TweetCell";
                  }
                  else {
                      NSLog(@"Error: %@", connectionError);
+                     if(!retriedTwitterLoad)
+                     {
+                         retriedTwitterLoad = YES;
+                         [self loadTweetsFromTwitter];
+                     }
                  }
              }];
         } else {
