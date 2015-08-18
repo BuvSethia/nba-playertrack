@@ -14,11 +14,11 @@
 @implementation PlayerTwitterViewController
 
 static NSString * const TweetTableReuseIdentifier = @"TweetCell";
-bool retriedTwitterLoad = NO;
+bool retriedTwitterLoadPlayer = NO;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    retriedTwitterLoadPlayer = NO;
     PlayerTabBarController *tabController = (PlayerTabBarController*)self.tabBarController.tabBarController;
     self.player = tabController.player;
     // Setup tableview
@@ -119,9 +119,9 @@ bool retriedTwitterLoad = NO;
                  }
                  else {
                      NSLog(@"Error: %@", connectionError);
-                     if(!retriedTwitterLoad)
+                     if(!retriedTwitterLoadPlayer)
                      {
-                         retriedTwitterLoad = YES;
+                         retriedTwitterLoadPlayer = YES;
                          [self loadTweetsFromTwitter];
                      }
                  }

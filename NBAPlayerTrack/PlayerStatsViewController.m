@@ -84,16 +84,19 @@ bool seasonCareer = YES; //Season = YES, Career = NO
 - (IBAction)perGameper36TogglePressed:(id)sender {
     perGameper36 = !perGameper36;
     [self updateUIForToggleChanges];
+    [self updateCollectionViewForToggleChanges];
 }
 
 - (IBAction)basicAdvancedStatsTogglePressed:(id)sender {
     basicAdvanced = !basicAdvanced;
     [self updateUIForToggleChanges];
+    [self updateCollectionViewForToggleChanges];
 }
 
 - (IBAction)seasonCareerTogglePressed:(id)sender {
     seasonCareer = !seasonCareer;
     [self updateUIForToggleChanges];
+    [self updateCollectionViewForToggleChanges];
 }
 
 -(void)updateUIForToggleChanges
@@ -102,35 +105,37 @@ bool seasonCareer = YES; //Season = YES, Career = NO
     //Also disables certain buttons based on what stats are currently being shown, to remove the idea that options that DON'T exist do exist
     if(perGameper36 == YES)
     {
-        self.perGameper36Button.titleLabel.text = @"Per 36";
+        [self.perGameper36Button setTitle:@"Per 36" forState:UIControlStateNormal];
         self.seasonCareerButton.enabled = YES;
     }
     else
     {
-        self.perGameper36Button.titleLabel.text = @"Per Game";
+        [self.perGameper36Button setTitle:@"Per Game" forState:UIControlStateNormal];
         self.seasonCareerButton.enabled = NO;
     }
     
     if(basicAdvanced == YES)
     {
-        self.basicAdvancedButton.titleLabel.text = @"Advanced";
+        [self.basicAdvancedButton setTitle:@"Advanced" forState:UIControlStateNormal];
         self.perGameper36Button.enabled = YES;
         self.seasonCareerButton.enabled = YES;
     }
     else
     {
-        self.basicAdvancedButton.titleLabel.text = @"Basic";
+        [self.basicAdvancedButton setTitle:@"Basic" forState:UIControlStateNormal];
         self.perGameper36Button.enabled = NO;
         self.seasonCareerButton.enabled = YES;
     }
     
     if(seasonCareer == YES)
     {
-        self.perGameper36Button.titleLabel.text = @"Career";
+        [self.seasonCareerButton setTitle:@"Career" forState:UIControlStateNormal];
     }
     else
     {
-        self.perGameper36Button.titleLabel.text = @"Season";
+        [self.seasonCareerButton setTitle:@"Season" forState:UIControlStateNormal];
+        perGameper36 = YES;
+        [self.perGameper36Button setTitle:@"Per 36" forState:UIControlStateNormal];
     }
     
     //Determine stats description label based on what stats are currently being shown
