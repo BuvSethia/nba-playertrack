@@ -12,5 +12,11 @@
 @interface PlayerStatsViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic, strong) Player *player;
+@property (nonatomic, strong) NSDictionary *currentlyDisplayedStats;
+@property (weak, nonatomic) IBOutlet UIButton *perGameper36Button;
+@property (weak, nonatomic) IBOutlet UIButton *basicAdvancedButton;
+@property (weak, nonatomic) IBOutlet UIButton *seasonCareerButton;
+@property (weak, nonatomic) IBOutlet UILabel *statsTypeLabel;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end
