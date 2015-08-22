@@ -51,7 +51,6 @@ static NSMutableArray *userPlayers = nil;
 
         }
         [MainMenuViewController saveUserPlayers];
-        //[MainMenuViewController removePlayerFile];
     }
     else
     {
