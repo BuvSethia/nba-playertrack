@@ -22,6 +22,8 @@ static NSMutableArray *userPlayers = nil;
 
 -(void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
+    
     if(self.revealViewController)
     {
         [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
@@ -120,7 +122,7 @@ static NSMutableArray *userPlayers = nil;
 {
     UIGraphicsBeginImageContext(size);
     [image drawInRect:CGRectMake(0,0,size.width,size.height)];
-    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     //here is the scaled image which has been changed to the size specified
     UIGraphicsEndImageContext();
     return newImage;

@@ -31,5 +31,7 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet UIButton *playerOneButton;
 @property (weak, nonatomic) IBOutlet UIButton *playerTwoButton;
 @property (weak, nonatomic) IBOutlet UIButton *statTypeSelectButton;
+@property (weak, nonatomic) IBOutlet UITableView *statCompareTableView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
 
 @end

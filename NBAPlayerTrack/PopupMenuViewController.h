@@ -13,7 +13,7 @@
 -(void)selectedMenuItem:(NSInteger)newItem calledBy: (id)sender;
 @end
 
-@interface PopupMenuViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface PopupMenuViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
 
 @property NSArray *tableMenuItems;
 @property (nonatomic, weak) id<MenuDelegate> delegate;

@@ -20,7 +20,7 @@
     //Add tap gesture recognizer to view
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                         action:@selector(onSingleTap:)];
-    tap.cancelsTouchesInView = NO;
+    [tap setCancelsTouchesInView:NO];
     [self.view addGestureRecognizer:tap];
 }
 
@@ -39,7 +39,7 @@
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"PopupCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if ( cell == nil ) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];

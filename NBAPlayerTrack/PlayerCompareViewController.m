@@ -7,6 +7,8 @@
 //
 
 #import "PlayerCompareViewController.h"
+#import "SWRevealViewController.h"
+#import "Utility.h"
 
 @interface PlayerCompareViewController ()
 
@@ -14,29 +16,102 @@
 
 @implementation PlayerCompareViewController
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    //Reveal view pan gesture enabling
+    if(self.revealViewController)
+    {
+        [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
+    }
+}
+
 - (void)viewDidLoad {
     
     [super viewDidLoad];
     
-    self.selectedPlayerOne = nil;
-    self.selectedPlayerTwo = nil;
+    //Reveal view
+    SWRevealViewController *revealViewController = self.revealViewController;
+    if ( revealViewController )
+    {
+        [self.sidebarButton setTarget: self.revealViewController];
+        [self.sidebarButton setAction: @selector( revealToggle: )];
+    }
+    
+    //Initializing variables
+    self.playerList = Nil;
+    [self loadPlayerList];
+    
+    self.selectedPlayerOne = Nil;
+    self.selectedPlayerTwo = Nil;
     self.statTypeToDisplay = Undecided;
+    
+    //Get rid of extra horizontal lines from table view
+    self.statCompareTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     PopupMenuViewController *dest = (PopupMenuViewController*) segue.destinationViewController;
+    dest.delegate = self;
     //Based on iOS version, make it so that the modal segue does not place a black screen behind the presented view.
     [dest setPresentationStyleForSelfController:self presentingController:dest];
     
     //If the sender is either of the player select buttons
     if(sender == self.playerOneButton || sender == self.playerTwoButton)
     {
-        
+        NSMutableArray *playerNames = [[NSMutableArray alloc] init];
+        for(Player *p in self.playerList)
+        {
+            [playerNames addObject:p.name];
+        }
+        NSArray *playerNamesArray = [playerNames copy];
+        dest.tableMenuItems = playerNamesArray;
+        dest.menuCaller = sender;
+    }
+    //If the sender is the stat type select button
+    else if (sender == self.statTypeSelectButton)
+    {
+        NSArray *statTypeArray = [[NSArray alloc] initWithObjects:@"Per Game", @"Per 36", @"Advanced", @"Per Game Career", @"Advanced Career", nil];
+        dest.tableMenuItems = statTypeArray;
+        dest.menuCaller = sender;
+    }
+    //Should never be reached, unless something goes wrong
+    else
+    {
+        NSLog(@"Player compare view unexpected segue");
     }
 }
 
+-(void)loadPlayerList
+{
+    if(self.playerList == Nil && [[NSFileManager defaultManager] fileExistsAtPath:[self userPlayersFilePath]])
+    {
+        
+        self.playerList = [NSKeyedUnarchiver unarchiveObjectWithFile:[self userPlayersFilePath]];
+        NSLog(@"Loading players from file");
+        /*for(int i = 0; i < self.playerList.count; i++)
+        {
+            self.playerList[i] = [Utility generateObjectForPlayer:self.playerList[i]];
+            
+        }
+        [MainMenuViewController saveUserPlayers];*/
+    }
+    else
+    {
+        NSLog(@"userPlayersFile DNE");
+    }
+}
+
+-(NSString*)userPlayersFilePath
+{
+    NSArray *initPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentFolder = [initPath objectAtIndex:0];
+    NSString *path = [documentFolder stringByAppendingFormat:@"/userPlayers.plist"];
+    return path;
+}
 
 #pragma mark - Table View
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -128,7 +203,33 @@
 #pragma mark - PopupMenuViewController
 -(void)selectedMenuItem:(NSInteger)newItem calledBy:(id)sender
 {
+    NSLog(@"Popup menu delegate called from player compare");
+    if(sender == self.playerOneButton)
+    {
+        self.selectedPlayerOne = self.playerList[newItem];
+        [self.playerOneButton setTitle:self.selectedPlayerOne.name forState:UIControlStateNormal];
+        self.playerOneImageView.image = [[UIImage alloc] initWithData:self.selectedPlayerOne.playerImage];
+        
+    }
+    else if(sender == self.playerTwoButton)
+    {
+        self.selectedPlayerTwo = self.playerList[newItem];
+        [self.playerTwoButton setTitle:self.selectedPlayerTwo.name forState:UIControlStateNormal];
+        self.playerTwoImageView.image = [[UIImage alloc] initWithData:self.selectedPlayerTwo.playerImage];
+    }
+    else if(sender == self.statTypeSelectButton)
+    {
+        self.statTypeToDisplay = (StatType)(newItem + 1);
+        NSArray *statTypeArray = [[NSArray alloc] initWithObjects:@"Per Game", @"Per 36", @"Advanced", @"Per Game Career", @"Advanced Career", nil];
+        [self.statTypeSelectButton setTitle:statTypeArray[newItem] forState:UIControlStateNormal];
+    }
+    //Should never reach this
+    else
+    {
+       NSLog(@"Unexpected caller of popup menu");
+    }
     
+    [self.statCompareTableView reloadData];
 }
 
 @end
