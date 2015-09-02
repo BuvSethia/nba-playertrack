@@ -23,6 +23,7 @@ bool seasonCareer = YES; //Season = YES, Career = NO
 
 -(void)viewDidLoad
 {
+    [super viewDidLoad];
     PlayerTabBarController *tabController = (PlayerTabBarController*)self.tabBarController;
     
     self.player = tabController.player;
@@ -35,10 +36,14 @@ bool seasonCareer = YES; //Season = YES, Career = NO
         [self.tabBarController.navigationItem.leftBarButtonItem setTarget: self.revealViewController];
         [self.tabBarController.navigationItem.leftBarButtonItem setAction: @selector( revealToggle: )];
     }
+    
+    //This is a slightly hacky line of code necessary to make the Twitter tab's title appear properly, because of issues with implementing stacked tab bars
+    [[[self.tabBarController.viewControllers objectAtIndex:2] tabBarItem] setTitle:@"Twitter"];
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     if(self.revealViewController)
     {
         [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];

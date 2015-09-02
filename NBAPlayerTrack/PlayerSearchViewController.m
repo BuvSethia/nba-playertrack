@@ -5,7 +5,7 @@
 //  Created by Buv Sethia on 3/11/15.
 //  Copyright (c) 2015 ___Sethia___. All rights reserved.
 //
-//  Major help from: https://developer.apple.com/library/ios/samplecode/TableSearch_UISearchController/Listings/TableSearch_TableSearch_APLMainTableViewController_m.html
+//  Major help from: http://www.raywenderlich.com/16873/how-to-add-search-into-a-table-view
 //
 
 #import "PlayerSearchViewController.h"
@@ -18,8 +18,11 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //Pull a list of all players in the database to show to the user
     self.playerArray = [NSArray arrayWithArray:[Player generatePlayerList]];
-    //Sort the players alphabetically by first name
+    
+    //Sort the list of players alphabetically by first name
     //http://stackoverflow.com/questions/805547/how-to-sort-an-nsmutablearray-with-custom-objects-in-it
     NSArray *sortedArray;
     sortedArray = [self.playerArray sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
@@ -28,31 +31,34 @@
         return [first compare:second];
     }];
     self.playerArray = sortedArray;
+    
+    //Reload the table data to show the alphabetized list
     [self.tableView reloadData];
     
+    //Removes extra horizontal lines from the table view
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
-    // Initialize the filteredCandyArray with a capacity equal to the candyArray's capacity
+    //SEARCH CONTROLLER STUFF
+    // Initialize the filtered player array with a max size of the total number of players in the list
     self.filteredPlayerArray = [NSMutableArray arrayWithCapacity:[self.playerArray count]];
-    
-    _resultsTableController = [[PlayerSearchResultsViewController alloc] init];
-    _resultsTableController.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    _searchController = [[UISearchController alloc] initWithSearchResultsController:self.resultsTableController];
+    self.resultsTableController = [[PlayerSearchResultsViewController alloc] init];
+    //Removethe extra horizontal lines
+    self.resultsTableController.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    //Initialize the search controller with reference to the view controller displaying the search results
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:self.resultsTableController];
     self.searchController.searchResultsUpdater = self;
     [self.searchController.searchBar sizeToFit];
     self.tableView.tableHeaderView = self.searchController.searchBar;
     
-    // we want to be the delegate for our filtered table so didSelectRowAtIndexPath is called for both tables
+    // We want to be the delegate for our filtered table so didSelectRowAtIndexPath is called for both tables
     self.resultsTableController.tableView.delegate = self;
     self.searchController.delegate = self;
-    self.searchController.dimsBackgroundDuringPresentation = NO; // default is YES
-    self.searchController.searchBar.delegate = self; // so we can monitor text changes + others
+    self.searchController.dimsBackgroundDuringPresentation = NO;
+    self.searchController.searchBar.delegate = self;
+    self.definesPresentationContext = YES;
     
-    // Search is now just presenting a view controller. As such, normal view controller
-    // presentation semantics apply. Namely that presentation will walk up the view controller
-    // hierarchy until it finds the root view controller or one that defines a presentation context.
-    //
-    self.definesPresentationContext = YES;  // know where you want UISearchController to be displayed
+    //For both the filtered table and the standard table of players, allow multiple select
+    
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -67,10 +73,8 @@
     if ( cell == nil ) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    // Create a new Player Object
-    Player *player = nil;
-    // Check to see whether the normal table or search results table is being displayed and set the Player object from the appropriate array
-    player = [self.playerArray objectAtIndex:indexPath.row];
+    // Create a new Player for the player at the current index, so we can set the cell's text to the player's name
+    Player *player = [self.playerArray objectAtIndex:indexPath.row];
     // Configure the cell
     cell.textLabel.text = player.name;
     
@@ -106,7 +110,14 @@
 
 #pragma mark - UISearchBarDelegate
 
+//Resigns the search bar when the search button is clicked
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [searchBar resignFirstResponder];
+}
+
+//If the cancel button is clicked, resign the search bar and make all selected players selected in the non-filtered array as well.
+-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
     [searchBar resignFirstResponder];
 }
 

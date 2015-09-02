@@ -20,22 +20,24 @@
 
 -(void)viewDidLoad
 {
+    [super viewDidLoad];
     NSLog(@"Player: %@", self.player.name);
     
     self.playerImage.image = [UIImage imageWithData:self.player.playerImage];
     self.playerName.text = self.player.name;
     self.playerTeam.text = self.player.team;
-    self.playerNumber.text = self.player.jNumber;
+    self.playerNumber.text = [NSString stringWithFormat:@"#%@", self.player.jNumber];
     self.playerPosition.text = self.player.position;
     //self.playerAge.text = [self calculateAge:tabController.player.DOB];
     self.playerYearsPro.text = self.player.yearsPro;
-    self.playerHeight.text = self.player.height;
-    self.playerWeight.text = self.player.weight;
+    self.playerHeight.text = [NSString stringWithFormat:@"Height: %@", self.player.height];
+    self.playerWeight.text = [NSString stringWithFormat:@"Weight: %@lbs", self.player.weight];
 
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     if(self.revealViewController)
     {
         [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];

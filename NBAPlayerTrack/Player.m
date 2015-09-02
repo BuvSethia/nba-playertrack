@@ -38,11 +38,13 @@
             Player *player = [[Player alloc] init];
             player.ID = key;
             NSDictionary *inner = [playerDictionary objectForKey:key];
+            NSLog(@"%@", inner);
             player.name = [inner objectForKey:@"PlayerName"];
             player.webLink = [inner objectForKey:@"WebLink"];
+            player.team = [inner objectForKey:@"TeamName"];
             player.updateDate = @"0";
             [playerArray addObject:player];
-            NSLog(@"%@,%@,%@", player.ID, player.name, player.webLink);
+            NSLog(@"%@,%@,%@,%@", player.ID, player.name, player.webLink, player.team);
         }
         
         return playerArray;
