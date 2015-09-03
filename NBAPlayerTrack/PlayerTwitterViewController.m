@@ -21,7 +21,7 @@ bool retriedTwitterLoadPlayer = NO;
     retriedTwitterLoadPlayer = NO;
     PlayerTabBarController *tabController = (PlayerTabBarController*)self.tabBarController.tabBarController;
     self.player = tabController.player;
-    // Setup tableview
+    // Setup tableview, as per instructions of Twitter Fabric API Docs
     self.tableView.estimatedRowHeight = 150;
     self.tableView.rowHeight = UITableViewAutomaticDimension; // Explicitly set on iOS 8 if using automatic row height calculation
     self.tableView.allowsSelection = NO;
@@ -130,6 +130,8 @@ bool retriedTwitterLoadPlayer = NO;
             NSLog(@"Unable to log in as guest: %@", [error localizedDescription]);
         }
     }];
+    
+    [self.tableView reloadData];
 }
 
 -(bool)saveTwitter

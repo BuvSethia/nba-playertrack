@@ -482,7 +482,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FMs-WI-DjE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2124" y="-799"/>
+            <point key="canvasLocation" x="2218" y="-823"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="XSC-aA-SzE">
@@ -585,7 +585,32 @@
                             <outlet property="delegate" destination="hhz-es-Srz" id="Lba-jf-Kz1"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="NBC-td-LAD"/>
+                    <navigationItem key="navigationItem" id="NBC-td-LAD">
+                        <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" id="zll-yM-TOJ">
+                            <rect key="frame" x="96" y="6" width="128" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pnM-Kc-Pil">
+                                    <rect key="frame" x="0.0" y="0.0" width="128" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <state key="normal" title="Add By Team">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <segue destination="xO2-Gm-h76" kind="modal" id="bL9-nm-luS"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </view>
+                        <barButtonItem key="rightBarButtonItem" title="Add" id="zja-IF-fsA">
+                            <connections>
+                                <action selector="addPlayersButtonClicked:" destination="hhz-es-Srz" id="QjC-CF-Jco"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LEW-JW-Sfo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -830,6 +855,35 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EDe-kT-7V4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1242" y="-694"/>
+        </scene>
+        <!--Popup Menu-->
+        <scene sceneID="EVZ-Sm-bFm">
+            <objects>
+                <viewController title="Popup Menu" id="xO2-Gm-h76" customClass="PopupMenuViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OnL-Eq-T2f">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="behind_alert_view.png" id="PJt-3c-q5c">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" tag="100" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="q9l-AN-czZ">
+                                <rect key="frame" x="43" y="142" width="234" height="284"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="xO2-Gm-h76" id="BOZ-9U-9HB"/>
+                                    <outlet property="delegate" destination="xO2-Gm-h76" id="l3m-AL-LEh"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TNw-Sj-leI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2146" y="442"/>
         </scene>
     </scenes>
     <resources>

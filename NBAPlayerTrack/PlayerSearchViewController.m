@@ -15,22 +15,37 @@
 
 @implementation PlayerSearchViewController
 
+NSArray *teamNamesArray;
+
 -(void)viewDidLoad
 {
     [super viewDidLoad];
     
-    //Pull a list of all players in the database to show to the user
-    self.playerArray = [NSArray arrayWithArray:[Player generatePlayerList]];
-    
-    //Sort the list of players alphabetically by first name
-    //http://stackoverflow.com/questions/805547/how-to-sort-an-nsmutablearray-with-custom-objects-in-it
-    NSArray *sortedArray;
-    sortedArray = [self.playerArray sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
-        NSString *first = [(Player*)a name];
-        NSString *second = [(Player*)b name];
-        return [first compare:second];
-    }];
-    self.playerArray = sortedArray;
+    //If an updated version of the player list is already saved as a file, load player list from file
+    if(self.playerArray == Nil && [[NSFileManager defaultManager] fileExistsAtPath:[self playerListFilePath]] && ![self updatePlayerListFile])
+    {
+        NSLog(@"Loading player list from file");
+        self.playerArray = [NSKeyedUnarchiver unarchiveObjectWithFile:[self playerListFilePath]];
+        [self.tableView reloadData];
+    }
+    //Otherwise, load it from the database.
+    else
+    {
+        NSLog(@"Getting player list from database");
+        //Pull a list of all players in the database to show to the user
+        self.playerArray = [NSArray arrayWithArray:[Player generatePlayerList]];
+        
+        //Sort the list of players alphabetically by first name
+        //http://stackoverflow.com/questions/805547/how-to-sort-an-nsmutablearray-with-custom-objects-in-it
+        NSArray *sortedArray;
+        sortedArray = [self.playerArray sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+            NSString *first = [(Player*)a name];
+            NSString *second = [(Player*)b name];
+            return [first compare:second];
+        }];
+        self.playerArray = sortedArray;
+        [self savePlayerList];
+    }
     
     //Reload the table data to show the alphabetized list
     [self.tableView reloadData];
@@ -58,7 +73,44 @@
     self.definesPresentationContext = YES;
     
     //For both the filtered table and the standard table of players, allow multiple select
+    self.resultsTableController.tableView.allowsMultipleSelection = YES;
+    self.tableView.allowsMultipleSelection = YES;
     
+    //Arary of NBA team names
+    teamNamesArray = [[NSArray alloc] initWithObjects: @"Atlanta Hawks",
+                      @"Boston Celtics",
+                      @"Charlotte Bobcats",
+                      @"Chicago Bulls",
+                      @"Cleveland Cavaliers",
+                      @"Dallas Mavericks",
+                      @"Denver Nuggets",
+                      @"Detroit Pistons",
+                      @"Golden State Warriors",
+                      @"Houston Rockets",
+                      @"Indiana Pacers",
+                      @"Los Angeles Clippers",
+                      @"Los Angeles Lakers",
+                      @"Memphis Grizzlies",
+                      @"Miami Heat",
+                      @"Milwaukee Bucks",
+                      @"Minnesota Timberwolves",
+                      @"New Jersey Nets",
+                      @"New Orleans Hornets",
+                      @"New York Knicks",
+                      @"Oklahoma City Thunder",
+                      @"Orlando Magic",
+                      @"Philadelphia Sixers",
+                      @"Phoenix Suns",
+                      @"Portland Trail Blazers",
+                      @"Sacramento Kings",
+                      @"San Antonio Spurs",
+                      @"Toronto Raptors",
+                      @"Utah Jazz",
+                      @"Washington Wizards", nil];
+    
+}
+
+- (IBAction)addPlayersButtonClicked:(id)sender {
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -145,6 +197,100 @@
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [self.view endEditing:YES];
+}
+
+#pragma mark - Navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    PopupMenuViewController *dest = (PopupMenuViewController*) segue.destinationViewController;
+    dest.delegate = self;
+    //Based on iOS version, make it so that the modal segue does not place a black screen behind the presented view.
+    [dest setPresentationStyleForSelfController:self presentingController:dest];
+    dest.tableMenuItems = teamNamesArray;
+    dest.menuCaller = sender;
+}
+
+#pragma mark - PopupMenu Delegate
+-(void)selectedMenuItem:(NSInteger)newItem calledBy:(id)sender
+{
+    //Confirm the selected team and ramifications with an alert view
+    UIAlertView *confirmSelection = [[UIAlertView alloc] initWithTitle:@"Confirm"
+                                                        message:@"All players associated with this team will be added to your player list."
+                                                       delegate:self
+                                              cancelButtonTitle:@"Okay"
+                                              otherButtonTitles:@"Cancel", nil];
+    confirmSelection.tag = newItem;
+    
+    [confirmSelection show];
+}
+
+
+#pragma mark - AlertView Delegate
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    //If the user confirms, add all the players playing for that team to the main player list.
+    if(buttonIndex == 0)
+    {
+        for(Player *player in self.playerArray)
+        {
+            if([player.team isEqualToString:teamNamesArray[alertView.tag]])
+            {
+                if(![MainMenuViewController containsPlayer:player.ID])
+                {
+                    Player *newPlayer = [Utility generateObjectForPlayer:player];
+                    [[MainMenuViewController userPlayers] addObject:newPlayer];
+                    [MainMenuViewController saveUserPlayers];
+                    NSLog(@"Added player %@ to main menu", newPlayer.name);
+                }
+                else
+                {
+                    NSLog(@"Already following that player");
+                }
+            }
+        }
+    }
+    //If they cancel do nothing
+    else if(buttonIndex == 1){}
+}
+
+#pragma mark - All players list caching and updating
+-(NSString*)playerListFilePath
+{
+    NSArray *initPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentFolder = [initPath objectAtIndex:0];
+    NSString *path = [documentFolder stringByAppendingFormat:@"AllPlayers.plist"];
+    return path;
+}
+
+-(bool)updatePlayerListFile
+{
+    NSDictionary* fileAttribs = [[NSFileManager defaultManager] attributesOfItemAtPath:[self playerListFilePath] error:nil];
+    NSDate *result = [fileAttribs objectForKey:NSFileModificationDate];
+    NSLog(@"%@", result);
+    NSDate *now = [NSDate date];
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitHour
+                                                                   fromDate:result
+                                                                     toDate:now
+                                                                    options:0];
+    NSInteger timeDifference = [components hour];
+    NSLog(@"Time since player list was updated is %ld", (long)timeDifference);
+    if(timeDifference <= 23)
+    {
+        return NO;
+    }
+    
+    return YES;
+}
+
+-(bool)savePlayerList
+{
+    [NSKeyedArchiver archiveRootObject:self.playerArray toFile:[self playerListFilePath]];
+    if([[NSFileManager defaultManager] fileExistsAtPath:[self playerListFilePath]])
+    {
+        NSLog(@"Player list saved to file");
+    }
+    return YES;
+    return YES;
 }
 
 @end

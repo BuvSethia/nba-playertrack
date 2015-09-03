@@ -44,7 +44,7 @@
             player.team = [inner objectForKey:@"TeamName"];
             player.updateDate = @"0";
             [playerArray addObject:player];
-            NSLog(@"%@,%@,%@,%@", player.ID, player.name, player.webLink, player.team);
+            //NSLog(@"%@,%@,%@,%@", player.ID, player.name, player.webLink, player.team);
         }
         
         return playerArray;

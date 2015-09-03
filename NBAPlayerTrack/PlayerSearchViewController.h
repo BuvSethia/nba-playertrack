@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "PlayerSearchResultsViewController.h"
+#import "PopupMenuViewController.h"
 
-@interface PlayerSearchViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating>
+@interface PlayerSearchViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating, UIAlertViewDelegate,MenuDelegate>
 
 @property NSArray *playerArray;
 @property (strong,nonatomic) NSMutableArray *filteredPlayerArray;

@@ -126,6 +126,8 @@ bool retriedTwitterLoad = NO;
             NSLog(@"Unable to log in as guest: %@", [error localizedDescription]);
         }
     }];
+    
+    [self.tableView reloadData];
 }
 
 //These methods are currently not in use. Save them for a rainy day
