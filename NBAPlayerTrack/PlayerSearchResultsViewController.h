@@ -10,6 +10,6 @@
 
 @interface PlayerSearchResultsViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
 
-@property NSArray *filteredPlayerArray;
+@property NSMutableDictionary *filteredPlayerDictionary;
 
 @end

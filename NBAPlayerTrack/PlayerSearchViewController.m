@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 ___Sethia___. All rights reserved.
 //
 //  Major help from: http://www.raywenderlich.com/16873/how-to-add-search-into-a-table-view
+//  And: http://www.icodeblog.com/2010/12/10/implementing-uitableview-sections-from-an-nsarray-of-nsdictionary-objects/
 //
 
 #import "PlayerSearchViewController.h"
@@ -21,35 +22,8 @@ NSArray *teamNamesArray;
 {
     [super viewDidLoad];
     
-    //If an updated version of the player list is already saved as a file, load player list from file
-    if(self.playerArray == Nil && [[NSFileManager defaultManager] fileExistsAtPath:[self playerListFilePath]] && ![self updatePlayerListFile])
-    {
-        NSLog(@"Loading player list from file");
-        self.playerArray = [NSKeyedUnarchiver unarchiveObjectWithFile:[self playerListFilePath]];
-        [self.tableView reloadData];
-    }
-    //Otherwise, load it from the database.
-    else
-    {
-        NSLog(@"Getting player list from database");
-        //Pull a list of all players in the database to show to the user
-        self.playerArray = [NSArray arrayWithArray:[Player generatePlayerList]];
-        
-        //Sort the list of players alphabetically by first name
-        //http://stackoverflow.com/questions/805547/how-to-sort-an-nsmutablearray-with-custom-objects-in-it
-        NSArray *sortedArray;
-        sortedArray = [self.playerArray sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
-            NSString *first = [(Player*)a name];
-            NSString *second = [(Player*)b name];
-            return [first compare:second];
-        }];
-        self.playerArray = sortedArray;
-        [self savePlayerList];
-    }
-    
-    //Reload the table data to show the alphabetized list
-    [self.tableView reloadData];
-    
+    [self loadPlayersToTable];
+
     //Removes extra horizontal lines from the table view
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
@@ -71,51 +45,38 @@ NSArray *teamNamesArray;
     self.searchController.dimsBackgroundDuringPresentation = NO;
     self.searchController.searchBar.delegate = self;
     self.definesPresentationContext = YES;
+    //Don't hide nav bar when search is active
+    self.searchController.hidesNavigationBarDuringPresentation = NO;
     
     //For both the filtered table and the standard table of players, allow multiple select
     self.resultsTableController.tableView.allowsMultipleSelection = YES;
     self.tableView.allowsMultipleSelection = YES;
     
-    //Arary of NBA team names
-    teamNamesArray = [[NSArray alloc] initWithObjects: @"Atlanta Hawks",
-                      @"Boston Celtics",
-                      @"Charlotte Bobcats",
-                      @"Chicago Bulls",
-                      @"Cleveland Cavaliers",
-                      @"Dallas Mavericks",
-                      @"Denver Nuggets",
-                      @"Detroit Pistons",
-                      @"Golden State Warriors",
-                      @"Houston Rockets",
-                      @"Indiana Pacers",
-                      @"Los Angeles Clippers",
-                      @"Los Angeles Lakers",
-                      @"Memphis Grizzlies",
-                      @"Miami Heat",
-                      @"Milwaukee Bucks",
-                      @"Minnesota Timberwolves",
-                      @"New Jersey Nets",
-                      @"New Orleans Hornets",
-                      @"New York Knicks",
-                      @"Oklahoma City Thunder",
-                      @"Orlando Magic",
-                      @"Philadelphia Sixers",
-                      @"Phoenix Suns",
-                      @"Portland Trail Blazers",
-                      @"Sacramento Kings",
-                      @"San Antonio Spurs",
-                      @"Toronto Raptors",
-                      @"Utah Jazz",
-                      @"Washington Wizards", nil];
+    [self loadTeamNameArray];
     
 }
 
 - (IBAction)addPlayersButtonClicked:(id)sender {
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+#pragma mark - Table View methods
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [self.playerArray count];
+    return [[self.playerListDictionary allKeys] count];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return [[[self.playerListDictionary allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [[self.playerListDictionary valueForKey:[[[self.playerListDictionary allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section]] count];
+}
+
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+    return [[self.playerListDictionary allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -126,7 +87,7 @@ NSArray *teamNamesArray;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     // Create a new Player for the player at the current index, so we can set the cell's text to the player's name
-    Player *player = [self.playerArray objectAtIndex:indexPath.row];
+    Player *player = [[self.playerListDictionary valueForKey:[[[self.playerListDictionary allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
     // Configure the cell
     cell.textLabel.text = player.name;
     
@@ -178,7 +139,7 @@ NSArray *teamNamesArray;
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
     // update the filtered array based on the search text
     NSString *searchText = searchController.searchBar.text;
-    NSMutableArray *searchResults = [self.playerArray mutableCopy];
+    NSMutableArray *searchResults = nil;
     
     // strip out all the leading and trailing spaces
     NSString *strippedString = [searchText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
@@ -186,10 +147,11 @@ NSArray *teamNamesArray;
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.name contains[c] %@",strippedString];
     searchResults = [NSMutableArray arrayWithArray:[self.playerArray filteredArrayUsingPredicate:predicate]];
     
-    // hand over the filtered results to our search results table
-    PlayerSearchResultsViewController *tableController = (PlayerSearchResultsViewController *)self.searchController.searchResultsController;
-    tableController.filteredPlayerArray = searchResults;
     self.filteredPlayerArray = searchResults;
+    [self createDictionaryForFilteredArray];
+    //Hand over the filtered results in dictionary form to our search results table
+    PlayerSearchResultsViewController *tableController = (PlayerSearchResultsViewController *)self.searchController.searchResultsController;
+    tableController.filteredPlayerDictionary = self.filteredPlayerDictionary;
     [tableController.tableView reloadData];
 }
 
@@ -274,12 +236,12 @@ NSArray *teamNamesArray;
                                                                     options:0];
     NSInteger timeDifference = [components hour];
     NSLog(@"Time since player list was updated is %ld", (long)timeDifference);
-    if(timeDifference <= 23)
+    if(timeDifference >= 24)
     {
-        return NO;
+        return YES;
     }
     
-    return YES;
+    return NO;
 }
 
 -(bool)savePlayerList
@@ -291,6 +253,154 @@ NSArray *teamNamesArray;
     }
     return YES;
     return YES;
+}
+
+#pragma mark - Table view section creation
+-(void)createSectionedDictionaryFromPlayerList
+{
+    BOOL sectionExists;
+    
+    self.playerListDictionary = [[NSMutableDictionary alloc] init];
+    
+    // Loop through the books and create our keys for each section
+    for (Player *player in self.playerArray)
+    {
+        //The first letter of the player's name (to determine the section header)
+        NSString *c = [player.name substringToIndex:1];
+        
+        sectionExists = NO;
+        
+        //Check if the section header already exists
+        for (NSString *str in [self.playerListDictionary allKeys])
+        {
+            if ([str isEqualToString:c])
+            {
+                sectionExists = YES;
+            }
+        }
+        
+        //If it doesn't, create it and initizalize that section with a mutable array
+        if (!sectionExists)
+        {
+            [self.playerListDictionary setValue:[[NSMutableArray alloc] init] forKey:c];
+        }
+    }
+    
+    //Populate the dictionary
+    for (Player *player in self.playerArray)
+    {
+        [[self.playerListDictionary objectForKey:[player.name substringToIndex:1]] addObject:player];
+    }
+    
+    NSLog(@"Number of sections is %ld", [[self.playerListDictionary allKeys] count]);
+    
+    [self.tableView reloadData];
+}
+
+#pragma mark - Loading stuff
+-(void)loadPlayersToTable
+{
+    //If an updated version of the player list is already saved as a file, load player list from file
+    if(self.playerArray == Nil && [[NSFileManager defaultManager] fileExistsAtPath:[self playerListFilePath]] && ![self updatePlayerListFile])
+    {
+        NSLog(@"Loading player list from file");
+        self.playerArray = [NSKeyedUnarchiver unarchiveObjectWithFile:[self playerListFilePath]];
+        [self createSectionedDictionaryFromPlayerList];
+    }
+    //Otherwise, load it from the database.
+    else
+    {
+        NSLog(@"Getting player list from database");
+        //Pull a list of all players in the database to show to the user
+        self.playerArray = [NSArray arrayWithArray:[Player generatePlayerList]];
+        
+        //Sort the list of players alphabetically by first name
+        //http://stackoverflow.com/questions/805547/how-to-sort-an-nsmutablearray-with-custom-objects-in-it
+        NSArray *sortedArray;
+        sortedArray = [self.playerArray sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+            NSString *first = [(Player*)a name];
+            NSString *second = [(Player*)b name];
+            return [first compare:second];
+        }];
+        self.playerArray = sortedArray;
+        [self savePlayerList];
+        [self createSectionedDictionaryFromPlayerList];
+    }
+}
+
+-(void)createDictionaryForFilteredArray
+{
+    BOOL sectionExists;
+    
+    self.filteredPlayerDictionary = [[NSMutableDictionary alloc] init];
+    
+    // Loop through the books and create our keys for each section
+    for (Player *player in self.filteredPlayerArray)
+    {
+        //The first letter of the player's name (to determine the section header)
+        NSString *c = [player.name substringToIndex:1];
+        
+        sectionExists = NO;
+        
+        //Check if the section header already exists
+        for (NSString *str in [self.filteredPlayerDictionary allKeys])
+        {
+            if ([str isEqualToString:c])
+            {
+                sectionExists = YES;
+            }
+        }
+        
+        //If it doesn't, create it and initizalize that section with a mutable array
+        if (!sectionExists)
+        {
+            [self.filteredPlayerDictionary setValue:[[NSMutableArray alloc] init] forKey:c];
+        }
+    }
+    
+    //Populate the dictionary
+    for (Player *player in self.filteredPlayerArray)
+    {
+        [[self.filteredPlayerDictionary objectForKey:[player.name substringToIndex:1]] addObject:player];
+    }
+    
+    NSLog(@"Number of sections is %ld", [[self.filteredPlayerDictionary allKeys] count]);
+}
+
+-(void)loadTeamNameArray
+{
+    //Arary of NBA team names
+    teamNamesArray = [[NSArray alloc] initWithObjects:
+                      @"Atlanta Hawks",
+                      @"Boston Celtics",
+                      @"Charlotte Bobcats",
+                      @"Chicago Bulls",
+                      @"Cleveland Cavaliers",
+                      @"Dallas Mavericks",
+                      @"Denver Nuggets",
+                      @"Detroit Pistons",
+                      @"Golden State Warriors",
+                      @"Houston Rockets",
+                      @"Indiana Pacers",
+                      @"Los Angeles Clippers",
+                      @"Los Angeles Lakers",
+                      @"Memphis Grizzlies",
+                      @"Miami Heat",
+                      @"Milwaukee Bucks",
+                      @"Minnesota Timberwolves",
+                      @"New Jersey Nets",
+                      @"New Orleans Hornets",
+                      @"New York Knicks",
+                      @"Oklahoma City Thunder",
+                      @"Orlando Magic",
+                      @"Philadelphia Sixers",
+                      @"Phoenix Suns",
+                      @"Portland Trail Blazers",
+                      @"Sacramento Kings",
+                      @"San Antonio Spurs",
+                      @"Toronto Raptors",
+                      @"Utah Jazz",
+                      @"Washington Wizards", nil];
 }
 
 @end
