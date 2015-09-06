@@ -40,6 +40,13 @@ bool seasonCareer = YES; //Season = YES, Career = NO
     
     //This is a slightly hacky line of code necessary to make the Twitter tab's title appear properly, because of issues with implementing stacked tab bars
     [[[self.tabBarController.viewControllers objectAtIndex:2] tabBarItem] setTitle:@"Twitter"];
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.tabBarController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Player Menu" style:UIBarButtonItemStylePlain target:self action:@selector(playerMenuPressed)];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -49,7 +56,6 @@ bool seasonCareer = YES; //Season = YES, Career = NO
     {
         [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     }
-    self.tabBarController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Player Menu" style:UIBarButtonItemStylePlain target:self action:@selector(playerMenuPressed)];
 }
 
 - (void)playerMenuPressed{

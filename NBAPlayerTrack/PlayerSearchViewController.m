@@ -406,7 +406,7 @@ NSArray *teamNamesArray;
         [[self.playerListDictionary objectForKey:[player.name substringToIndex:1]] addObject:player];
     }
     
-    NSLog(@"Number of sections is %ld", [[self.playerListDictionary allKeys] count]);
+    //NSLog(@"Number of sections is %ld", [[self.playerListDictionary allKeys] count]);
     
     [self.tableView reloadData];
 }
@@ -478,7 +478,7 @@ NSArray *teamNamesArray;
         [[self.filteredPlayerDictionary objectForKey:[player.name substringToIndex:1]] addObject:player];
     }
     
-    NSLog(@"Number of sections is %ld", [[self.filteredPlayerDictionary allKeys] count]);
+    //NSLog(@"Number of sections is %ld", [[self.filteredPlayerDictionary allKeys] count]);
 }
 
 -(void)loadTeamNameArray

@@ -22,6 +22,8 @@
         [self.tabBarController.navigationItem.leftBarButtonItem setAction: @selector( revealToggle: )];
     }
     
+    self.tabBarController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(articlesMenuPressed)];
+    
     NSURL *urlU = [NSURL URLWithString:self.url];
     NSURLRequest *request = [NSURLRequest requestWithURL:urlU];
     [self.webView loadRequest:request];
@@ -33,7 +35,6 @@
     {
         [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     }
-    self.tabBarController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(articlesMenuPressed)];
 }
 
 - (void)articlesMenuPressed{
