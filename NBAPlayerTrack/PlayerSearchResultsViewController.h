@@ -11,5 +11,6 @@
 @interface PlayerSearchResultsViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property NSMutableDictionary *filteredPlayerDictionary;
+@property NSMutableArray *selectedPlayers;
 
 @end

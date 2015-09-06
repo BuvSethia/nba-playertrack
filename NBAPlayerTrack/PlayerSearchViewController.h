@@ -13,10 +13,11 @@
 @interface PlayerSearchViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating, UIAlertViewDelegate,MenuDelegate>
 
 @property NSArray *playerArray;
+@property NSMutableDictionary *playerListDictionary;
 @property NSMutableArray *filteredPlayerArray;
 @property NSMutableDictionary *filteredPlayerDictionary;
+@property NSMutableArray *selectedPlayers;
 @property (nonatomic, strong) UISearchController *searchController;
 @property (nonatomic, strong) PlayerSearchResultsViewController *resultsTableController;
-@property NSMutableDictionary *playerListDictionary;
 
 @end

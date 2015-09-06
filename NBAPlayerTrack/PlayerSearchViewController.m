@@ -23,6 +23,8 @@ NSArray *teamNamesArray;
     [super viewDidLoad];
     
     [self loadPlayersToTable];
+    
+    self.selectedPlayers = [[NSMutableArray alloc] init];
 
     //Removes extra horizontal lines from the table view
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -57,9 +59,32 @@ NSArray *teamNamesArray;
 }
 
 - (IBAction)addPlayersButtonClicked:(id)sender {
+    for(Player *player in self.selectedPlayers)
+    {
+        if(![MainMenuViewController containsPlayer:player.ID])
+        {
+            Player *newPlayer = [Utility generateObjectForPlayer:player];
+            [[MainMenuViewController userPlayers] addObject:newPlayer];
+            [MainMenuViewController saveUserPlayers];
+            NSLog(@"Added player %@ to main menu", newPlayer.name);
+        }
+        else
+        {
+            NSLog(@"Already following that player");
+        }
+    }
+    [self.selectedPlayers removeAllObjects];
+    [self.tableView reloadData];
+    UIAlertView *confirmation = [[UIAlertView alloc] initWithTitle:@"Players Added"
+                                                               message:@"All selected players have been added to your player list."
+                                                               delegate:nil
+                                                     cancelButtonTitle:@"Okay"
+                                                     otherButtonTitles:nil];
+    [confirmation show];
 }
 
 #pragma mark - Table View methods
+
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return [[self.playerListDictionary allKeys] count];
@@ -90,35 +115,120 @@ NSArray *teamNamesArray;
     Player *player = [[self.playerListDictionary valueForKey:[[[self.playerListDictionary allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
     // Configure the cell
     cell.textLabel.text = player.name;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.accessoryView.hidden = YES;
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    //If the player has already been selected (perhaps in the filtered table), put a checkmark in the cell
+    for(Player *p in self.selectedPlayers)
+    {
+        if([player.ID isEqualToString:p.ID])
+        {
+            cell.accessoryView.hidden = NO;
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            break;
+        }
+    }
     
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    //NSLog(@"%ld", (long)indexPath.row);
-    Player *player;
-    if(tableView == self.tableView)
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *tableViewCell = [tableView cellForRowAtIndexPath:indexPath];
+    if(tableViewCell.accessoryType == UITableViewCellAccessoryCheckmark)
     {
-        player = self.playerArray[indexPath.row];
-        NSLog(@"Selecting from main table %@", player.ID);
+        [self tableView:tableView didDeselectRowAtIndexPath:indexPath];
     }
     else
     {
-        player = self.filteredPlayerArray[indexPath.row];
-        NSLog(@"Selecting from search table %@", player.ID);
+        tableViewCell.accessoryView.hidden = NO;
+        tableViewCell.accessoryType = UITableViewCellAccessoryCheckmark;
+        if(tableView == self.tableView)
+        {
+            Player *selectedPlayer = [[self.playerListDictionary valueForKey:[[[self.playerListDictionary allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
+            bool playerAlreadySelected = NO;
+            for(Player *p in self.selectedPlayers)
+            {
+                if([p.ID isEqualToString:selectedPlayer.ID])
+                {
+                    playerAlreadySelected = YES;
+                }
+            }
+            if(!playerAlreadySelected)
+            {
+                [self.selectedPlayers addObject:selectedPlayer];
+                NSLog(@"Selected player %@ from unfiltered", selectedPlayer.name);
+            }
+        }
+        else if(tableView == self.resultsTableController.tableView)
+        {
+            Player *selectedPlayer = [[self.filteredPlayerDictionary valueForKey:[[[self.filteredPlayerDictionary allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
+            bool playerAlreadySelected = NO;
+            for(Player *p in self.selectedPlayers)
+            {
+                if([p.ID isEqualToString:selectedPlayer.ID])
+                {
+                    playerAlreadySelected = YES;
+                }
+            }
+            if(!playerAlreadySelected)
+            {
+                [self.selectedPlayers addObject:selectedPlayer];
+                NSLog(@"Selected player %@ from filtered", selectedPlayer.name);
+            }
+        }
     }
     
-    if(![MainMenuViewController containsPlayer:player.ID])
+    
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"Deselecting player");
+    UITableViewCell *tableViewCell = [tableView cellForRowAtIndexPath:indexPath];
+    if(tableViewCell.accessoryType == UITableViewCellAccessoryNone)
     {
-        Player *newPlayer = [Utility generateObjectForPlayer:player];
-        [[MainMenuViewController userPlayers] addObject:newPlayer];
-        [MainMenuViewController saveUserPlayers];
+        [self tableView:tableView didSelectRowAtIndexPath:indexPath];
     }
     else
     {
-        NSLog(@"Already following that player");
+        tableViewCell.accessoryView.hidden = YES;
+        tableViewCell.accessoryType = UITableViewCellAccessoryNone;
+        if(tableView == self.tableView)
+        {
+            Player *selectedPlayer = [[self.playerListDictionary valueForKey:[[[self.playerListDictionary allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
+
+            NSLog(@"Attempting to remove %@ player from selected players", selectedPlayer.name);
+            //Remove the deselected player from the selected player array
+            for(int i = 0; i < self.selectedPlayers.count; i++)
+            {
+                Player *toCompare = self.selectedPlayers[i];
+                NSLog(@"Comparing %@ to %@", selectedPlayer.ID, toCompare.ID);
+                if([selectedPlayer.ID isEqualToString:toCompare.ID])
+                {
+                    [self.selectedPlayers removeObjectAtIndex:i];
+                    NSLog(@"Removing %@ from selected players", selectedPlayer.ID);
+                }
+            }
+        }
+        else if(tableView == self.resultsTableController.tableView)
+        {
+            Player *selectedPlayer = [[self.filteredPlayerDictionary valueForKey:[[[self.filteredPlayerDictionary allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
+
+            NSLog(@"Attempting to remove %@ player from selected players", selectedPlayer.name);
+            //Remove the deselected player from the selected player array
+            for(int i = 0; i < self.selectedPlayers.count; i++)
+            {
+                Player *toCompare = self.selectedPlayers[i];
+                NSLog(@"Comparing %@ to %@", selectedPlayer.ID, toCompare.ID);
+                if([selectedPlayer.ID isEqualToString:toCompare.ID])
+                {
+                    [self.selectedPlayers removeObjectAtIndex:i];
+                    NSLog(@"Removing %@ from selected players", selectedPlayer.ID);
+                }
+            }
+        }
     }
-    
 }
 
 #pragma mark - UISearchBarDelegate
@@ -132,6 +242,7 @@ NSArray *teamNamesArray;
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
     [searchBar resignFirstResponder];
+    [self.tableView reloadData];
 }
 
 #pragma mark - UISearchResultsUpdating
@@ -151,7 +262,10 @@ NSArray *teamNamesArray;
     [self createDictionaryForFilteredArray];
     //Hand over the filtered results in dictionary form to our search results table
     PlayerSearchResultsViewController *tableController = (PlayerSearchResultsViewController *)self.searchController.searchResultsController;
+    //Data from which cells are populated
     tableController.filteredPlayerDictionary = self.filteredPlayerDictionary;
+    //Used to determine which players should already have checkmarks next to them
+    tableController.selectedPlayers = self.selectedPlayers;
     [tableController.tableView reloadData];
 }
 

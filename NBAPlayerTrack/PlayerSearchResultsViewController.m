@@ -35,6 +35,7 @@
     return [[self.filteredPlayerDictionary allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
 }
 
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *CellIdentifier = @"Cell";
@@ -46,6 +47,18 @@
     Player *player = [[self.filteredPlayerDictionary valueForKey:[[[self.filteredPlayerDictionary allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
     // Configure the cell
     cell.textLabel.text = player.name;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.accessoryView.hidden = YES;
+    //If the player has already been selected (perhaps in the unfiltered table), put a checkmark in the cell
+    for(Player *p in self.selectedPlayers)
+    {
+        if([player.ID isEqualToString:p.ID])
+        {
+            cell.accessoryView.hidden = NO;
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            break;
+        }
+    }
     
     return cell;
 }
