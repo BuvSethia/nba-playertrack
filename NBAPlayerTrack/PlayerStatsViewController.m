@@ -10,6 +10,7 @@
 #import "PlayerTabBarController.h"
 #import "SWRevealViewController.h"
 #import "PlayerInfoViewController.h"
+#import "ArticleViewController.h"
 
 @interface PlayerStatsViewController ()
 
@@ -64,6 +65,11 @@ bool seasonCareer = YES; //Season = YES, Career = NO
         PlayerInfoViewController *dest = segue.destinationViewController;
         PlayerTabBarController *tabController = (PlayerTabBarController*)self.tabBarController;
         dest.player = tabController.player;
+    }
+    else if([seguename isEqualToString:@"moreStatsSegue"])
+    {
+        ArticleViewController *dest = (ArticleViewController*)segue.destinationViewController;
+        dest.url = self.player.webLink;
     }
 }
 

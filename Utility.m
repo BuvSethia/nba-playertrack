@@ -16,7 +16,9 @@
 {
     NSLog(@"Player being updated: %@", player.ID);
     //Save ourselves a call to a service and the database and check in-app if stats for this player have already been updated today
-    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[[NSDate alloc] init]];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    [calendar setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    NSDateComponents *components = [calendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[[NSDate alloc] init]];
     NSInteger day = [components day];
     NSInteger playerDay = [player.updateDate integerValue];
     if(day == playerDay)

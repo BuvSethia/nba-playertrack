@@ -33,7 +33,7 @@
     {
         [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     }
-    self.tabBarController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Articles Menu" style:UIBarButtonItemStylePlain target:self action:@selector(articlesMenuPressed)];
+    self.tabBarController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(articlesMenuPressed)];
 }
 
 - (void)articlesMenuPressed{
