@@ -15,9 +15,6 @@
 
 @implementation MainMenuViewController
 
-//To make my life easy
-NSInteger selectedCell = -1;
-
 static NSMutableArray *userPlayers = nil;
 
 -(void)viewDidAppear:(BOOL)animated

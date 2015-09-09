@@ -311,16 +311,16 @@
             </objects>
             <point key="canvasLocation" x="340" y="704"/>
         </scene>
-        <!--View Controller-->
+        <!--References View Controller-->
         <scene sceneID="DaS-jX-fPs">
             <objects>
-                <viewController id="ebe-hR-p9d" sceneMemberID="viewController">
+                <viewController id="ebe-hR-p9d" customClass="ReferencesViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Qg6-zQ-dNI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" selectable="NO" id="10p-O7-SV9">
-                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">All stats pulled from Basketball-Reference. Short biographies pulled from Wikipedia. This app was created by Sumbhav Sethia, under the supervision of Hasan Davulcu and Christophe Faucon.</string>
@@ -330,10 +330,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="ivD-3Y-lVz">
+                        <barButtonItem key="leftBarButtonItem" image="menu.png" id="XGq-4N-3cf"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="sidebarButton" destination="XGq-4N-3cf" id="j0k-xI-7CA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ASi-qQ-1n5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="612" y="-58"/>
+            <point key="canvasLocation" x="1144" y="-58"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="G79-HF-C89">
@@ -359,7 +365,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D1T-9A-q4l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="998" y="-62"/>
+            <point key="canvasLocation" x="1530" y="-62"/>
         </scene>
         <!--Player Compare View Controller-->
         <scene sceneID="FHI-Dd-NW6">
@@ -517,7 +523,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uuw-WW-2rT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1370" y="-58"/>
+            <point key="canvasLocation" x="1902" y="-58"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="v4g-4W-A77">
@@ -540,7 +546,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sxh-jz-BjA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2274" y="-188"/>
+            <point key="canvasLocation" x="2806" y="-188"/>
         </scene>
         <!--Menu-->
         <scene sceneID="QNM-Qa-WNp">
@@ -567,7 +573,7 @@
                         <segue destination="ts5-gz-BoV" kind="custom" identifier="GraphSegue" customClass="SWRevealViewControllerSeguePushController" id="AXF-Cj-Us2"/>
                         <segue destination="Gw3-vK-TBk" kind="custom" identifier="AroundTheNBASegue" customClass="SWRevealViewControllerSeguePushController" id="gAD-rS-ocO"/>
                         <segue destination="nFY-dq-fZf" kind="custom" identifier="OptionsSegue" customClass="SWRevealViewControllerSeguePushController" id="upS-YX-QLy"/>
-                        <segue destination="ebe-hR-p9d" kind="custom" identifier="ReferencesSegue" customClass="SWRevealViewControllerSeguePushController" id="YTG-pI-sDh"/>
+                        <segue destination="WO0-QS-wiV" kind="custom" identifier="ReferencesSegue" customClass="SWRevealViewControllerSeguePushController" id="YTG-pI-sDh"/>
                         <segue destination="7Vv-bx-4vt" kind="custom" identifier="MainMenuSegue" customClass="SWRevealViewControllerSeguePushController" id="T4S-O0-FH8"/>
                         <segue destination="ymG-6q-ZTe" kind="custom" identifier="PlayerCompareSegue" customClass="SWRevealViewControllerSeguePushController" id="iHw-fA-emC"/>
                     </connections>
@@ -626,7 +632,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LEW-JW-Sfo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1748" y="442"/>
+            <point key="canvasLocation" x="2280" y="442"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0uG-fy-6p5">
@@ -895,7 +901,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TNw-Sj-leI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2146" y="442"/>
+            <point key="canvasLocation" x="2678" y="442"/>
         </scene>
         <!--Article View Controller-->
         <scene sceneID="4rR-UY-FZ5">
@@ -922,6 +928,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U8p-ch-jeg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3756" y="2391"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="TbZ-PN-2E1">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="WO0-QS-wiV" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6W8-ls-bUQ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ebe-hR-p9d" kind="relationship" relationship="rootViewController" id="bbL-sF-z1q"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fEz-3w-VlH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="612" y="-58"/>
         </scene>
     </scenes>
     <resources>

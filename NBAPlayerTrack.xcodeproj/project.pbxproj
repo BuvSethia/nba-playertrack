@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		390668571B9FF8F700B74228 /* ReferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 390668561B9FF8F700B74228 /* ReferencesViewController.m */; };
 		399F9BA11B52514A00DF89A0 /* PlayerInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 399F9BA01B52514900DF89A0 /* PlayerInfoViewController.m */; };
 		399F9BA41B525FBE00DF89A0 /* PlayerStatsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 399F9BA31B525FBE00DF89A0 /* PlayerStatsViewController.m */; };
 		39A100A91AA4E4340092F5CF /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A100A81AA4E4340092F5CF /* SWRevealViewController.m */; };
@@ -52,6 +53,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		390668551B9FF8F700B74228 /* ReferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReferencesViewController.h; sourceTree = "<group>"; };
+		390668561B9FF8F700B74228 /* ReferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReferencesViewController.m; sourceTree = "<group>"; };
 		399F9B9F1B52514900DF89A0 /* PlayerInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerInfoViewController.h; path = NBAPlayerTrack/PlayerInfoViewController.h; sourceTree = "<group>"; };
 		399F9BA01B52514900DF89A0 /* PlayerInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerInfoViewController.m; path = NBAPlayerTrack/PlayerInfoViewController.m; sourceTree = "<group>"; };
 		399F9BA21B525FBE00DF89A0 /* PlayerStatsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerStatsViewController.h; path = NBAPlayerTrack/PlayerStatsViewController.h; sourceTree = "<group>"; };
@@ -225,6 +228,8 @@
 				39A2BA1F1AB36F34001C905E /* Utility.m */,
 				39F749991B881BB600C6889A /* PopupMenuViewController.h */,
 				39F7499A1B881BB600C6889A /* PopupMenuViewController.m */,
+				390668551B9FF8F700B74228 /* ReferencesViewController.h */,
+				390668561B9FF8F700B74228 /* ReferencesViewController.m */,
 				39A7D25A1AA25731005210F9 /* Images.xcassets */,
 				39A7D25C1AA25731005210F9 /* LaunchScreen.xib */,
 				39A7D24D1AA25731005210F9 /* Supporting Files */,
@@ -408,6 +413,7 @@
 				39A3D23C1ABB6EDD00AC65E2 /* Article.m in Sources */,
 				39BA58141ABA7520007E5F9E /* ArticleViewController.m in Sources */,
 				39A2BA201AB36F34001C905E /* Utility.m in Sources */,
+				390668571B9FF8F700B74228 /* ReferencesViewController.m in Sources */,
 				39A9CB451AC2446400C9CF3A /* PublicTwitterViewController.m in Sources */,
 				39A100B31AA4F0A70092F5CF /* NavigationViewController.m in Sources */,
 				39A7D2501AA25731005210F9 /* main.m in Sources */,
