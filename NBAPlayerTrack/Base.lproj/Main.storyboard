@@ -525,28 +525,63 @@
             </objects>
             <point key="canvasLocation" x="1902" y="-58"/>
         </scene>
-        <!--View Controller-->
+        <!--Graph Menu View Controller-->
         <scene sceneID="v4g-4W-A77">
             <objects>
-                <viewController id="ts5-gz-BoV" sceneMemberID="viewController">
+                <viewController id="ts5-gz-BoV" customClass="GraphMenuViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Jug-HA-ozx">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Grpahs" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Lse-xL-ZfP">
-                                <rect key="frame" x="147" y="285" width="103" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="52" sectionHeaderHeight="22" sectionFooterHeight="22" id="WWX-tZ-q8k">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GraphMenuCell" rowHeight="52" id="PIg-jn-mAz">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PIg-jn-mAz" id="jI8-vc-OZm">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="PpN-pS-vrY">
+                                                    <rect key="frame" x="8" y="15" width="22" height="22"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="cellInfoButtonPressed:" destination="ts5-gz-BoV" eventType="touchUpInside" id="Aez-9a-apK"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Fz6-Lo-ePJ">
+                                                    <rect key="frame" x="38" y="15" width="274" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="ts5-gz-BoV" id="GAt-ND-sjM"/>
+                                    <outlet property="delegate" destination="ts5-gz-BoV" id="BuB-ZI-XRG"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="49s-Xh-JVp">
+                        <barButtonItem key="leftBarButtonItem" image="menu.png" id="coT-bs-gLS"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="sidebarButton" destination="coT-bs-gLS" id="pM9-Yu-i54"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sxh-jz-BjA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2806" y="-188"/>
+            <point key="canvasLocation" x="3338" y="-188"/>
         </scene>
         <!--Menu-->
         <scene sceneID="QNM-Qa-WNp">
@@ -570,7 +605,7 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <segue destination="ts5-gz-BoV" kind="custom" identifier="GraphSegue" customClass="SWRevealViewControllerSeguePushController" id="AXF-Cj-Us2"/>
+                        <segue destination="Rx1-Kn-t6U" kind="custom" identifier="GraphSegue" customClass="SWRevealViewControllerSeguePushController" id="AXF-Cj-Us2"/>
                         <segue destination="Gw3-vK-TBk" kind="custom" identifier="AroundTheNBASegue" customClass="SWRevealViewControllerSeguePushController" id="gAD-rS-ocO"/>
                         <segue destination="nFY-dq-fZf" kind="custom" identifier="OptionsSegue" customClass="SWRevealViewControllerSeguePushController" id="upS-YX-QLy"/>
                         <segue destination="WO0-QS-wiV" kind="custom" identifier="ReferencesSegue" customClass="SWRevealViewControllerSeguePushController" id="YTG-pI-sDh"/>
@@ -946,6 +981,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fEz-3w-VlH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="612" y="-58"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="NWu-jy-iFY">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Rx1-Kn-t6U" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fiT-xm-vJY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ts5-gz-BoV" kind="relationship" relationship="rootViewController" id="9of-yG-oqy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rpn-cT-mRu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2806" y="-188"/>
         </scene>
     </scenes>
     <resources>
