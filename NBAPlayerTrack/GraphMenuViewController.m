@@ -8,6 +8,7 @@
 
 #import "GraphMenuViewController.h"
 #import "SWRevealViewController.h"
+#import "BarGraphViewController.h"
 
 @interface GraphMenuViewController ()
 
@@ -60,14 +61,21 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    //If Player Compare Graph
+    if(indexPath.row == 0)
+    {
+        [self performSegueWithIdentifier:@"BarGraphSegue" sender:tableView];
+    }
+    //If Trend Graph
+    else
+    {
+        
+    }
     
 }
 #pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+
 }
 
 - (IBAction)cellInfoButtonPressed:(id)sender {
@@ -83,7 +91,7 @@
     }
     else
     {
-        graphDescriptorString = @"You've discovered a graph time that hasn't been programmed yet!";
+        graphDescriptorString = @"You've discovered a graph type that hasn't been programmed yet!";
     }
     
     UIAlertView *info = [[UIAlertView alloc] initWithTitle:self.graphTypeArray[button.tag] message:graphDescriptorString delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];

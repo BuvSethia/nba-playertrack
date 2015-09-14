@@ -8,7 +8,6 @@
 
 #import "PlayerCompareViewController.h"
 #import "SWRevealViewController.h"
-#import "Utility.h"
 
 @interface PlayerCompareViewController ()
 
@@ -92,12 +91,7 @@
         
         self.playerList = [NSKeyedUnarchiver unarchiveObjectWithFile:[self userPlayersFilePath]];
         NSLog(@"Loading players from file");
-        /*for(int i = 0; i < self.playerList.count; i++)
-        {
-            self.playerList[i] = [Utility generateObjectForPlayer:self.playerList[i]];
-            
-        }
-        [MainMenuViewController saveUserPlayers];*/
+
     }
     else
     {
