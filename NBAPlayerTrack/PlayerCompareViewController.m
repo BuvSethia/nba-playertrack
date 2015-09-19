@@ -214,7 +214,7 @@
     else if(sender == self.statTypeSelectButton)
     {
         self.statTypeToDisplay = (StatType)(newItem + 1);
-        NSArray *statTypeArray = [[NSArray alloc] initWithObjects:@"Per Game", @"Per 36", @"Advanced", @"Per Game Career", @"Advanced Career", nil];
+        NSArray *statTypeArray = [[NSArray alloc] initWithObjects:@"Per Game Season", @"Per 36 Season", @"Advanced", @"Per Game Career", @"Advanced Career", nil];
         [self.statTypeSelectButton setTitle:statTypeArray[newItem] forState:UIControlStateNormal];
     }
     //Should never reach this

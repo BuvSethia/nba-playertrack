@@ -27,7 +27,6 @@
 //If view is tapped outside of the table view, dismiss it
 -(void)onSingleTap:(UITapGestureRecognizer *)sender
 {
-    NSLog(@"We got a tap");
     [self dismissViewControllerAnimated:YES completion:Nil];
 }
 
