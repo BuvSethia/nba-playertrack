@@ -62,6 +62,10 @@ const int MAX_STATS = 5;
     {
         [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     }
+    
+    //Set the orientation of the view as landscape to use space better
+    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
+    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
 }
 
 - (IBAction)graphTypeButtonPressed:(id)sender {
@@ -478,5 +482,22 @@ const int MAX_STATS = 5;
     
     return normalizedStatsDictionary;
 }
+
+-(NSUInteger)supportedInterfaceOrientations
+{
+    NSLog(@"Supported interface orientations of data input for bar graph");
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+-(UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+    return UIInterfaceOrientationPortrait;
+}
+
+-(BOOL)shouldAutorotate
+{
+    return NO;
+}
+
 
 @end

@@ -25,21 +25,18 @@
         [self.sidebarButton setTarget: self.revealViewController];
         [self.sidebarButton setAction: @selector( revealToggle: )];
     }
+    
+    [self initPlot];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    //Set the orientation of the view as landscape to use space better
-    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
-    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
     
     if(self.revealViewController)
     {
         [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     }
-    
-    [self initPlot];
 }
 
 #pragma mark - CPTPlotDataSource methods
@@ -82,12 +79,14 @@
     [self configureAxes];
     [self configureAnnotations];
     [self configureLegend];
+    [self displayImageOfGraph];
 }
 
 -(void)configureGraph
 {
     //Create Graph
-    CPTGraph *graph = [[CPTXYGraph alloc] initWithFrame:self.hostView.bounds];
+    CGRect newFrame = CGRectMake(self.hostView.bounds.origin.x, self.hostView.bounds.origin.y, self.hostView.bounds.size.width, self.hostView.bounds.size.height);
+    CPTGraph *graph = [[CPTXYGraph alloc] initWithFrame:newFrame];
     graph.plotAreaFrame.masksToBorder = NO;
     self.hostView.hostedGraph = graph;
     
@@ -108,7 +107,7 @@
     graph.title = title;
     graph.titleTextStyle = titleStyle;
     graph.titlePlotAreaFrameAnchor = CPTRectAnchorTop;
-    graph.titleDisplacement = CGPointMake(0.0f, -10.0f);
+    graph.titleDisplacement = CGPointMake(0.0f, -15.0f);
     
     //Create Plot Spaces
     CGFloat xMin = 0.0f;
@@ -222,7 +221,7 @@
         CPTAxisLabel *newLabel = [[CPTAxisLabel alloc] initWithText:label textStyle:style];
         NSNumber *labelLocation = [NSNumber numberWithFloat:([tickLocation floatValue]- 0.5f)];
         newLabel.tickLocation = [labelLocation decimalValue];
-        newLabel.offset = axisSet.xAxis.labelOffset + axisSet.xAxis.majorTickLength;
+        newLabel.offset = axisSet.xAxis.labelOffset + axisSet.xAxis.majorTickLength - 5.0f;
         [customLabels addObject:newLabel];
     }
     
@@ -265,7 +264,7 @@
             CPTPlotSpaceAnnotation *statAnnotation = [[CPTPlotSpaceAnnotation alloc] initWithPlotSpace:plot.plotSpace anchorPlotPoint:[NSArray arrayWithObjects:anchorX, anchorY, nil]];
         
             //Create text layer for annotation
-            NSString *statValue = [NSString stringWithFormat:@"%@", stat];
+            NSString *statValue = [[NSString stringWithFormat:@"%@", stat] stringByReplacingOccurrencesOfString:@"0." withString:@"."];
             CPTTextLayer *textLayer = [[CPTTextLayer alloc] initWithText:statValue style:style];
         
             //Set annotation values
@@ -291,10 +290,11 @@
     //theLegend.borderLineStyle = [CPTLineStyle lineStyle];
     //theLegend.cornerRadius = 5.0;
     // 4 - Add legend to graph
-    graph.legend = theLegend;
     graph.legendAnchor = CPTRectAnchorTop;
     CGFloat legendPadding = self.navigationController.navigationBar.frame.size.height;
-    graph.legendDisplacement = CGPointMake(self.hostView.hostedGraph.paddingLeft/2.0, legendPadding);
+    graph.legendDisplacement = CGPointMake(0.0, legendPadding);
+    graph.legend = theLegend;
+    [self.hostView setHostedGraph:graph];
 }
 
 - (IBAction)editDataPressed:(id)sender
@@ -302,14 +302,45 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (BOOL)shouldAutorotate
+-(void)displayImageOfGraph
 {
-    return NO;
+    UIImage *graphImage = [self.hostView.hostedGraph imageOfLayer];
+    //graphImage = [self resizeImage:graphImage imageSize:self.graphImageView.bounds.size];
+    UIImage *legendImage = [self.hostView.hostedGraph.legend imageOfLayer];
+    [self.hostView setHostedGraph:nil];
+    [self.hostView setHidden:YES];
+    //[self.view bringSubviewToFront:self.legendImageView];
+    [self.graphImageView setImage:graphImage];
+    [self.legendImageView setImage:legendImage];
 }
 
+//http://stackoverflow.com/questions/12552785/resizing-image-to-fit-uiimageview
+-(UIImage*)resizeImage:(UIImage *)image imageSize:(CGSize)size
+{
+    UIGraphicsBeginImageContext(size);
+    [image drawInRect:CGRectMake(0,0,size.width,size.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    //here is the scaled image which has been changed to the size specified
+    UIGraphicsEndImageContext();
+    return newImage;
+    
+}
+
+/*
 -(NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskLandscapeLeft;
+}
+
+-(UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
 {
     return UIInterfaceOrientationLandscapeLeft;
 }
+
+-(BOOL)shouldAutorotate
+{
+    return NO;
+}
+*/
 
 @end

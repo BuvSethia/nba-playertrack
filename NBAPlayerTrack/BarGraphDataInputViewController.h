@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PopupMenuViewController.h"
 
-@interface BarGraphDataInputViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate, UIAlertViewDelegate, MenuDelegate>
+@interface BarGraphDataInputViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate, UIAlertViewDelegate, MenuDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *selectPlayerButton;
 @property (weak, nonatomic) IBOutlet UIButton *perGameSeasonButton;
 @property (weak, nonatomic) IBOutlet UIButton *perGameCareerButton;

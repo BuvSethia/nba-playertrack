@@ -377,15 +377,15 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="55s-so-ulL">
                                 <rect key="frame" x="11" y="69" width="113" height="113"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="fol-h6-2Ky">
                                 <rect key="frame" x="191" y="69" width="113" height="113"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="wordWrap" id="zL2-jY-v0Q">
                                 <rect key="frame" x="11" y="192" width="113" height="49"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Select Player">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -394,8 +394,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="wordWrap" id="9FW-c6-bUV">
-                                <rect key="frame" x="191" y="192" width="113" height="49"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="191.00000054013412" y="192" width="113" height="49"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Select Player">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -405,7 +405,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dGt-YT-OQG">
                                 <rect key="frame" x="16" y="249" width="288" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Select Stats to Compare">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -753,10 +753,11 @@
                         </view>
                         <barButtonItem key="rightBarButtonItem" title="Create" id="zW8-FV-NwJ">
                             <connections>
-                                <segue destination="HyV-5h-iai" kind="push" identifier="DisplayBarGraphSegue" id="dh4-Cz-ICc"/>
+                                <segue destination="HyV-5h-iai" kind="push" identifier="DisplayBarGraphSegue" id="GpG-4d-cVk"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
                         <outlet property="advancedCareerButton" destination="R1b-CE-EPg" id="iGR-Op-y0E"/>
                         <outlet property="advancedSeasonButton" destination="BFQ-ol-vJN" id="9uS-ew-lR4"/>
@@ -1172,10 +1173,10 @@
             </objects>
             <point key="canvasLocation" x="612" y="-58"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Graph Navigation Controller-->
         <scene sceneID="NWu-jy-iFY">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Rx1-Kn-t6U" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Rx1-Kn-t6U" customClass="GraphNavigationController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fiT-xm-vJY">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1227,30 +1228,49 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="GKo-fv-BXd" customClass="CPTGraphHostingView">
-                                <rect key="frame" x="0.0" y="65" width="320" height="503"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <view hidden="YES" contentMode="scaleToFill" id="B9w-cH-llN" customClass="CPTGraphHostingView">
+                                <rect key="frame" x="0.0" y="66" width="568" height="254"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="dhk-SH-a6L">
+                                <rect key="frame" x="0.0" y="66" width="320" height="502"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="B9v-V7-spj">
+                                        <rect key="frame" x="0.0" y="35" width="320" height="467"/>
+                                        <autoresizingMask key="autoresizingMask" heightSizable="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="lnY-TY-UWT">
+                                        <rect key="frame" x="0.0" y="8" width="320" height="49"/>
+                                        <autoresizingMask key="autoresizingMask" heightSizable="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="G6p-EN-d1z">
+                        <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" image="menu.png" id="crZ-gs-zJe"/>
                         <barButtonItem key="rightBarButtonItem" title="Edit Data" id="4eK-5A-B6c">
                             <connections>
-                                <action selector="editDataPressed:" destination="HyV-5h-iai" id="rQJ-ch-oLC"/>
+                                <action selector="editDataPressed:" destination="HyV-5h-iai" id="8Jp-0l-zUz"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="hostView" destination="GKo-fv-BXd" id="bc0-wh-3dF"/>
-                        <outlet property="sidebarButton" destination="crZ-gs-zJe" id="vyL-sA-dS6"/>
+                        <outlet property="graphImageView" destination="B9v-V7-spj" id="lsS-Gk-1Qh"/>
+                        <outlet property="hostView" destination="B9w-cH-llN" id="Ds8-EJ-N1P"/>
+                        <outlet property="legendImageView" destination="lnY-TY-UWT" id="lpf-Ge-Q9z"/>
+                        <outlet property="presentedImagesView" destination="dhk-SH-a6L" id="Y0k-iU-0da"/>
+                        <outlet property="sidebarButton" destination="crZ-gs-zJe" id="2oj-uR-aEK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="42j-tv-hKf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4182" y="152"/>
+            <point key="canvasLocation" x="4182" y="153"/>
         </scene>
     </scenes>
     <resources>

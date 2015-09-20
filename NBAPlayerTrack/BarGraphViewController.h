@@ -17,5 +17,8 @@
 @property NSMutableDictionary *normalizedStatsToGraph;
 @property NSArray *xAxisDescriptors;
 @property (weak, nonatomic) IBOutlet CPTGraphHostingView *hostView;
+@property (weak, nonatomic) IBOutlet UIImageView *graphImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *legendImageView;
+@property (weak, nonatomic) IBOutlet UIView *presentedImagesView;
 
 @end
