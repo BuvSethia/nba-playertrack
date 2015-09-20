@@ -302,6 +302,22 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+//http://stackoverflow.com/questions/9257992/how-to-combine-merge-2-images-into-1
+- (IBAction)saveGraphPressed:(id)sender
+{
+    //Combine the legend and the graph into one image by creating an image out of the view presenting them.
+    UIGraphicsBeginImageContext(self.presentedImagesView.bounds.size);
+    [self.presentedImagesView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *combinedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    //Save combined image to gallery
+    UIImageWriteToSavedPhotosAlbum(combinedImage, nil, nil, nil);
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Graph saved to image gallery" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+    [alert show];
+}
+
 -(void)displayImageOfGraph
 {
     UIImage *graphImage = [self.hostView.hostedGraph imageOfLayer];

@@ -1254,6 +1254,23 @@
                     <navigationItem key="navigationItem" id="G6p-EN-d1z">
                         <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" image="menu.png" id="crZ-gs-zJe"/>
+                        <view key="titleView" contentMode="scaleToFill" id="4Mb-pf-FVh">
+                            <rect key="frame" x="96" y="6" width="128" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="GfU-Fk-0Ag">
+                                    <rect key="frame" x="8" y="2" width="112" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" title="Save Graph">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="saveGraphPressed:" destination="HyV-5h-iai" eventType="touchUpInside" id="9AF-bx-rUk"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </view>
                         <barButtonItem key="rightBarButtonItem" title="Edit Data" id="4eK-5A-B6c">
                             <connections>
                                 <action selector="editDataPressed:" destination="HyV-5h-iai" id="8Jp-0l-zUz"/>
