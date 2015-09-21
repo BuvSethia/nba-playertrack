@@ -27,9 +27,9 @@
     self.playerName.text = self.player.name;
     self.playerTeam.text = self.player.team;
     self.playerNumber.text = [NSString stringWithFormat:@"#%@", self.player.jNumber];
-    self.playerPosition.text = self.player.position;
-    //self.playerAge.text = [self calculateAge:tabController.player.DOB];
-    self.playerYearsPro.text = self.player.yearsPro;
+    self.playerPosition.text = [NSString stringWithFormat:@"Position: %@", self.player.position];
+    self.playerAge.text = [NSString stringWithFormat:@"Age: %@", [self calculateAge:self.player.DOB]];
+    self.playerYearsPro.text = [NSString stringWithFormat:@"Years Pro: %@", self.player.yearsPro];
     self.playerHeight.text = [NSString stringWithFormat:@"Height: %@", self.player.height];
     self.playerWeight.text = [NSString stringWithFormat:@"Weight: %@lbs", self.player.weight];
 
@@ -63,7 +63,9 @@
     
 }
 
-/*
+- (IBAction)moreInfoPressed:(id)sender {
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -71,6 +73,5 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
-*/
 
 @end

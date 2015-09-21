@@ -466,7 +466,8 @@ const int MAX_STATS = 5;
         {
             if(indexOfNonZeroStat != -1)
             {
-                double normalizedStat = [stat doubleValue]/[statsForStatType[indexOfNonZeroStat] doubleValue];
+                double absOfNormalizerStat = fabs([statsForStatType[indexOfNonZeroStat] doubleValue]);
+                double normalizedStat = [stat doubleValue]/absOfNormalizerStat;
                 [normalizedStatsForStatType addObject:[NSDecimalNumber numberWithDouble:normalizedStat]];
             }
             else

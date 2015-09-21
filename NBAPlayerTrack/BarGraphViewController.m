@@ -107,16 +107,27 @@
     graph.title = title;
     graph.titleTextStyle = titleStyle;
     graph.titlePlotAreaFrameAnchor = CPTRectAnchorTop;
-    graph.titleDisplacement = CGPointMake(0.0f, -15.0f);
+    graph.titleDisplacement = CGPointMake(0.0f, -10.0f);
     
     //Create Plot Spaces
     CGFloat xMin = 0.0f;
     CGFloat xMax = self.statsToGraph.count;
-    CGFloat yMin = 0.0f;
-    CGFloat yMax = 1.5f * [self determineMaxYForGraph];  // should determine dynamically based on max price
+    CGFloat yMin = 1.1f * [self determineMinYForGraph];
+    NSLog(@"Min y for graph is %f", yMin);
+    CGFloat yMax = 1.5f * [self determineMaxYForGraph];
+    //Make the graph look pretty if all the graph values are negative
+    if(yMax <= 0.0f)
+    {
+        yMax = fabsf(yMin);
+    }
+    //Make graph look pretty for huge negative values
+    if(yMin < 0)
+    {
+        yMax += fabsf(yMin);
+    }
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *) graph.defaultPlotSpace;
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(xMin) length:CPTDecimalFromFloat(xMax)];
-    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(yMin) length:CPTDecimalFromFloat(yMax)];
+    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(yMin) length:CPTDecimalFromFloat(yMax + fabsf(yMin))];
 }
 
 -(float)determineMaxYForGraph
@@ -136,6 +147,25 @@
     }
     
     return max;
+}
+
+-(float)determineMinYForGraph
+{
+    float min = 0;
+    
+    for(NSString *statType in self.xAxisDescriptors)
+    {
+        NSMutableArray *statsForType = [self.normalizedStatsToGraph objectForKey:statType];
+        for(NSString *stat in statsForType)
+        {
+            if([stat floatValue] < min)
+            {
+                min = [stat floatValue];
+            }
+        }
+    }
+    
+    return min;
 }
 
 -(void)configurePlots {
@@ -198,6 +228,47 @@
     
     //Put labels on the x-axis
     //http://stackoverflow.com/questions/2904562/how-do-you-provide-labels-for-the-axis-of-a-core-plot-chart
+    
+    //Create a new x axis and put the labels there so that even when there are negative values, the labels will always be anchored at the bottom of the graph
+    CPTXYAxis *labelAxis = [[CPTXYAxis alloc] init];
+    labelAxis.coordinate = CPTCoordinateX;
+    labelAxis.axisLineStyle = nil;
+    labelAxis.labelingPolicy = CPTAxisLabelingPolicyNone;
+    labelAxis.labelRotation = M_PI/4;
+    NSMutableArray *customTickLocations = [[NSMutableArray alloc] init];
+    for(int i = 0; i < self.xAxisDescriptors.count; i++)
+    {
+        [customTickLocations addObject:[NSNumber numberWithInt:(i + 1)]];
+    }
+    NSUInteger labelLocation = 0;
+    NSMutableArray *customLabels = [NSMutableArray arrayWithCapacity:[self.xAxisDescriptors count]];
+    
+    //Text Style
+    
+    CPTMutableTextStyle *style = [CPTMutableTextStyle textStyle];
+    style.color= [CPTColor blackColor];
+    style.fontSize = 9.5f;
+    style.fontName = @"Helvetica";
+    style.textAlignment = CPTTextAlignmentCenter;
+    style.lineBreakMode = NSLineBreakByWordWrapping;
+    
+    for (NSNumber *tickLocation in customTickLocations) {
+        NSString *label = [[self.xAxisDescriptors objectAtIndex:labelLocation++] stringByReplacingOccurrencesOfString:@"- " withString:@"-\n"];
+        CPTAxisLabel *newLabel = [[CPTAxisLabel alloc] initWithText:label textStyle:style];
+        NSNumber *labelLocation = [NSNumber numberWithFloat:([tickLocation floatValue]- 0.5f)];
+        newLabel.tickLocation = [labelLocation decimalValue];
+        newLabel.offset = 0.0f;
+        //newLabel.offset = axisSet.xAxis.labelOffset + axisSet.xAxis.majorTickLength - 5.0f;
+        //newLabel.offset = self.hostView.hostedGraph.bounds.size.height -                                            axisSet.xAxis.majorTickLength - 5.0f;
+        [customLabels addObject:newLabel];
+    }
+    
+    labelAxis.axisLabels =  [NSSet setWithArray:customLabels];
+    labelAxis.plotSpace = self.hostView.hostedGraph.defaultPlotSpace;
+    labelAxis.axisConstraints = [CPTConstraints constraintWithLowerOffset:0.0];
+    self.hostView.hostedGraph.axisSet.axes = [NSArray arrayWithObjects:axisSet.xAxis, axisSet.yAxis, labelAxis, nil];
+    
+    /*
     axisSet.xAxis.labelRotation = M_PI/4;
     NSMutableArray *customTickLocations = [[NSMutableArray alloc] init];
     for(int i = 0; i < self.xAxisDescriptors.count; i++)
@@ -221,11 +292,13 @@
         CPTAxisLabel *newLabel = [[CPTAxisLabel alloc] initWithText:label textStyle:style];
         NSNumber *labelLocation = [NSNumber numberWithFloat:([tickLocation floatValue]- 0.5f)];
         newLabel.tickLocation = [labelLocation decimalValue];
-        newLabel.offset = axisSet.xAxis.labelOffset + axisSet.xAxis.majorTickLength - 5.0f;
+        //newLabel.offset = axisSet.xAxis.labelOffset + axisSet.xAxis.majorTickLength - 5.0f;
+        newLabel.offset = self.hostView.hostedGraph.bounds.size.height -                                            axisSet.xAxis.majorTickLength - 5.0f;
         [customLabels addObject:newLabel];
     }
     
     axisSet.xAxis.axisLabels =  [NSSet setWithArray:customLabels];
+    */
 }
 
 -(void)configureAnnotations
@@ -253,18 +326,31 @@
             NSString *selectedStatType = self.xAxisDescriptors[index];
             NSMutableArray *statsFromStatType = [self.statsToGraph objectForKey:selectedStatType];
             stat = [[NSNumber alloc] initWithFloat:[statsFromStatType[j] floatValue]];
+            //Used for formatting the location of the annotation
+            NSMutableArray *normalizedStatsFromStatType = [self.statsToGraph objectForKey:selectedStatType];
+            NSNumber *normalizedStat = [[NSNumber alloc] initWithFloat:[normalizedStatsFromStatType[j] floatValue]];
             NSLog(@"Stat annotation value %@", stat);
         
             //Get the anchor point for annotation
             CGFloat x = index + 0.25 + (j * 0.25);
             NSNumber *anchorX = [NSNumber numberWithFloat:x];
-            CGFloat y = [[self numberForPlot:plot field:CPTBarPlotFieldBarTip recordIndex:index] floatValue] + 0.05f;
+            //If the normalized stat is negative (downward bar), the annotation should be lower.
+            CGFloat y;
+            if(normalizedStat >= 0)
+            {
+                y = [[self numberForPlot:plot field:CPTBarPlotFieldBarTip recordIndex:index] floatValue] + 0.05f;
+            }
+            else
+            {
+                y = [[self numberForPlot:plot field:CPTBarPlotFieldBarTip recordIndex:index] floatValue] - 0.10f;
+            }
             NSNumber *anchorY = [NSNumber numberWithFloat:y];
         
             CPTPlotSpaceAnnotation *statAnnotation = [[CPTPlotSpaceAnnotation alloc] initWithPlotSpace:plot.plotSpace anchorPlotPoint:[NSArray arrayWithObjects:anchorX, anchorY, nil]];
         
             //Create text layer for annotation
-            NSString *statValue = [[NSString stringWithFormat:@"%@", stat] stringByReplacingOccurrencesOfString:@"0." withString:@"."];
+            //NSString *statValue = [[NSString stringWithFormat:@"%@", stat] stringByReplacingOccurrencesOfString:@"0." withString:@"."];
+            NSString *statValue = [NSString stringWithFormat:@"%@", stat];
             CPTTextLayer *textLayer = [[CPTTextLayer alloc] initWithText:statValue style:style];
         
             //Set annotation values
