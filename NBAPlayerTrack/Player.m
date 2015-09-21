@@ -74,6 +74,7 @@
         self.articles = [decoder decodeObjectForKey:@"Articles"];
         self.twitterID = [decoder decodeObjectForKey:@"Twitter"];
         self.playerImage = [decoder decodeObjectForKey:@"Image"];
+        self.shortBio = [decoder decodeObjectForKey:@"ShortBio"];
     }
     return self;
 }
@@ -100,6 +101,7 @@
     [encoder encodeObject:self.articles forKey:@"Articles"];
     [encoder encodeObject:self.twitterID forKey:@"Twitter"];
     [encoder encodeObject:self.playerImage forKey:@"Image"];
+    [encoder encodeObject:self.shortBio forKey:@"ShortBio"];
     
 }
 

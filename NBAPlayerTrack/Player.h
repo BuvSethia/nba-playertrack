@@ -33,6 +33,7 @@
 @property NSDictionary *careerPerGameStats;
 @property NSDictionary *advancedStats;
 @property NSDictionary *careerAdvancedStats;
+@property NSDictionary *shortBio;
 
 @property NSMutableArray *articles;
 

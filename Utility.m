@@ -120,9 +120,27 @@
         newPlayer.careerAdvancedStats = [playerInfo objectForKey:@"CareerAdvancedStats"];
         newPlayer.articles = [[Utility new] getArticlesForPlayer:playerID];
         
+        //Get player's image
         NSString *imageURL = [NSString stringWithFormat:@"http://ec2-52-10-76-24.us-west-2.compute.amazonaws.com/PlayerImages/%@.png", playerID];
         NSData *data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:imageURL]];
         newPlayer.playerImage = data;
+        
+        //Get player's short bio
+        NSString *bioURL = [NSString stringWithFormat:@"http://ec2-52-10-76-24.us-west-2.compute.amazonaws.com/PlayerBios/%@.txt", playerID];
+        NSURL *url = [NSURL URLWithString:bioURL];
+        NSError *error = nil;
+        NSString *text = [[NSString alloc] initWithContentsOfURL: url
+                                                        encoding: NSUTF8StringEncoding
+                                                           error: &error];
+        NSData *bioData = [text dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary *wikiDictionary = [NSJSONSerialization JSONObjectWithData:bioData
+                                                               options:NSJSONReadingMutableContainers
+                                                                 error:nil];
+        NSDictionary *inner = [[wikiDictionary objectForKey:@"query"] objectForKey:@"pages"];
+        NSArray *innerKeys = [inner allKeys];
+        NSDictionary *bioDictionary = [inner objectForKey:innerKeys[0]];
+        NSLog(@"BIO: %@", [bioDictionary objectForKey:@"extract"]);
+        newPlayer.shortBio = bioDictionary;
         
         return newPlayer;
         
