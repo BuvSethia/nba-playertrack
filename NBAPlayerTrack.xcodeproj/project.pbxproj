@@ -43,6 +43,7 @@
 		39AC2E051AB8C8DA0077D31E /* PlayerNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39AC2E041AB8C8DA0077D31E /* PlayerNewsViewController.m */; };
 		39B2E88F1BAE0775008B9E96 /* GraphNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B2E88E1BAE0775008B9E96 /* GraphNavigationController.m */; };
 		39B2E8911BAE11EB008B9E96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39B2E8901BAE11EB008B9E96 /* Main.storyboard */; };
+		39B2E8941BB10213008B9E96 /* PlayerBioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B2E8931BB10213008B9E96 /* PlayerBioViewController.m */; };
 		39BA58141ABA7520007E5F9E /* ArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39BA58131ABA7520007E5F9E /* ArticleViewController.m */; };
 		39F7499B1B881BB600C6889A /* PopupMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39F7499A1B881BB600C6889A /* PopupMenuViewController.m */; };
 		39F7499D1B881BCF00C6889A /* behind_alert_view.png in Resources */ = {isa = PBXBuildFile; fileRef = 39F7499C1B881BCF00C6889A /* behind_alert_view.png */; };
@@ -199,6 +200,8 @@
 		39B2E88D1BAE0775008B9E96 /* GraphNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphNavigationController.h; sourceTree = "<group>"; };
 		39B2E88E1BAE0775008B9E96 /* GraphNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphNavigationController.m; sourceTree = "<group>"; };
 		39B2E8901BAE11EB008B9E96 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		39B2E8921BB10213008B9E96 /* PlayerBioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerBioViewController.h; sourceTree = "<group>"; };
+		39B2E8931BB10213008B9E96 /* PlayerBioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerBioViewController.m; sourceTree = "<group>"; };
 		39BA58121ABA7520007E5F9E /* ArticleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticleViewController.h; path = NBAPlayerTrack/ArticleViewController.h; sourceTree = "<group>"; };
 		39BA58131ABA7520007E5F9E /* ArticleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArticleViewController.m; path = NBAPlayerTrack/ArticleViewController.m; sourceTree = "<group>"; };
 		39F749991B881BB600C6889A /* PopupMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupMenuViewController.h; sourceTree = "<group>"; };
@@ -362,6 +365,8 @@
 				399F9BA01B52514900DF89A0 /* PlayerInfoViewController.m */,
 				399F9BA21B525FBE00DF89A0 /* PlayerStatsViewController.h */,
 				399F9BA31B525FBE00DF89A0 /* PlayerStatsViewController.m */,
+				39B2E8921BB10213008B9E96 /* PlayerBioViewController.h */,
+				39B2E8931BB10213008B9E96 /* PlayerBioViewController.m */,
 			);
 			name = "Stats View";
 			path = ..;
@@ -616,6 +621,7 @@
 			files = (
 				39A100AC1AA4E5B40092F5CF /* MainMenuViewController.m in Sources */,
 				39A3D8DF1AB0E4FD006E9393 /* PlayerSearchViewController.m in Sources */,
+				39B2E8941BB10213008B9E96 /* PlayerBioViewController.m in Sources */,
 				39A3D8E21AB0F871006E9393 /* PlayerSearchResultsViewController.m in Sources */,
 				39A7D2531AA25731005210F9 /* AppDelegate.m in Sources */,
 				39F7499B1B881BB600C6889A /* PopupMenuViewController.m in Sources */,
