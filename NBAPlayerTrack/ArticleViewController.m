@@ -17,9 +17,9 @@
     SWRevealViewController *revealViewController = self.revealViewController;
     if ( revealViewController )
     {
-        self.navigationItem.leftBarButtonItem = self.tabBarController.navigationItem.leftBarButtonItem;
-        [self.tabBarController.navigationItem.leftBarButtonItem setTarget: self.revealViewController];
-        [self.tabBarController.navigationItem.leftBarButtonItem setAction: @selector( revealToggle: )];
+        self.navigationItem.leftBarButtonItem = self.sidebarButton;
+        [self.sidebarButton setTarget: self.revealViewController];
+        [self.sidebarButton setAction: @selector( revealToggle: )];
     }
     
     self.tabBarController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(articlesMenuPressed)];

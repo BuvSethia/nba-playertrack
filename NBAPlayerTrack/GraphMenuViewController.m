@@ -12,7 +12,7 @@
 
 @interface GraphMenuViewController ()
 
-@property NSArray *graphTypeArray;
+@property NSArray *graphTypes;
 
 @end
 
@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.graphTypeArray = [[NSArray alloc] initWithObjects:@"Player Compare Graph", @"Trend Graph", nil];
+    self.graphTypes = [[NSArray alloc] initWithObjects:@"Player Compare Graph", @"Multi Stat Trend Graph", @"Multi Player Trend Graph", nil];
     
     SWRevealViewController *revealViewController = self.revealViewController;
     if ( revealViewController )
@@ -44,7 +44,7 @@
 #pragma mark - Table View
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.graphTypeArray.count;
+    return self.graphTypes.count;
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -53,8 +53,8 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     UIButton *infoButton = (UIButton*)[cell viewWithTag:1];
     infoButton.tag = indexPath.row;
-    UILabel *graphTypeLabel = (UILabel*) [cell viewWithTag:2];
-    graphTypeLabel.text = self.graphTypeArray[indexPath.row];
+    UILabel *graphTypeLabel = (UILabel*) [cell viewWithTag:100];
+    graphTypeLabel.text = self.graphTypes[indexPath.row];
     
     return cell;
 }
@@ -66,10 +66,10 @@
     {
         [self performSegueWithIdentifier:@"BarGraphSegue" sender:tableView];
     }
-    //If Trend Graph
-    else
+    //If Multi Stat Trend Graph
+    else if(indexPath.row == 1)
     {
-        
+        [self performSegueWithIdentifier:@"SinglePlayerTrendSegue" sender:tableView];
     }
     
 }
@@ -87,25 +87,19 @@
     }
     else if (button.tag == 1)
     {
-        graphDescriptorString = @"A line graph depicting how the chosen stat for up to 3 players has changed over the season.";
+        graphDescriptorString = @"A line graph depicting how up to three chosen stats for a player have changed over the season, game by game.";
+    }
+    else if (button.tag == 2)
+    {
+        graphDescriptorString = @"A line graph depicting how the chosen stat for up to 3 players has changed over the season, game by game.";
     }
     else
     {
         graphDescriptorString = @"You've discovered a graph type that hasn't been programmed yet!";
     }
     
-    UIAlertView *info = [[UIAlertView alloc] initWithTitle:self.graphTypeArray[button.tag] message:graphDescriptorString delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
+    UIAlertView *info = [[UIAlertView alloc] initWithTitle:self.graphTypes[button.tag] message:graphDescriptorString delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
     [info show];
-}
-
--(BOOL)shouldAutorotate
-{
-    return NO;
-}
-
--(NSUInteger)supportedInterfaceOrientations
-{
-    return UIInterfaceOrientationMaskAllButUpsideDown;
 }
 
 @end

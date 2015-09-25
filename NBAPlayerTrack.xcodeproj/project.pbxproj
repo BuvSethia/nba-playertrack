@@ -14,6 +14,7 @@
 		390668B11BA1F71200B74228 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 390668B01BA1F71200B74228 /* Accelerate.framework */; };
 		390668B41BA1F9A800B74228 /* BarGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 390668B31BA1F9A800B74228 /* BarGraphViewController.m */; };
 		3917D8431BA757AD00C72549 /* BarGraphDataInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3917D8421BA757AD00C72549 /* BarGraphDataInputViewController.m */; };
+		3982C0F71BB5E9450037CF30 /* SinglePlayerTrendGraphDataInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3982C0F61BB5E9450037CF30 /* SinglePlayerTrendGraphDataInputViewController.m */; };
 		399F9BA11B52514A00DF89A0 /* PlayerInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 399F9BA01B52514900DF89A0 /* PlayerInfoViewController.m */; };
 		399F9BA41B525FBE00DF89A0 /* PlayerStatsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 399F9BA31B525FBE00DF89A0 /* PlayerStatsViewController.m */; };
 		39A100A91AA4E4340092F5CF /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A100A81AA4E4340092F5CF /* SWRevealViewController.m */; };
@@ -41,7 +42,6 @@
 		39A9CB491AC26A1600C9CF3A /* Crowd.png in Resources */ = {isa = PBXBuildFile; fileRef = 39A9CB481AC26A1600C9CF3A /* Crowd.png */; };
 		39AC2E021AB8ADCE0077D31E /* PlayerTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39AC2E011AB8ADCE0077D31E /* PlayerTabBarController.m */; };
 		39AC2E051AB8C8DA0077D31E /* PlayerNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39AC2E041AB8C8DA0077D31E /* PlayerNewsViewController.m */; };
-		39B2E88F1BAE0775008B9E96 /* GraphNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B2E88E1BAE0775008B9E96 /* GraphNavigationController.m */; };
 		39B2E8911BAE11EB008B9E96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39B2E8901BAE11EB008B9E96 /* Main.storyboard */; };
 		39B2E8941BB10213008B9E96 /* PlayerBioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B2E8931BB10213008B9E96 /* PlayerBioViewController.m */; };
 		39BA58141ABA7520007E5F9E /* ArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39BA58131ABA7520007E5F9E /* ArticleViewController.m */; };
@@ -150,6 +150,8 @@
 		390668B31BA1F9A800B74228 /* BarGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarGraphViewController.m; sourceTree = "<group>"; };
 		3917D8411BA757AD00C72549 /* BarGraphDataInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarGraphDataInputViewController.h; sourceTree = "<group>"; };
 		3917D8421BA757AD00C72549 /* BarGraphDataInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarGraphDataInputViewController.m; sourceTree = "<group>"; };
+		3982C0F51BB5E9450037CF30 /* SinglePlayerTrendGraphDataInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglePlayerTrendGraphDataInputViewController.h; sourceTree = "<group>"; };
+		3982C0F61BB5E9450037CF30 /* SinglePlayerTrendGraphDataInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglePlayerTrendGraphDataInputViewController.m; sourceTree = "<group>"; };
 		399F9B9F1B52514900DF89A0 /* PlayerInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerInfoViewController.h; path = NBAPlayerTrack/PlayerInfoViewController.h; sourceTree = "<group>"; };
 		399F9BA01B52514900DF89A0 /* PlayerInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerInfoViewController.m; path = NBAPlayerTrack/PlayerInfoViewController.m; sourceTree = "<group>"; };
 		399F9BA21B525FBE00DF89A0 /* PlayerStatsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerStatsViewController.h; path = NBAPlayerTrack/PlayerStatsViewController.h; sourceTree = "<group>"; };
@@ -197,8 +199,6 @@
 		39AC2E011AB8ADCE0077D31E /* PlayerTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerTabBarController.m; sourceTree = "<group>"; };
 		39AC2E031AB8C8DA0077D31E /* PlayerNewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerNewsViewController.h; path = NBAPlayerTrack/PlayerNewsViewController.h; sourceTree = "<group>"; };
 		39AC2E041AB8C8DA0077D31E /* PlayerNewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerNewsViewController.m; path = NBAPlayerTrack/PlayerNewsViewController.m; sourceTree = "<group>"; };
-		39B2E88D1BAE0775008B9E96 /* GraphNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphNavigationController.h; sourceTree = "<group>"; };
-		39B2E88E1BAE0775008B9E96 /* GraphNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphNavigationController.m; sourceTree = "<group>"; };
 		39B2E8901BAE11EB008B9E96 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		39B2E8921BB10213008B9E96 /* PlayerBioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerBioViewController.h; sourceTree = "<group>"; };
 		39B2E8931BB10213008B9E96 /* PlayerBioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerBioViewController.m; sourceTree = "<group>"; };
@@ -243,8 +243,8 @@
 				390668B31BA1F9A800B74228 /* BarGraphViewController.m */,
 				3917D8411BA757AD00C72549 /* BarGraphDataInputViewController.h */,
 				3917D8421BA757AD00C72549 /* BarGraphDataInputViewController.m */,
-				39B2E88D1BAE0775008B9E96 /* GraphNavigationController.h */,
-				39B2E88E1BAE0775008B9E96 /* GraphNavigationController.m */,
+				3982C0F51BB5E9450037CF30 /* SinglePlayerTrendGraphDataInputViewController.h */,
+				3982C0F61BB5E9450037CF30 /* SinglePlayerTrendGraphDataInputViewController.m */,
 			);
 			name = Graphs;
 			sourceTree = "<group>";
@@ -626,6 +626,7 @@
 				39A7D2531AA25731005210F9 /* AppDelegate.m in Sources */,
 				39F7499B1B881BB600C6889A /* PopupMenuViewController.m in Sources */,
 				390668B41BA1F9A800B74228 /* BarGraphViewController.m in Sources */,
+				3982C0F71BB5E9450037CF30 /* SinglePlayerTrendGraphDataInputViewController.m in Sources */,
 				39AC2E021AB8ADCE0077D31E /* PlayerTabBarController.m in Sources */,
 				39A389101AC11E53009FA8B6 /* PlayerTwitterViewController.m in Sources */,
 				39F749A01B882C1F00C6889A /* PlayerCompareViewController.m in Sources */,
@@ -644,7 +645,6 @@
 				399F9BA41B525FBE00DF89A0 /* PlayerStatsViewController.m in Sources */,
 				39A389151AC150FD009FA8B6 /* PlayerCell.m in Sources */,
 				39A100A91AA4E4340092F5CF /* SWRevealViewController.m in Sources */,
-				39B2E88F1BAE0775008B9E96 /* GraphNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

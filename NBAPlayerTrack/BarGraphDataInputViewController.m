@@ -62,10 +62,6 @@ const int MAX_STATS = 5;
     {
         [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     }
-    
-    //Set the orientation of the view as landscape to use space better
-    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
-    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
 }
 
 - (IBAction)graphTypeButtonPressed:(id)sender {

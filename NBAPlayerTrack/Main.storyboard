@@ -131,7 +131,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Kdc-Gn-zzx">
-                                <rect key="frame" x="238.00000005449567" y="181" width="66" height="30"/>
+                                <rect key="frame" x="238.00000005449573" y="181" width="66" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="Career">
@@ -227,7 +227,6 @@
         <!--Player Bio View Controller-->
         <scene sceneID="PQ8-4m-J2j">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QWb-HT-NmN" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="L3r-KW-yvg" customClass="PlayerBioViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Va9-k9-nBA">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -259,6 +258,7 @@
                         <outlet property="bioTextField" destination="W3m-Sf-QL4" id="c9e-fr-j9n"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QWb-HT-NmN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3040" y="2543"/>
         </scene>
@@ -300,8 +300,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="K0j-xU-ObT"/>
+                    <navigationItem key="navigationItem" id="K0j-xU-ObT">
+                        <barButtonItem key="leftBarButtonItem" image="menu.png" id="1Fz-FQ-wpP"/>
+                    </navigationItem>
                     <connections>
+                        <outlet property="sidebarButton" destination="1Fz-FQ-wpP" id="DN6-4y-Vck"/>
                         <outlet property="webView" destination="jNY-Vy-rY5" id="PWp-kD-uUP"/>
                     </connections>
                 </viewController>
@@ -443,7 +446,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dGt-YT-OQG">
-                                <rect key="frame" x="16" y="249" width="288" height="30"/>
+                                <rect key="frame" x="16" y="249" width="288.00000054013412" height="30"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Select Stats to Compare">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -592,7 +595,7 @@
                                                         <action selector="cellInfoButtonPressed:" destination="ts5-gz-BoV" eventType="touchUpInside" id="Aez-9a-apK"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Fz6-Lo-ePJ">
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Fz6-Lo-ePJ">
                                                     <rect key="frame" x="38" y="15" width="274" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -617,6 +620,7 @@
                     <connections>
                         <outlet property="sidebarButton" destination="coT-bs-gLS" id="pM9-Yu-i54"/>
                         <segue destination="O5l-MH-b2s" kind="push" identifier="BarGraphSegue" id="pyI-u3-FTB"/>
+                        <segue destination="d6U-YL-XkG" kind="push" identifier="SinglePlayerTrendSegue" id="ZUh-bJ-JvC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sxh-jz-BjA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -673,7 +677,7 @@
                                                     <color key="textColor" red="1" green="0.01237137336" blue="0.01089771588" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Per Game Season - PTS" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XFM-Gz-S1g">
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Per Game Season - PTS" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XFM-Gz-S1g">
                                                     <rect key="frame" x="8" y="4" width="107" height="34"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -811,7 +815,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VVw-GR-qMf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3745" y="-275"/>
+            <point key="canvasLocation" x="3745" y="-268"/>
         </scene>
         <!--Menu-->
         <scene sceneID="QNM-Qa-WNp">
@@ -1174,8 +1178,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="BO8-8K-euY"/>
+                    <navigationItem key="navigationItem" id="BO8-8K-euY">
+                        <barButtonItem key="leftBarButtonItem" image="menu.png" id="sQH-3v-BIV"/>
+                    </navigationItem>
                     <connections>
+                        <outlet property="sidebarButton" destination="sQH-3v-BIV" id="qaX-C9-MPa"/>
                         <outlet property="webView" destination="nz6-DH-NfO" id="LeA-hJ-0BC"/>
                     </connections>
                 </viewController>
@@ -1201,10 +1208,10 @@
             </objects>
             <point key="canvasLocation" x="612" y="-58"/>
         </scene>
-        <!--Graph Navigation Controller-->
+        <!--Navigation Controller-->
         <scene sceneID="NWu-jy-iFY">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Rx1-Kn-t6U" customClass="GraphNavigationController" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Rx1-Kn-t6U" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fiT-xm-vJY">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1316,6 +1323,141 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="42j-tv-hKf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4182" y="153"/>
+        </scene>
+        <!--Single Player Trend Graph Data Input View Controller-->
+        <scene sceneID="i86-Vo-LgN">
+            <objects>
+                <viewController id="d6U-YL-XkG" customClass="SinglePlayerTrendGraphDataInputViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gu0-PP-l9Z">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="qfy-SY-Fjp">
+                                <rect key="frame" x="16" y="246" width="288" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Select Stats (up to 3)">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="Abf-nR-4w5" kind="modal" identifier="SinglePlayerTrendStatSegue" id="MBn-45-eUK"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="yUJ-ve-w2h">
+                                <rect key="frame" x="16" y="67" width="288" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Select Player">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="Abf-nR-4w5" kind="modal" identifier="SinglePlayerTrendPlayerSegue" id="cSp-p9-hCK"/>
+                                </connections>
+                            </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Y5j-kq-a7U">
+                                <rect key="frame" x="16" y="284" width="288" height="130"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gNi-Zp-qkQ">
+                                    <size key="itemSize" width="139" height="42"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StatTypeCell" id="Rhf-sF-Bww">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="139" height="42"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="O5I-cC-bQa">
+                                                    <rect key="frame" x="118" y="10" width="21" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="1" green="0.01237137336" blue="0.01089771588" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FTPCT" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Zta-Fc-ZqO">
+                                                    <rect key="frame" x="8" y="4" width="107" height="34"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="d6U-YL-XkG" id="ia8-Ti-FIg"/>
+                                    <outlet property="delegate" destination="d6U-YL-XkG" id="ewV-hA-plq"/>
+                                </connections>
+                            </collectionView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="33" sectionHeaderHeight="22" sectionFooterHeight="22" id="yrd-Fc-4h5">
+                                <rect key="frame" x="16" y="105" width="288" height="108"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PlayerNameCell" id="ADX-wd-7zN">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ADX-wd-7zN" id="6tV-y9-ero">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wyw-IE-wYT">
+                                                    <rect key="frame" x="267" y="5" width="13" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="1" green="0.01237137336" blue="0.01089771588" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="d6U-YL-XkG" id="Aaw-cO-9zk"/>
+                                    <outlet property="delegate" destination="d6U-YL-XkG" id="W8h-hr-Nx9"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="W4Y-dm-Vci">
+                        <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" image="menu.png" id="8Zf-EK-hZA"/>
+                        <view key="titleView" contentMode="scaleToFill" id="cGn-Fz-E4d">
+                            <rect key="frame" x="96" y="6" width="128" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="EO5-Uw-rD0">
+                                    <rect key="frame" x="-23" y="2" width="175" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <state key="normal" title="Choose Graph Type">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="graphTypeButtonPressed:" destination="d6U-YL-XkG" eventType="touchUpInside" id="lA1-97-Dnp"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </view>
+                        <barButtonItem key="rightBarButtonItem" title="Create" id="zZ9-PK-ZGZ"/>
+                    </navigationItem>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+                    <connections>
+                        <outlet property="collectionView" destination="Y5j-kq-a7U" id="iht-Oq-fSK"/>
+                        <outlet property="selectPlayerButton" destination="yUJ-ve-w2h" id="e4K-Do-ENy"/>
+                        <outlet property="sidebarButton" destination="8Zf-EK-hZA" id="soM-fu-Zwt"/>
+                        <outlet property="statsButton" destination="qfy-SY-Fjp" id="yXZ-C8-obJ"/>
+                        <outlet property="tableView" destination="yrd-Fc-4h5" id="yBO-xs-Sfq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lvx-tg-2kZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3411" y="-840"/>
         </scene>
     </scenes>
     <resources>
