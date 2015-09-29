@@ -38,6 +38,8 @@ static NSMutableArray *userPlayers = nil;
     }
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    //Removes horizontal lines from the table view
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
     if(userPlayers == Nil && [[NSFileManager defaultManager] fileExistsAtPath:[MainMenuViewController userPlayersFilePath]])
     {

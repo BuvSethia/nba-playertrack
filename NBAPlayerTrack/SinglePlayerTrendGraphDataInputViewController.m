@@ -8,21 +8,25 @@
 
 #import "SinglePlayerTrendGraphDataInputViewController.h"
 #import "SWRevealViewController.h"
+#import "SinglePlayerTrendGraphViewController.h"
 #import "Player.h"
 
 @interface SinglePlayerTrendGraphDataInputViewController ()
 
 @property NSMutableArray *playerList;
-@property NSMutableArray *selectedPlayersToGraph;
+@property Player *selectedPlayerToGraph;
 @property NSMutableArray *selectedStatsToGraph;
 @property NSMutableDictionary *nbaAppStatLabelConversionDictionary;
+
+@property NSInteger fromMonth;
+@property NSInteger toMonth;
+@property NSArray *listOfMonths;
 
 @end
 
 @implementation SinglePlayerTrendGraphDataInputViewController
 
 //Max number of players and stats a user can select
-const int STREND_MAX_PLAYERS = 1;
 const int STREND_MAX_STATS = 3;
 
 - (void)viewDidLoad {
@@ -31,9 +35,13 @@ const int STREND_MAX_STATS = 3;
     self.playerList = nil;
     [self loadPlayerList];
     
-    self.selectedPlayersToGraph = [[NSMutableArray alloc] init];
+    self.selectedPlayerToGraph = Nil;
     self.selectedStatsToGraph = [[NSMutableArray alloc] init];
     [self loadLabelConversionDictionary];
+    self.listOfMonths = [[NSArray alloc] initWithObjects:@"OCT", @"NOV", @"DEC", @"JAN", @"FEB", @"MAR", @"APR", nil];
+    //Default the range to all games
+    self.fromMonth = 0;
+    self.toMonth = 6;
     
     //Removes horizontal lines from the table view
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
@@ -44,7 +52,42 @@ const int STREND_MAX_STATS = 3;
         [self.sidebarButton setTarget: self.revealViewController];
         [self.sidebarButton setAction: @selector( revealToggle: )];
     }
+    
+    //Labels for picker view component titles
+    [self createLabelForComponent:0];
+    [self createLabelForComponent:1];
 
+}
+
+//http://stackoverflow.com/questions/18999115/add-header-to-uipickerview
+-(void)createLabelForComponent:(NSInteger)component
+{
+    NSString *title;
+    if(component == 0)
+    {
+        title = @"From:";
+    }
+    else
+    {
+        title = @"To:";
+    }
+    float lblWidth = self.rangePicker.frame.size.width / self.rangePicker.numberOfComponents;
+    float lblXposition = self.rangePicker.frame.origin.x;
+    float lblYposition = (self.rangePicker.frame.origin.y);
+    
+    UILabel *lbl;
+        
+    lbl = [[UILabel alloc] initWithFrame:CGRectMake((lblXposition + component * lblWidth),
+                                                              lblYposition,
+                                                              lblWidth,
+                                                              20)];
+    
+    
+    [lbl setText:title];
+    [lbl setTextAlignment:NSTextAlignmentCenter];
+    [lbl setFont:[UIFont boldSystemFontOfSize:20.0f]];
+    
+    [self.view addSubview:lbl];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -137,6 +180,42 @@ const int STREND_MAX_STATS = 3;
     
 }
 
+#pragma mark - Picker View
+-(int)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 2;
+}
+
+-(int)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return self.listOfMonths.count;
+}
+
+-(NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    if(component == 0)
+    {
+        return self.listOfMonths[row];
+    }
+    //Backwards
+    else
+    {
+        return self.listOfMonths[self.listOfMonths.count - 1 - row];
+    }
+}
+
+-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    if(component == 0)
+    {
+        self.fromMonth = row;
+    }
+    else
+    {
+        self.toMonth = self.listOfMonths.count - 1 - row;
+    }
+}
+
 #pragma mark - AlertView Delegate
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -146,21 +225,25 @@ const int STREND_MAX_STATS = 3;
 #pragma mark - Table View
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.selectedPlayersToGraph.count;
+    if(self.selectedPlayerToGraph)
+    {
+        return 1;
+    }
+    
+    return 0;
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"PlayerNameCell"];
-    Player *player = self.selectedPlayersToGraph[indexPath.row];
-    cell.textLabel.text = player.name;
+    cell.textLabel.text = self.selectedPlayerToGraph.name;
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.selectedPlayersToGraph removeObjectAtIndex:indexPath.row];
+    self.selectedPlayerToGraph = Nil;
     [self.tableView reloadData];
 }
 
@@ -171,17 +254,13 @@ const int STREND_MAX_STATS = 3;
     {
         Player *p = self.playerList[newItem];
         bool alreadySelectedPlayer = NO;
-        for(Player *player in self.selectedPlayersToGraph)
+        if(self.selectedPlayerToGraph)
         {
-            if([player.ID isEqualToString:p.ID])
-            {
-                alreadySelectedPlayer = YES;
-                break;
-            }
+            alreadySelectedPlayer = YES;
         }
         if(!alreadySelectedPlayer)
         {
-            [self.selectedPlayersToGraph addObject:p];
+            self.selectedPlayerToGraph = p;
             NSLog(@"Added player %@ to selected players to graph", p.ID);
         }
         else
@@ -247,7 +326,7 @@ const int STREND_MAX_STATS = 3;
 
 -(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
-    if(self.selectedPlayersToGraph.count > 0 && self. selectedPlayersToGraph.count <= STREND_MAX_PLAYERS && self.selectedStatsToGraph.count > 0 && self.selectedStatsToGraph.count <= STREND_MAX_STATS && [identifier isEqualToString:@"DisplaySinglePlayerTrendGraphSegue"])
+    if(self.selectedPlayerToGraph && self.selectedStatsToGraph.count > 0 && self.selectedStatsToGraph.count <= STREND_MAX_STATS && [identifier isEqualToString:@"DisplaySinglePlayerTrendGraphSegue"])
     {
         return YES;
     }
@@ -255,7 +334,7 @@ const int STREND_MAX_STATS = 3;
     {
         return YES;
     }
-    else if(self.selectedPlayersToGraph.count < STREND_MAX_PLAYERS && sender == self.selectPlayerButton)
+    else if(!self.selectedPlayerToGraph && sender == self.selectPlayerButton)
     {
         return YES;
     }
@@ -273,7 +352,10 @@ const int STREND_MAX_STATS = 3;
     //If we are showing the bar graph
     if([segue.identifier isEqualToString:@"DisplaySinglePlayerTrendGraphSegue"])
     {
-        
+        SinglePlayerTrendGraphViewController *dest = segue.destinationViewController;
+        dest.statsToGraph = [self generateStatsDictionary];
+        dest.playerBeingGraphed = self.selectedPlayerToGraph;
+        dest.monthsBeingGraphed = [self generateMonthsArray];
     }
     //If we are presenting data using the pop up menu
     else
@@ -303,6 +385,70 @@ const int STREND_MAX_STATS = 3;
             
         }
     }
+}
+
+#pragma mark - Stats to Graph
+-(NSArray*)generateMonthsArray
+{
+    NSArray *gamelogHeaders = [self.selectedPlayerToGraph.gamelog objectForKey:@"headers"];
+    NSMutableArray *months = [[NSMutableArray alloc] init];
+    
+    //An array of arrays containing game stat data for each game a player has played.
+    NSArray *arrayOfGames = [self.selectedPlayerToGraph.gamelog objectForKey:@"rowSet"];
+    //The position of the game date in each array of game data so we don't have to search for it over and over.
+    NSInteger locationOfGameDateInHeaders = [gamelogHeaders indexOfObject:@"GAME_DATE"];
+    NSLog(@"%d", locationOfGameDateInHeaders);
+    
+    for(NSArray *gameData in [arrayOfGames reverseObjectEnumerator])
+    {
+        NSString *gameDateString = [[gameData objectAtIndex:locationOfGameDateInHeaders] stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+        NSString *gameMonth = [[gameDateString componentsSeparatedByString:@" "] objectAtIndex:0];
+        
+        NSInteger gameMonthIndex = [self.listOfMonths indexOfObject:gameMonth];
+        if(gameMonthIndex >= self.fromMonth && gameMonthIndex <= self.toMonth)
+        {
+            [months addObject:gameMonth];
+        }
+    }
+    
+    return  [months copy];
+}
+
+-(NSMutableDictionary*)generateStatsDictionary
+{
+    NSArray *gamelogHeaders = [self.selectedPlayerToGraph.gamelog objectForKey:@"headers"];
+    //Location in the array of stats for each game's gamelog of each of the desired stats to graph, so we don't have to keep searching for them over and over later.
+    NSInteger locationsOfSelectedStatsInStatList[self.selectedStatsToGraph.count];
+    NSMutableDictionary *statsToGraphDictionary = [[NSMutableDictionary alloc] init];
+    for(int i = 0; i < self.selectedStatsToGraph.count; i++)
+    {
+        locationsOfSelectedStatsInStatList[i] = [gamelogHeaders indexOfObject:[self.nbaAppStatLabelConversionDictionary objectForKey:self.selectedStatsToGraph[i]]];
+        [statsToGraphDictionary setObject:[[NSMutableArray alloc] init] forKey:self.selectedStatsToGraph[i]];
+    }
+    
+    //An array of arrays containing game stat data for each game a player has played.
+    NSArray *arrayOfGames = [self.selectedPlayerToGraph.gamelog objectForKey:@"rowSet"];
+    //The position of the game date in each array of game data so we don't have to search for it over and over.
+    NSInteger locationOfGameDateInHeaders = [gamelogHeaders indexOfObject:@"GAME_DATE"];
+    NSLog(@"%d", locationOfGameDateInHeaders);
+    
+    for(NSArray *gameData in [arrayOfGames reverseObjectEnumerator])
+    {
+        NSString *gameDateString = [[gameData objectAtIndex:locationOfGameDateInHeaders] stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+        NSString *gameMonth = [[gameDateString componentsSeparatedByString:@" "] objectAtIndex:0];
+        
+        NSInteger gameMonthIndex = [self.listOfMonths indexOfObject:gameMonth];
+        if(gameMonthIndex >= self.fromMonth && gameMonthIndex <= self.toMonth)
+        {
+            for(int i = 0; i < self.selectedStatsToGraph.count; i++)
+            {
+                [[statsToGraphDictionary objectForKey:self.selectedStatsToGraph[i]] addObject:gameData[locationsOfSelectedStatsInStatList[i]]];
+            }
+        }
+    }
+    
+    NSLog(@"%@", statsToGraphDictionary);
+    return statsToGraphDictionary;
 }
 
 @end

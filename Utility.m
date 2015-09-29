@@ -113,6 +113,7 @@
         newPlayer.yearsPro = [playerInfo objectForKey:@"YearsPro"];
         newPlayer.team = [playerInfo objectForKey:@"TeamName"];
         newPlayer.twitterID = [playerInfo objectForKey:@"TwitterID"];
+        newPlayer.nbaStatsID = [playerInfo objectForKey:@"NBAStatsID"];
         newPlayer.perGameStats = [playerInfo objectForKey:@"PerGame"];
         newPlayer.per36Stats = [playerInfo objectForKey:@"Per36"];
         newPlayer.advancedStats = [playerInfo objectForKey:@"AdvancedStats"];
@@ -127,9 +128,8 @@
         
         //Get player's short bio
         NSString *bioURL = [NSString stringWithFormat:@"http://ec2-52-10-76-24.us-west-2.compute.amazonaws.com/PlayerBios/%@.txt", playerID];
-        NSURL *url = [NSURL URLWithString:bioURL];
         NSError *error = nil;
-        NSString *text = [[NSString alloc] initWithContentsOfURL: url
+        NSString *text = [[NSString alloc] initWithContentsOfURL: [NSURL URLWithString:bioURL]
                                                         encoding: NSUTF8StringEncoding
                                                            error: &error];
         NSData *bioData = [text dataUsingEncoding:NSUTF8StringEncoding];
@@ -141,6 +141,20 @@
         NSDictionary *bioDictionary = [inner objectForKey:innerKeys[0]];
         NSLog(@"BIO: %@", [bioDictionary objectForKey:@"extract"]);
         newPlayer.shortBio = bioDictionary;
+        
+        //Get player's gamelog
+        NSString *gamelogURL = [NSString stringWithFormat:@"http://stats.nba.com/stats/playergamelog?playerid=%@&season=2014-15&seasontype=Regular+Season", newPlayer.nbaStatsID];
+        NSLog(@"%@", gamelogURL);
+        NSString *gamelog = [[NSString alloc] initWithContentsOfURL: [NSURL URLWithString:gamelogURL]
+                                                        encoding: NSUTF8StringEncoding
+                                                           error: &error];
+        NSData *gamelogData = [gamelog dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary *gamelogDict = [NSJSONSerialization JSONObjectWithData:gamelogData
+                                                                       options:NSJSONReadingMutableContainers
+                                                                         error:nil];
+        newPlayer.gamelog = [[gamelogDict objectForKey:@"resultSets"] objectAtIndex:0];
+        NSLog(@"%@", newPlayer.gamelog);
+        
         
         return newPlayer;
         

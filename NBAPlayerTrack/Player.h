@@ -25,6 +25,7 @@
 @property NSString *yearsPro;
 @property NSString *team;
 @property NSString *twitterID;
+@property NSString *nbaStatsID;
 
 @property NSData *playerImage;
 
@@ -34,6 +35,7 @@
 @property NSDictionary *advancedStats;
 @property NSDictionary *careerAdvancedStats;
 @property NSDictionary *shortBio;
+@property NSDictionary *gamelog;
 
 @property NSMutableArray *articles;
 

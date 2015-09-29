@@ -15,6 +15,7 @@
 		390668B41BA1F9A800B74228 /* BarGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 390668B31BA1F9A800B74228 /* BarGraphViewController.m */; };
 		3917D8431BA757AD00C72549 /* BarGraphDataInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3917D8421BA757AD00C72549 /* BarGraphDataInputViewController.m */; };
 		3982C0F71BB5E9450037CF30 /* SinglePlayerTrendGraphDataInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3982C0F61BB5E9450037CF30 /* SinglePlayerTrendGraphDataInputViewController.m */; };
+		3982C0FA1BBA37420037CF30 /* SinglePlayerTrendGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3982C0F91BBA37420037CF30 /* SinglePlayerTrendGraphViewController.m */; };
 		399F9BA11B52514A00DF89A0 /* PlayerInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 399F9BA01B52514900DF89A0 /* PlayerInfoViewController.m */; };
 		399F9BA41B525FBE00DF89A0 /* PlayerStatsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 399F9BA31B525FBE00DF89A0 /* PlayerStatsViewController.m */; };
 		39A100A91AA4E4340092F5CF /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A100A81AA4E4340092F5CF /* SWRevealViewController.m */; };
@@ -152,6 +153,8 @@
 		3917D8421BA757AD00C72549 /* BarGraphDataInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarGraphDataInputViewController.m; sourceTree = "<group>"; };
 		3982C0F51BB5E9450037CF30 /* SinglePlayerTrendGraphDataInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglePlayerTrendGraphDataInputViewController.h; sourceTree = "<group>"; };
 		3982C0F61BB5E9450037CF30 /* SinglePlayerTrendGraphDataInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglePlayerTrendGraphDataInputViewController.m; sourceTree = "<group>"; };
+		3982C0F81BBA37420037CF30 /* SinglePlayerTrendGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglePlayerTrendGraphViewController.h; sourceTree = "<group>"; };
+		3982C0F91BBA37420037CF30 /* SinglePlayerTrendGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglePlayerTrendGraphViewController.m; sourceTree = "<group>"; };
 		399F9B9F1B52514900DF89A0 /* PlayerInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerInfoViewController.h; path = NBAPlayerTrack/PlayerInfoViewController.h; sourceTree = "<group>"; };
 		399F9BA01B52514900DF89A0 /* PlayerInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerInfoViewController.m; path = NBAPlayerTrack/PlayerInfoViewController.m; sourceTree = "<group>"; };
 		399F9BA21B525FBE00DF89A0 /* PlayerStatsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerStatsViewController.h; path = NBAPlayerTrack/PlayerStatsViewController.h; sourceTree = "<group>"; };
@@ -245,6 +248,8 @@
 				3917D8421BA757AD00C72549 /* BarGraphDataInputViewController.m */,
 				3982C0F51BB5E9450037CF30 /* SinglePlayerTrendGraphDataInputViewController.h */,
 				3982C0F61BB5E9450037CF30 /* SinglePlayerTrendGraphDataInputViewController.m */,
+				3982C0F81BBA37420037CF30 /* SinglePlayerTrendGraphViewController.h */,
+				3982C0F91BBA37420037CF30 /* SinglePlayerTrendGraphViewController.m */,
 			);
 			name = Graphs;
 			sourceTree = "<group>";
@@ -642,6 +647,7 @@
 				399F9BA11B52514A00DF89A0 /* PlayerInfoViewController.m in Sources */,
 				39AC2E051AB8C8DA0077D31E /* PlayerNewsViewController.m in Sources */,
 				3917D8431BA757AD00C72549 /* BarGraphDataInputViewController.m in Sources */,
+				3982C0FA1BBA37420037CF30 /* SinglePlayerTrendGraphViewController.m in Sources */,
 				399F9BA41B525FBE00DF89A0 /* PlayerStatsViewController.m in Sources */,
 				39A389151AC150FD009FA8B6 /* PlayerCell.m in Sources */,
 				39A100A91AA4E4340092F5CF /* SWRevealViewController.m in Sources */,

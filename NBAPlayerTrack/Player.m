@@ -75,6 +75,8 @@
         self.twitterID = [decoder decodeObjectForKey:@"Twitter"];
         self.playerImage = [decoder decodeObjectForKey:@"Image"];
         self.shortBio = [decoder decodeObjectForKey:@"ShortBio"];
+        self.gamelog = [decoder decodeObjectForKey:@"Gamelog"];
+        self.nbaStatsID = [decoder decodeObjectForKey:@"NBAStatsID"];
     }
     return self;
 }
@@ -102,6 +104,8 @@
     [encoder encodeObject:self.twitterID forKey:@"Twitter"];
     [encoder encodeObject:self.playerImage forKey:@"Image"];
     [encoder encodeObject:self.shortBio forKey:@"ShortBio"];
+    [encoder encodeObject:self.gamelog forKey:@"Gamelog"];
+    [encoder encodeObject:self.nbaStatsID forKey:@"NBAStatsID"];
     
 }
 
