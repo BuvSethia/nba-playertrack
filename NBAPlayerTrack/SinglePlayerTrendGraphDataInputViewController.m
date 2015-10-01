@@ -27,7 +27,7 @@
 @implementation SinglePlayerTrendGraphDataInputViewController
 
 //Max number of players and stats a user can select
-const int STREND_MAX_STATS = 3;
+const int STREND_MAX_STATS = 2;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -181,12 +181,12 @@ const int STREND_MAX_STATS = 3;
 }
 
 #pragma mark - Picker View
--(int)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
     return 2;
 }
 
--(int)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
     return self.listOfMonths.count;
 }
@@ -237,6 +237,7 @@ const int STREND_MAX_STATS = 3;
 {
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"PlayerNameCell"];
     cell.textLabel.text = self.selectedPlayerToGraph.name;
+    NSLog(@"Creating table view cell");
     
     return cell;
 }
@@ -262,13 +263,13 @@ const int STREND_MAX_STATS = 3;
         {
             self.selectedPlayerToGraph = p;
             NSLog(@"Added player %@ to selected players to graph", p.ID);
+            [self.tableView reloadData];
         }
         else
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You cannot select the same player twice" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
             [alert show];
         }
-        [self.tableView reloadData];
     }
     else if (sender == self.statsButton)
     {
@@ -340,7 +341,7 @@ const int STREND_MAX_STATS = 3;
     }
     else
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"The number of selected players must be 1 and the number of selected stats must be between 1 and 3." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"The number of selected players must be 1 and the number of selected stats must be between 1 and 2." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
         [alert show];
         return NO;
     }
@@ -397,7 +398,6 @@ const int STREND_MAX_STATS = 3;
     NSArray *arrayOfGames = [self.selectedPlayerToGraph.gamelog objectForKey:@"rowSet"];
     //The position of the game date in each array of game data so we don't have to search for it over and over.
     NSInteger locationOfGameDateInHeaders = [gamelogHeaders indexOfObject:@"GAME_DATE"];
-    NSLog(@"%d", locationOfGameDateInHeaders);
     
     for(NSArray *gameData in [arrayOfGames reverseObjectEnumerator])
     {
@@ -430,7 +430,6 @@ const int STREND_MAX_STATS = 3;
     NSArray *arrayOfGames = [self.selectedPlayerToGraph.gamelog objectForKey:@"rowSet"];
     //The position of the game date in each array of game data so we don't have to search for it over and over.
     NSInteger locationOfGameDateInHeaders = [gamelogHeaders indexOfObject:@"GAME_DATE"];
-    NSLog(@"%d", locationOfGameDateInHeaders);
     
     for(NSArray *gameData in [arrayOfGames reverseObjectEnumerator])
     {

@@ -73,16 +73,18 @@
 -(void)configureGraph
 {
     //Create Graph
-    CPTGraph *graph = [[CPTXYGraph alloc] initWithFrame:self.hostView.bounds];
+    //CPTGraph *graph = [[CPTXYGraph alloc] initWithFrame:self.hostView.bounds];
+    CGRect newFrame = CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y, self.view.bounds.size.width, self.view.bounds.size.height);
+    CPTGraph *graph = [[CPTXYGraph alloc] initWithFrame:newFrame];
     graph.plotAreaFrame.masksToBorder = NO;
     self.hostView.hostedGraph = graph;
     
     //Graph Theme
     [graph applyTheme:[CPTTheme themeNamed:kCPTPlainWhiteTheme]];
     graph.paddingBottom = 30.0f;
-    graph.paddingLeft  = 10.0f;
-    graph.paddingTop    = -1.0f;
-    graph.paddingRight  = -5.0f;
+    graph.paddingLeft  = 38.0f;
+    graph.paddingTop    = -5.0f;
+    graph.paddingRight  = 38.0f;
     
     //Graph Title
     CPTMutableTextStyle *titleStyle = [CPTMutableTextStyle textStyle];
@@ -94,7 +96,7 @@
     graph.title = title;
     graph.titleTextStyle = titleStyle;
     graph.titlePlotAreaFrameAnchor = CPTRectAnchorTop;
-    graph.titleDisplacement = CGPointMake(0.0f, -10.0f);
+    graph.titleDisplacement = CGPointMake(0.0f, -1.0f);
 }
 
 -(float)determineMaxYForGraph:(NSMutableArray*)valueSet
@@ -142,7 +144,7 @@
         CGFloat xMin = 0.0f;
         CGFloat xMax = [[self.statsToGraph objectForKey:[[self.statsToGraph allKeys] objectAtIndex:i]] count];
         CGFloat yMin = 0.0f;
-        CGFloat yMax = 1.5f * [self determineMaxYForGraph:[self.statsToGraph objectForKey:[[self.statsToGraph allKeys] objectAtIndex:i]]];
+        CGFloat yMax = 1.2f * [self determineMaxYForGraph:[self.statsToGraph objectForKey:[[self.statsToGraph allKeys] objectAtIndex:i]]];
         plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(xMin) length:CPTDecimalFromFloat(xMax)];
         plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(yMin) length:CPTDecimalFromFloat(yMax + fabsf(yMin))];        [graph addPlotSpace:plotSpace];
         
@@ -155,11 +157,11 @@
         }
         else if(i == 1)
         {
-            lineStyle.lineColor = [CPTColor greenColor];
+            lineStyle.lineColor = [CPTColor blueColor];
         }
         else
         {
-            lineStyle.lineColor = [CPTColor blueColor];
+            lineStyle.lineColor = [CPTColor greenColor];
         }
         newPlot.dataLineStyle = lineStyle;
         CPTMutableLineStyle *symbolLineStyle = [CPTMutableLineStyle lineStyle];
@@ -231,7 +233,7 @@
             [monthsAlreadyLabeled addObject:month];
             CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:month  textStyle:x.labelTextStyle];
             CGFloat location = i++;
-            label.tickLocation = CPTDecimalFromCGFloat(1.0f);
+            label.tickLocation = CPTDecimalFromCGFloat(location/self.monthsBeingGraphed.count);
             label.offset = x.majorTickLength + 1.0f;
             if (label) {
                 [xLabels addObject:label];
@@ -247,44 +249,62 @@
     x.axisLabels = xLabels;
     x.majorTickLocations = xLocations;
     
-    // 4 - Configure y-axis
-    CPTAxis *y = axisSet.yAxis;
-    y.title = @"Price";
-    y.titleTextStyle = axisTitleStyle;
-    y.titleOffset = -40.0f;
-    y.axisLineStyle = axisLineStyle;
-    y.majorGridLineStyle = gridLineStyle;
-    y.labelingPolicy = CPTAxisLabelingPolicyNone;
-    y.labelTextStyle = axisTextStyle;
-    y.labelOffset = 16.0f;
-    y.majorTickLineStyle = axisLineStyle;
-    y.majorTickLength = 4.0f;
-    y.minorTickLength = 2.0f;
-    y.tickDirection = CPTSignPositive;
-    NSInteger majorIncrement = 100;
-    NSInteger minorIncrement = 50;
-    CGFloat yMax = 700.0f;  // should determine dynamically based on max price
-    NSMutableSet *yLabels = [NSMutableSet set];
-    NSMutableSet *yMajorLocations = [NSMutableSet set];
-    NSMutableSet *yMinorLocations = [NSMutableSet set];
-    for (NSInteger j = minorIncrement; j <= yMax; j += minorIncrement) {
-        NSUInteger mod = j % majorIncrement;
-        if (mod == 0) {
-            CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:[NSString stringWithFormat:@"%i", j] textStyle:y.labelTextStyle];
-            NSDecimal location = CPTDecimalFromInteger(j);
-            label.tickLocation = location;
-            label.offset = -y.majorTickLength - y.labelOffset;
-            if (label) {
-                [yLabels addObject:label];
-            }
-            [yMajorLocations addObject:[NSDecimalNumber decimalNumberWithDecimal:location]];
-        } else {
-            [yMinorLocations addObject:[NSDecimalNumber decimalNumberWithDecimal:CPTDecimalFromInteger(j)]];
+    //Y axis for each stat type
+    NSMutableArray *allAxes = [[NSMutableArray alloc] init];
+    for(int j = 0; j < self.statsToGraph.count; j++)
+    {
+        CPTXYAxis *yAxis = [[CPTXYAxis alloc] init];
+        yAxis.coordinate = CPTCoordinateY;
+        yAxis.title = [[self.statsToGraph allKeys] objectAtIndex:j];
+        yAxis.titleTextStyle = axisTitleStyle;
+        yAxis.titleOffset = 19.0f;
+        yAxis.axisLineStyle = axisLineStyle;
+        yAxis.majorGridLineStyle = gridLineStyle;
+        //yAxis.labelingPolicy = CPTAxisLabelingPolicyNone;
+        yAxis.labelTextStyle = axisTextStyle;
+        //yAxis.labelOffset = 16.0f;
+        yAxis.majorTickLineStyle = axisLineStyle;
+        yAxis.majorTickLength = 2.0f;
+        yAxis.minorTickLength = 0.0f;
+        yAxis.tickDirection = CPTSignNegative;
+        yAxis.titleDirection = CPTSignNegative;
+        yAxis.plotSpace = [self.hostView.hostedGraph.allPlotSpaces objectAtIndex:(j + 1)];
+        yAxis.majorGridLineStyle = Nil;
+        
+        if(j == 1)
+        {
+            yAxis.orthogonalCoordinateDecimal = CPTDecimalFromFloat(self.monthsBeingGraphed.count);
+            //yAxis.titleOffset = 17.0f;
+            yAxis.titleDirection = CPTSignPositive;
+            yAxis.tickDirection = CPTSignPositive;
         }
+        
+        /*
+         CGFloat majorIncrement = .15f * [self determineMaxYForGraph:[self.statsToGraph objectForKey:[[self.statsToGraph allKeys] objectAtIndex:j]]];
+         CGFloat yMax = 1.5f * [self determineMaxYForGraph:[self.statsToGraph objectForKey:[[self.statsToGraph allKeys] objectAtIndex:j]]];
+         NSMutableSet *yLabels = [NSMutableSet set];
+         NSMutableSet *yMajorLocations = [NSMutableSet set];
+         for (CGFloat k = majorIncrement; k <= yMax; k += majorIncrement) {
+             CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:[NSString stringWithFormat:@"%f", k] textStyle:yAxis.labelTextStyle];
+             NSDecimal location = CPTDecimalFromInteger(k);
+             label.tickLocation = location;
+             label.offset = -yAxis.majorTickLength - yAxis.labelOffset;
+             if (label) {
+                 [yLabels addObject:label];
+             }
+             [yMajorLocations addObject:[NSDecimalNumber decimalNumberWithDecimal:location]];
+         }
+
+         yAxis.axisLabels = yLabels;
+         yAxis.majorTickLocations = yMajorLocations;
+        */
+        [allAxes addObject:yAxis];
+        
     }
-    y.axisLabels = yLabels;    
-    y.majorTickLocations = yMajorLocations;
-    y.minorTickLocations = yMinorLocations;
+    
+    [allAxes addObject:x];
+    
+    self.hostView.hostedGraph.axisSet.axes = [allAxes copy];
 }
 
 -(void)configureLegend

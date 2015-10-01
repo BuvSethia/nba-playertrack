@@ -40,6 +40,7 @@ static NSMutableArray *userPlayers = nil;
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     //Removes horizontal lines from the table view
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    [self.tableView registerNib:[UINib nibWithNibName:@"PlayerCell" bundle:nil] forCellReuseIdentifier:@"menuCell"];
     
     if(userPlayers == Nil && [[NSFileManager defaultManager] fileExistsAtPath:[MainMenuViewController userPlayersFilePath]])
     {
@@ -52,13 +53,12 @@ static NSMutableArray *userPlayers = nil;
 
         }
         [MainMenuViewController saveUserPlayers];
+        [self.tableView reloadData];
     }
     else
     {
         NSLog(@"userPlayersFile DNE");
     }
-    
-    [self.tableView registerNib:[UINib nibWithNibName:@"PlayerCell" bundle:nil] forCellReuseIdentifier:@"menuCell"];
     
 }
 

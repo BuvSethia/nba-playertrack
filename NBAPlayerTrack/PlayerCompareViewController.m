@@ -153,7 +153,54 @@
     {
     }
     
+    if([statName.text containsString:@"playerID"] || [statName.text containsString:@"Season"])
+    {
+        playerOneStatLabel.textColor = [UIColor blackColor];
+        playerTwoStatLabel.textColor = [UIColor blackColor];
+    }
+    else if([self isMinimizeStat:statName.text])
+    {
+        if([playerOneStatLabel.text doubleValue] < [playerTwoStatLabel.text doubleValue])
+        {
+            playerOneStatLabel.textColor = [UIColor greenColor];
+            playerTwoStatLabel.textColor = [UIColor redColor];
+        }
+        else if([playerOneStatLabel.text doubleValue] > [playerTwoStatLabel.text doubleValue])
+        {
+            playerOneStatLabel.textColor = [UIColor redColor];
+            playerTwoStatLabel.textColor = [UIColor greenColor];
+        }
+        else
+        {
+            playerOneStatLabel.textColor = [UIColor greenColor];
+            playerTwoStatLabel.textColor = [UIColor greenColor];
+        }
+    }
+    else
+    {
+        if([playerOneStatLabel.text doubleValue] > [playerTwoStatLabel.text doubleValue])
+        {
+            playerOneStatLabel.textColor = [UIColor greenColor];
+            playerTwoStatLabel.textColor = [UIColor redColor];
+        }
+        else if([playerOneStatLabel.text doubleValue] < [playerTwoStatLabel.text doubleValue])
+        {
+            playerOneStatLabel.textColor = [UIColor redColor];
+            playerTwoStatLabel.textColor = [UIColor greenColor];
+        }
+        else
+        {
+            playerOneStatLabel.textColor = [UIColor greenColor];
+            playerTwoStatLabel.textColor = [UIColor greenColor];
+        }
+    }
+    
     return cell;
+}
+
+-(bool)isMinimizeStat:(NSString*)statType
+{
+    return [statType isEqualToString:@"TOV"] || [statType isEqualToString:@"PF"] || [statType isEqualToString:@"TOVPCT"];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

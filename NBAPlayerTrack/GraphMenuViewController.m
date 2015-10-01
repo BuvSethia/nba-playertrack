@@ -87,7 +87,7 @@
     }
     else if (button.tag == 1)
     {
-        graphDescriptorString = @"A line graph depicting how up to three chosen stats for a player have changed over the season, game by game.";
+        graphDescriptorString = @"A line graph depicting how up to two chosen stats for a player have changed over the season, game by game.";
     }
     else if (button.tag == 2)
     {
