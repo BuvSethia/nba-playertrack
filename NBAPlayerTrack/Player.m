@@ -38,7 +38,7 @@
             Player *player = [[Player alloc] init];
             player.ID = key;
             NSDictionary *inner = [playerDictionary objectForKey:key];
-            NSLog(@"%@", inner);
+            //NSLog(@"%@", inner);
             player.name = [inner objectForKey:@"PlayerName"];
             player.webLink = [inner objectForKey:@"WebLink"];
             player.team = [inner objectForKey:@"TeamName"];

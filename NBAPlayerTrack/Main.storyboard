@@ -12,17 +12,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="menuCell" rowHeight="87" id="Uod-p2-WyC" customClass="PlayerCell">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Uod-p2-WyC" id="Rq8-m2-4BA">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="Gws-jJ-dQP" kind="push" identifier="PlayerDetailSegue" id="hLn-1w-fqG"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="mUR-8C-Tfw" id="dW3-jX-BoN"/>
                             <outlet property="delegate" destination="mUR-8C-Tfw" id="obj-FK-bY1"/>
@@ -38,6 +27,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="sidebarButton" destination="j9Y-CO-ARc" id="YF0-Nv-8b4"/>
+                        <segue destination="Gws-jJ-dQP" kind="push" identifier="PlayerDetailSegue" id="OnW-rk-yy6"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9TC-Aw-4J0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -242,11 +232,10 @@
                                     <action selector="backToStatsPressed:" destination="L3r-KW-yvg" eventType="touchUpInside" id="pgQ-51-ec0"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="W3m-Sf-QL4">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" id="W3m-Sf-QL4">
                                 <rect key="frame" x="16" y="58" width="288" height="510"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -1553,7 +1542,7 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="T4S-O0-FH8"/>
-        <segue reference="pHU-jl-OCr"/>
         <segue reference="MBn-45-eUK"/>
+        <segue reference="pHU-jl-OCr"/>
     </inferredMetricsTieBreakers>
 </document>

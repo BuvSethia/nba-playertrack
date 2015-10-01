@@ -40,11 +40,11 @@ static NSMutableArray *userPlayers = nil;
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     //Removes horizontal lines from the table view
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    //Let the table view use Player Cells
     [self.tableView registerNib:[UINib nibWithNibName:@"PlayerCell" bundle:nil] forCellReuseIdentifier:@"menuCell"];
     
     if(userPlayers == Nil && [[NSFileManager defaultManager] fileExistsAtPath:[MainMenuViewController userPlayersFilePath]])
     {
-        
         userPlayers = [NSKeyedUnarchiver unarchiveObjectWithFile:[MainMenuViewController userPlayersFilePath]];
         NSLog(@"Loading players from file");
         for(int i = 0; i < userPlayers.count; i++)
@@ -53,7 +53,12 @@ static NSMutableArray *userPlayers = nil;
 
         }
         [MainMenuViewController saveUserPlayers];
-        [self.tableView reloadData];
+        
+    }
+    else if(userPlayers != Nil)
+    {
+        NSLog(@"Players already loaded");
+        //[self.tableView reloadData];
     }
     else
     {
@@ -78,13 +83,11 @@ static NSMutableArray *userPlayers = nil;
     
     static NSString *CellIdentifier = @"menuCell";
     PlayerCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    /*UIImage *image = [UIImage imageNamed:@"menu.png"];
-    UIImageView *imageView = (UIImageView *)[cell.contentView viewWithTag:1000];
-    CGSize imageSize = imageView.frame.size;
-    UIImage *resized = [self resizeImage:image imageSize:imageSize];
-    
-    imageView.image = resized;*/
+    if(!cell)
+    {
+        [tableView registerNib:[UINib nibWithNibName:@"PlayerCell" bundle:nil] forCellReuseIdentifier:@"menuCell"];
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    }
     
     return cell;
 }

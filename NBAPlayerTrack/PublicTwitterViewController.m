@@ -88,7 +88,8 @@ bool retriedTwitterLoad = NO;
     [TwitterKit logInGuestWithCompletion:^(TWTRGuestSession *guestSession, NSError *error) {
         if (guestSession) {
             NSString *statusesShowEndpoint = @"https://api.twitter.com/1.1/search/tweets.json";
-            NSDictionary *params = @{@"q" : self.player.name, @"count" : @"60"};
+            NSString *queryString = [NSString stringWithFormat:@"%@ -filter:retweets", self.player.name];
+            NSDictionary *params = @{@"q" : queryString, @"count" : @"60"};
             NSError *clientError;
             NSURLRequest *request = [[[Twitter sharedInstance] APIClient]
                                      URLRequestWithMethod:@"GET"

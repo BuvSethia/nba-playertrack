@@ -32,6 +32,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     NSString *selectedOption = self.menuItems[indexPath.row];
     
     if([selectedOption isEqualToString:@"Main Menu"])
@@ -58,6 +59,7 @@
     {
         [self performSegueWithIdentifier:@"ReferencesSegue" sender:self];
     }
+    
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
