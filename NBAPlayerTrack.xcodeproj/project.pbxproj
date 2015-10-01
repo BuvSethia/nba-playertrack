@@ -14,6 +14,8 @@
 		390668B11BA1F71200B74228 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 390668B01BA1F71200B74228 /* Accelerate.framework */; };
 		390668B41BA1F9A800B74228 /* BarGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 390668B31BA1F9A800B74228 /* BarGraphViewController.m */; };
 		3917D8431BA757AD00C72549 /* BarGraphDataInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3917D8421BA757AD00C72549 /* BarGraphDataInputViewController.m */; };
+		39513FD01BBCF48A00A854E2 /* NewspaperIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 39513FCF1BBCF48A00A854E2 /* NewspaperIcon.png */; };
+		39513FD21BBCF74D00A854E2 /* TwitterBird.png in Resources */ = {isa = PBXBuildFile; fileRef = 39513FD11BBCF74D00A854E2 /* TwitterBird.png */; };
 		3982C0F71BB5E9450037CF30 /* SinglePlayerTrendGraphDataInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3982C0F61BB5E9450037CF30 /* SinglePlayerTrendGraphDataInputViewController.m */; };
 		3982C0FA1BBA37420037CF30 /* SinglePlayerTrendGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3982C0F91BBA37420037CF30 /* SinglePlayerTrendGraphViewController.m */; };
 		399F9BA11B52514A00DF89A0 /* PlayerInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 399F9BA01B52514900DF89A0 /* PlayerInfoViewController.m */; };
@@ -151,6 +153,8 @@
 		390668B31BA1F9A800B74228 /* BarGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarGraphViewController.m; sourceTree = "<group>"; };
 		3917D8411BA757AD00C72549 /* BarGraphDataInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarGraphDataInputViewController.h; sourceTree = "<group>"; };
 		3917D8421BA757AD00C72549 /* BarGraphDataInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarGraphDataInputViewController.m; sourceTree = "<group>"; };
+		39513FCF1BBCF48A00A854E2 /* NewspaperIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NewspaperIcon.png; sourceTree = "<group>"; };
+		39513FD11BBCF74D00A854E2 /* TwitterBird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TwitterBird.png; sourceTree = "<group>"; };
 		3982C0F51BB5E9450037CF30 /* SinglePlayerTrendGraphDataInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglePlayerTrendGraphDataInputViewController.h; sourceTree = "<group>"; };
 		3982C0F61BB5E9450037CF30 /* SinglePlayerTrendGraphDataInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglePlayerTrendGraphDataInputViewController.m; sourceTree = "<group>"; };
 		3982C0F81BBA37420037CF30 /* SinglePlayerTrendGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglePlayerTrendGraphViewController.h; sourceTree = "<group>"; };
@@ -462,6 +466,8 @@
 		39A7D24D1AA25731005210F9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				39513FD11BBCF74D00A854E2 /* TwitterBird.png */,
+				39513FCF1BBCF48A00A854E2 /* NewspaperIcon.png */,
 				39A9CB481AC26A1600C9CF3A /* Crowd.png */,
 				39A100AD1AA4EA0D0092F5CF /* menu.png */,
 				39A100AE1AA4EA0D0092F5CF /* menu@2x.png */,
@@ -586,7 +592,9 @@
 				39A100AF1AA4EA0D0092F5CF /* menu.png in Resources */,
 				39A100B01AA4EA0D0092F5CF /* menu@2x.png in Resources */,
 				39A9CB491AC26A1600C9CF3A /* Crowd.png in Resources */,
+				39513FD01BBCF48A00A854E2 /* NewspaperIcon.png in Resources */,
 				39A389121AC1504F009FA8B6 /* PlayerCell.xib in Resources */,
+				39513FD21BBCF74D00A854E2 /* TwitterBird.png in Resources */,
 				39A7D25E1AA25731005210F9 /* LaunchScreen.xib in Resources */,
 				39B2E8911BAE11EB008B9E96 /* Main.storyboard in Resources */,
 				39A3890C1AC11DCD009FA8B6 /* TwitterKitResources.bundle in Resources */,

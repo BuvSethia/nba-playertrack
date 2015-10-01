@@ -25,9 +25,21 @@ bool seasonCareer = YES; //Season = YES, Career = NO
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    PlayerTabBarController *tabController = (PlayerTabBarController*)self.tabBarController;
     
+    PlayerTabBarController *tabController = (PlayerTabBarController*)self.tabBarController;
     self.player = tabController.player;
+    
+    //Setting up tab bar icons. We have to do this here because of issues with using a double tab bar for displaying twitter info
+    CGSize size = CGSizeMake(30, 30);
+    UIImage *image = [UIImage imageWithData:self.player.playerImage];
+    [[[tabController.viewControllers objectAtIndex:0] tabBarItem] setImage:[self resizeImage:image imageSize:size]];
+    image = [UIImage imageNamed:@"NewspaperIcon.png"];
+    [[[tabController.viewControllers objectAtIndex:1] tabBarItem] setImage:[self resizeImage:image imageSize:size]];
+    //Twitter logo is smaller because it looks HUGE in app for some reason
+    size = CGSizeMake(25, 25);
+    image = [UIImage imageNamed:@"TwitterBird.png"];
+    [[[tabController.viewControllers objectAtIndex:2] tabBarItem] setImage:[self resizeImage:image imageSize:size]];
+    
     self.currentlyDisplayedStats = self.player.perGameStats;
     
     SWRevealViewController *revealViewController = self.revealViewController;
@@ -203,6 +215,18 @@ bool seasonCareer = YES; //Season = YES, Career = NO
     }
     
     [self.collectionView reloadData];
+}
+
+//http://stackoverflow.com/questions/12552785/resizing-image-to-fit-uiimageview
+-(UIImage*)resizeImage:(UIImage *)image imageSize:(CGSize)size
+{
+    UIGraphicsBeginImageContext(size);
+    [image drawInRect:CGRectMake(0,0,size.width,size.height)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    //here is the scaled image which has been changed to the size specified
+    UIGraphicsEndImageContext();
+    return newImage;
+    
 }
 
 @end

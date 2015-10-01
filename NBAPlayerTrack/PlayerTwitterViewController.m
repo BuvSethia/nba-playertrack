@@ -44,7 +44,6 @@ bool retriedTwitterLoadPlayer = NO;
     
     UIImage *image = [UIImage imageWithData:self.player.playerImage];
     CGSize size = CGSizeMake(30, 30);
-    
     [[[self.tabBarController.viewControllers objectAtIndex:0] tabBarItem] setImage:[self resizeImage:image imageSize:size]];
     NSString *title = [NSString stringWithFormat:@"%@'s Twitter", self.player.name];
     [[[self.tabBarController.viewControllers objectAtIndex:0] tabBarItem] setTitle:title];
