@@ -334,7 +334,7 @@ NSArray *teamNamesArray;
 {
     NSArray *initPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentFolder = [initPath objectAtIndex:0];
-    NSString *path = [documentFolder stringByAppendingFormat:@"AllPlayers.plist"];
+    NSString *path = [documentFolder stringByAppendingFormat:@"/AllPlayers.plist"];
     return path;
 }
 
@@ -364,9 +364,10 @@ NSArray *teamNamesArray;
     if([[NSFileManager defaultManager] fileExistsAtPath:[self playerListFilePath]])
     {
         NSLog(@"Player list saved to file");
+        return YES;
     }
-    return YES;
-    return YES;
+    
+    return NO;
 }
 
 #pragma mark - Table view section creation

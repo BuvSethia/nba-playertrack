@@ -37,7 +37,12 @@ static NSMutableArray *userPlayers = nil;
         [self.sidebarButton setAction: @selector( revealToggle: )];
     }
     
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    //Test
+    self.navigationController.navigationBar.barTintColor = [UIColor blueColor];
+    
+    //self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.tableView.backgroundView = nil;
+    self.tableView.backgroundColor = [UIColor lightGrayColor];
     //Removes horizontal lines from the table view
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     //Let the table view use Player Cells
