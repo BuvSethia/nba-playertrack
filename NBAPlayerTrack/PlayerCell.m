@@ -11,13 +11,26 @@
 @implementation PlayerCell
 
 - (void)awakeFromNib {
-    // Initialization code
+    self.layer.shadowOffset = CGSizeMake(1, 0);
+    self.layer.shadowColor = [[UIColor blackColor] CGColor];
+    self.layer.shadowRadius = 10;
+    self.layer.shadowOpacity = .50;
+    CGRect shadowFrame = self.layer.bounds;
+    CGPathRef shadowPath = [UIBezierPath bezierPathWithRect:shadowFrame].CGPath;
+    self.layer.shadowPath = shadowPath;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)setFrame:(CGRect)frame {
+    CGFloat inset = 5.0f;
+    frame.origin.x += inset;
+    frame.size.width -= 2 * inset;
+    [super setFrame:frame];
 }
 
 @end

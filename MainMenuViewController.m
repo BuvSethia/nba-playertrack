@@ -38,13 +38,13 @@ static NSMutableArray *userPlayers = nil;
     }
     
     //Test
-    self.navigationController.navigationBar.barTintColor = [UIColor blueColor];
+    //self.navigationController.navigationBar.barTintColor = [UIColor blueColor];
     
     //self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = [UIColor lightGrayColor];
     //Removes horizontal lines from the table view
-    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    //[self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     //Let the table view use Player Cells
     [self.tableView registerNib:[UINib nibWithNibName:@"PlayerCell" bundle:nil] forCellReuseIdentifier:@"menuCell"];
     
@@ -81,6 +81,11 @@ static NSMutableArray *userPlayers = nil;
 #pragma mark Table View Controller
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    return 1;
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     return [userPlayers count];
 }
 
@@ -100,7 +105,7 @@ static NSMutableArray *userPlayers = nil;
 -(void)tableView:(UITableView *)tableView willDisplayCell:(PlayerCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Create a new Player Object
-    Player *player = [userPlayers objectAtIndex:indexPath.row];
+    Player *player = [userPlayers objectAtIndex:indexPath.section];
     
     cell.image.image = [[UIImage alloc] initWithData:player.playerImage];
     cell.nameLabel.text = player.name;
@@ -117,11 +122,26 @@ static NSMutableArray *userPlayers = nil;
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [userPlayers removeObjectAtIndex:indexPath.row];
+        [userPlayers removeObjectAtIndex:indexPath.section];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
         [MainMenuViewController saveUserPlayers];
         
     }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    PlayerCell *cell = [tableView dequeueReusableCellWithIdentifier:@"menuCell"];
+    return cell.bounds.size.height;
+}
+
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 2.0f;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 2.0f;
 }
 
 //http://stackoverflow.com/questions/12552785/resizing-image-to-fit-uiimageview
@@ -189,7 +209,7 @@ static NSMutableArray *userPlayers = nil;
     {
         PlayerTabBarController *dest = (PlayerTabBarController*)segue.destinationViewController;
         NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
-        Player *p = [userPlayers objectAtIndex:selectedIndexPath.row];
+        Player *p = [userPlayers objectAtIndex:selectedIndexPath.section];
         dest.player = p;
     }
 }
