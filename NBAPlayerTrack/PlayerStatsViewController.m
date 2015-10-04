@@ -40,25 +40,30 @@ bool seasonCareer = YES; //Season = YES, Career = NO
     image = [UIImage imageNamed:@"TwitterBird.png"];
     [[[tabController.viewControllers objectAtIndex:2] tabBarItem] setImage:[self resizeImage:image imageSize:size]];
     
+    //This is a slightly hacky line of code necessary to make the Twitter tab's title appear properly, because of issues with implementing stacked tab bars
+    [[[self.tabBarController.viewControllers objectAtIndex:2] tabBarItem] setTitle:@"Twitter"];
+    
     self.currentlyDisplayedStats = self.player.perGameStats;
     
     SWRevealViewController *revealViewController = self.revealViewController;
     if ( revealViewController )
     {
-        self.navigationItem.leftBarButtonItem = self.tabBarController.navigationItem.leftBarButtonItem;
         [self.tabBarController.navigationItem.leftBarButtonItem setTarget: self.revealViewController];
         [self.tabBarController.navigationItem.leftBarButtonItem setAction: @selector( revealToggle: )];
     }
     
-    //This is a slightly hacky line of code necessary to make the Twitter tab's title appear properly, because of issues with implementing stacked tab bars
-    [[[self.tabBarController.viewControllers objectAtIndex:2] tabBarItem] setTitle:@"Twitter"];
+    //Navigation item coloring
+    self.tabBarController.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
+    self.tabBarController.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
     
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
     self.tabBarController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Player Menu" style:UIBarButtonItemStylePlain target:self action:@selector(playerMenuPressed)];
+    self.tabBarController.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -91,6 +96,7 @@ bool seasonCareer = YES; //Season = YES, Career = NO
     }
 }
 
+#pragma mark - Collection View
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.currentlyDisplayedStats.count;
 }
@@ -107,7 +113,32 @@ bool seasonCareer = YES; //Season = YES, Career = NO
     UILabel *statValue = (UILabel *)[cell viewWithTag:101];
     statValue.text = [self.currentlyDisplayedStats.allValues objectAtIndex:indexPath.row];
     
+    //Cell shadow
+    cell.layer.masksToBounds = NO;
+    cell.layer.shadowOffset = CGSizeMake(1, 0);
+    cell.layer.shadowColor = [[UIColor blackColor] CGColor];
+    cell.layer.shadowRadius = 10;
+    cell.layer.shadowOpacity = .50;
+    CGRect shadowFrame = cell.layer.bounds;
+    CGPathRef shadowPath = [UIBezierPath bezierPathWithRect:shadowFrame].CGPath;
+    cell.layer.shadowPath = shadowPath;
+    
     return cell;
+}
+
+#pragma mark - Collection View Flow Layout
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 0.0f;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 3.0f;
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(2.0f, 3.0f, 2.0f, 3.0f);
 }
 
 - (IBAction)perGameper36TogglePressed:(id)sender {

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Player.h"
 
-@interface PlayerStatsViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface PlayerStatsViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) Player *player;
 @property (nonatomic, strong) NSDictionary *currentlyDisplayedStats;

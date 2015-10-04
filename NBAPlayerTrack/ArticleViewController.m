@@ -17,12 +17,16 @@
     SWRevealViewController *revealViewController = self.revealViewController;
     if ( revealViewController )
     {
-        self.navigationItem.leftBarButtonItem = self.sidebarButton;
         [self.sidebarButton setTarget: self.revealViewController];
         [self.sidebarButton setAction: @selector( revealToggle: )];
     }
     
     self.tabBarController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(articlesMenuPressed)];
+    
+    //Navigation item tint
+    self.tabBarController.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
+    self.tabBarController.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
+    
     
     NSURL *urlU = [NSURL URLWithString:self.url];
     NSURLRequest *request = [NSURLRequest requestWithURL:urlU];

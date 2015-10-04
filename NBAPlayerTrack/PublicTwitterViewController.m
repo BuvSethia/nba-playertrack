@@ -27,20 +27,25 @@ bool retriedTwitterLoad = NO;
     self.tableView.allowsSelection = NO;
     [self.tableView registerClass:[TWTRTweetTableViewCell class] forCellReuseIdentifier:TweetTableReuseIdentifier];
     
-    /*if(self.tweets == Nil && [[NSFileManager defaultManager] fileExistsAtPath:[self playerTwitterFilePath]] && ![self updateTwitterFile])
+    //Navigation item coloring
+    self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
+    self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
+    
+    if(self.tweets == Nil && [[NSFileManager defaultManager] fileExistsAtPath:[self playerTwitterFilePath]] && ![self updateTwitterFile])
     {
         NSLog(@"Loading tweets from file");
-        self.tweets = [[NSArray alloc] initWithContentsOfFile:[self playerTwitterFilePath]];
+        // reading back in...
+        NSInputStream *is = [[NSInputStream alloc] initWithFileAtPath:[self playerTwitterFilePath]];
+        
+        [is open];
+        self.tweets = [NSJSONSerialization JSONObjectWithStream:is options:NSJSONReadingMutableLeaves error:nil];
+        [is close];
         [self.tableView reloadData];
     }
     else
     {
         [self loadTweetsFromTwitter];
-    }*/
-    
-    
-    
-    [self loadTweetsFromTwitter];
+    }
     
 }
 
@@ -111,7 +116,7 @@ bool retriedTwitterLoad = NO;
                      NSDictionary *tweets = [result objectForKey:@"statuses"];
                      NSData *tweetsData = [NSJSONSerialization dataWithJSONObject:tweets options:NSJSONWritingPrettyPrinted error:nil];
                      self.tweets = [NSJSONSerialization JSONObjectWithData:tweetsData options:NSJSONReadingMutableLeaves error:nil];
-                     //[self saveTwitter];
+                     [self saveTwitter];
                      [self.tableView reloadData];
                  }
                  else {
@@ -131,14 +136,21 @@ bool retriedTwitterLoad = NO;
     [self.tableView reloadData];
 }
 
-//These methods are currently not in use. Save them for a rainy day
 #pragma mark Saving and loading tweet file
 -(bool)saveTwitter
 {
-    [self.tweets writeToFile:[self playerTwitterFilePath] atomically:YES];
+    NSOutputStream *os = [[NSOutputStream alloc] initToFileAtPath:[self playerTwitterFilePath] append:NO];
+    
+    [os open];
+    [NSJSONSerialization writeJSONObject:self.tweets toStream:os options:0 error:nil];
+    [os close];
     if([[NSFileManager defaultManager] fileExistsAtPath:[self playerTwitterFilePath]])
     {
-        NSLog(@"User players saved to file");
+        NSLog(@"Twitter saved");
+    }
+    else
+    {
+        NSLog(@"Twitter not saved");
     }
     return YES;
 }

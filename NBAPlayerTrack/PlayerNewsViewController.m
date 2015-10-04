@@ -17,25 +17,33 @@
 
 -(void)viewDidLoad
 {
+    [super viewDidLoad];
+    
     PlayerTabBarController *tabController = (PlayerTabBarController*)self.tabBarController;
     self.articles = tabController.player.articles;
     [self.tableView reloadData];
     SWRevealViewController *revealViewController = self.revealViewController;
     if ( revealViewController )
     {
-        self.navigationItem.leftBarButtonItem = self.tabBarController.navigationItem.leftBarButtonItem;
         [self.tabBarController.navigationItem.leftBarButtonItem setTarget: self.revealViewController];
         [self.tabBarController.navigationItem.leftBarButtonItem setAction: @selector( revealToggle: )];
     }
 }
 
--(void)viewDidAppear:(BOOL)animated
+-(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    
     if(self.revealViewController)
     {
         [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     }
+    
     self.tabBarController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Player Menu" style:UIBarButtonItemStylePlain target:self action:@selector(playerMenuPressed)];
+    
+    //Navigation item coloring
+    self.tabBarController.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
+    self.tabBarController.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

@@ -56,6 +56,10 @@ NSArray *teamNamesArray;
     
     [self loadTeamNameArray];
     
+    //Navigation item coloring
+    self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
+    self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
+    
 }
 
 - (IBAction)addPlayersButtonClicked:(id)sender {

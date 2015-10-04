@@ -14,6 +14,10 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //Navigation item coloring
+    self.navigationItem.backBarButtonItem.tintColor = [UIColor whiteColor];
+    self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

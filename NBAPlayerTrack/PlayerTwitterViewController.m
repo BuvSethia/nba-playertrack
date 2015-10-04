@@ -51,6 +51,10 @@ bool retriedTwitterLoadPlayer = NO;
     [[[self.tabBarController.viewControllers objectAtIndex:1] tabBarItem] setTitle:title2];
     UIImage *image2 = [UIImage imageNamed:@"Crowd.png" ];
     [[[self.tabBarController.viewControllers objectAtIndex:1] tabBarItem] setImage:[self resizeImage:image2 imageSize:size]];
+    
+    //Navigation item coloring
+    self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
+    self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
 }
 
 -(void)viewDidAppear:(BOOL)animated
