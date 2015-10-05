@@ -16,7 +16,7 @@
     [super viewDidLoad];
     
     //Navigation item coloring
-    self.navigationItem.backBarButtonItem.tintColor = [UIColor whiteColor];
+    self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
 }
 

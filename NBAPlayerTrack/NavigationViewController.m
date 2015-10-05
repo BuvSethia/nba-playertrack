@@ -35,7 +35,7 @@
     
     NSString *selectedOption = self.menuItems[indexPath.row];
     
-    if([selectedOption isEqualToString:@"Main Menu"])
+    if([selectedOption isEqualToString:@"My Players"])
     {
         [self performSegueWithIdentifier:@"MainMenuSegue" sender:self];
     }

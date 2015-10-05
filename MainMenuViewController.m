@@ -44,7 +44,7 @@ static NSMutableArray *userPlayers = nil;
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = [UIColor lightGrayColor];
     //Removes horizontal lines from the table view
-    //[self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     //Let the table view use Player Cells
     [self.tableView registerNib:[UINib nibWithNibName:@"PlayerCell" bundle:nil] forCellReuseIdentifier:@"menuCell"];
     
@@ -118,15 +118,21 @@ static NSMutableArray *userPlayers = nil;
     [self performSegueWithIdentifier:@"PlayerDetailSegue" sender:tableView];
 }
 
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    [tableView beginUpdates];
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
         [userPlayers removeObjectAtIndex:indexPath.section];
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                         withRowAnimation:UITableViewRowAnimationFade];
+        [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section]
+                 withRowAnimation:UITableViewRowAnimationFade];
         [MainMenuViewController saveUserPlayers];
         
     }
+    [tableView endUpdates];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -137,11 +143,11 @@ static NSMutableArray *userPlayers = nil;
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 2.0f;
+    return 0.0f;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 2.0f;
+    return 5.0f;
 }
 
 //http://stackoverflow.com/questions/12552785/resizing-image-to-fit-uiimageview
