@@ -107,7 +107,21 @@ const int MAX_STATS = 5;
 {
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"PlayerNameCell"];
     Player *player = self.selectedPlayersToGraph[indexPath.row];
-    cell.textLabel.text = player.name;
+    UILabel *nameLabel = (UILabel*) [cell viewWithTag:100];
+    nameLabel.text = player.name;
+    
+    //Cell corners
+    cell.layer.cornerRadius = 3.0f;
+    
+    //Cell shadow
+    cell.layer.masksToBounds = NO;
+    cell.layer.shadowOffset = CGSizeMake(1, 0);
+    cell.layer.shadowColor = [[UIColor blackColor] CGColor];
+    cell.layer.shadowRadius = 5;
+    cell.layer.shadowOpacity = .50;
+    CGRect shadowFrame = cell.layer.bounds;
+    CGPathRef shadowPath = [UIBezierPath bezierPathWithRect:shadowFrame].CGPath;
+    cell.layer.shadowPath = shadowPath;
     
     return cell;
 }
@@ -291,6 +305,19 @@ const int MAX_STATS = 5;
     
     UILabel *statName = (UILabel *)[cell viewWithTag:1];
     statName.text = self.selectedStatsToGraph[indexPath.row];
+    
+    //Cell corners
+    cell.layer.cornerRadius = 3.0f;
+    
+    //Cell shadow
+    cell.layer.masksToBounds = NO;
+    cell.layer.shadowOffset = CGSizeMake(1, 0);
+    cell.layer.shadowColor = [[UIColor blackColor] CGColor];
+    cell.layer.shadowRadius = 5;
+    cell.layer.shadowOpacity = .50;
+    CGRect shadowFrame = cell.layer.bounds;
+    CGPathRef shadowPath = [UIBezierPath bezierPathWithRect:shadowFrame].CGPath;
+    cell.layer.shadowPath = shadowPath;
     
     return cell;
 }

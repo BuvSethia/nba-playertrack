@@ -69,7 +69,7 @@ const int STREND_MAX_STATS = 2;
     }
     else
     {
-        title = @"To:";
+        title = @"Through:";
     }
     float lblWidth = self.rangePicker.frame.size.width / self.rangePicker.numberOfComponents;
     float lblXposition = self.rangePicker.frame.origin.x;
@@ -236,8 +236,22 @@ const int STREND_MAX_STATS = 2;
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"PlayerNameCell"];
-    cell.textLabel.text = self.selectedPlayerToGraph.name;
-    NSLog(@"Creating table view cell");
+    UILabel *nameLabel = (UILabel*) [cell viewWithTag:100];
+    nameLabel.text = self.selectedPlayerToGraph.name;
+    
+    
+    //Cell corners
+    cell.layer.cornerRadius = 3.0f;
+    
+    //Cell shadow
+    cell.layer.masksToBounds = NO;
+    cell.layer.shadowOffset = CGSizeMake(1, 0);
+    cell.layer.shadowColor = [[UIColor blackColor] CGColor];
+    cell.layer.shadowRadius = 5;
+    cell.layer.shadowOpacity = .50;
+    CGRect shadowFrame = cell.layer.bounds;
+    CGPathRef shadowPath = [UIBezierPath bezierPathWithRect:shadowFrame].CGPath;
+    cell.layer.shadowPath = shadowPath;
     
     return cell;
 }
@@ -312,6 +326,19 @@ const int STREND_MAX_STATS = 2;
     
     UILabel *statName = (UILabel *)[cell viewWithTag:1];
     statName.text = self.selectedStatsToGraph[indexPath.row];
+    
+    //Cell corners
+    cell.layer.cornerRadius = 3.0f;
+    
+    //Cell shadow
+    cell.layer.masksToBounds = NO;
+    cell.layer.shadowOffset = CGSizeMake(1, 0);
+    cell.layer.shadowColor = [[UIColor blackColor] CGColor];
+    cell.layer.shadowRadius = 5;
+    cell.layer.shadowOpacity = .50;
+    CGRect shadowFrame = cell.layer.bounds;
+    CGPathRef shadowPath = [UIBezierPath bezierPathWithRect:shadowFrame].CGPath;
+    cell.layer.shadowPath = shadowPath;
     
     return cell;
 }

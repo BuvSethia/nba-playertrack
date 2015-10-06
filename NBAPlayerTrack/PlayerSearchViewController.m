@@ -522,4 +522,8 @@ NSArray *teamNamesArray;
                       @"Washington Wizards", nil];
 }
 
+- (IBAction)backButtonPressed:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 @end

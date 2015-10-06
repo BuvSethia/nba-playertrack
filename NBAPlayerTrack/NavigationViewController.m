@@ -14,7 +14,7 @@
 -(void)viewDidLoad
 {
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    self.menuItems = [[NSArray alloc] initWithObjects:@"Main Menu", @"Around the NBA", @"Player Compare", @"Graphs", @"Options", @"References", nil];
+    self.menuItems = [[NSArray alloc] initWithObjects:@"My Players", @"Around the NBA", @"Player Compare", @"Graphs", @"Options", @"References", nil];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

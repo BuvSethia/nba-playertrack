@@ -153,6 +153,7 @@
     {
     }
     
+    //Determine which player's stat is better to highlight it green (and the lesser one red)
     if([statName.text containsString:@"playerID"] || [statName.text containsString:@"Season"])
     {
         playerOneStatLabel.textColor = [UIColor blackColor];

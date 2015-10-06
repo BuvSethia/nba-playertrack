@@ -29,6 +29,7 @@
         [self.sidebarButton setTarget: self.revealViewController];
         [self.sidebarButton setAction: @selector( revealToggle: )];
     }
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated

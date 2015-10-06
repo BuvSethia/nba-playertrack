@@ -413,6 +413,14 @@
     [self.hostView setHidden:YES];
     //[self.view bringSubviewToFront:self.legendImageView];
     [self.graphImageView setImage:graphImage];
+    if(legendImage.size.width >= self.legendImageView.bounds.size.width)
+    {
+        self.legendImageView.contentMode = UIViewContentModeScaleToFill;
+    }
+    else
+    {
+        self.legendImageView.contentMode = UIViewContentModeCenter;
+    }
     [self.legendImageView setImage:legendImage];
 }
 
