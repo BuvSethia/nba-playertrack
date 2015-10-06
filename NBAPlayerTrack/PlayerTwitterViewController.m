@@ -63,8 +63,14 @@ bool retriedTwitterLoadPlayer = NO;
     {
         [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     }
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
     self.tabBarController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Player Menu" style:UIBarButtonItemStylePlain target:self action:@selector(playerMenuPressed)];
-    //self.tabBarController.tabBar.barTintColor = [UIColor blueColor];
+    self.tabBarController.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
 }
 
 - (void)playerMenuPressed{

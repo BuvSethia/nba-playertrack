@@ -22,8 +22,6 @@ NSArray *teamNamesArray;
 {
     [super viewDidLoad];
     
-    [self loadPlayersToTable];
-    
     self.selectedPlayers = [[NSMutableArray alloc] init];
 
     //Removes extra horizontal lines from the table view
@@ -60,6 +58,24 @@ NSArray *teamNamesArray;
     self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
     
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    UIActivityIndicatorView *loadPlayersIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    loadPlayersIndicator.color = [UIColor blackColor];
+    loadPlayersIndicator.center = self.view.center;
+    [loadPlayersIndicator startAnimating];
+    [self.view addSubview:loadPlayersIndicator];
+    [self.view bringSubviewToFront:loadPlayersIndicator];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self loadPlayersToTable];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [loadPlayersIndicator removeFromSuperview];
+        });
+    });
 }
 
 - (IBAction)addPlayersButtonClicked:(id)sender {

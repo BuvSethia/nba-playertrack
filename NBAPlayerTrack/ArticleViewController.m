@@ -9,6 +9,12 @@
 #import "ArticleViewController.h"
 #import "SWRevealViewController.h"
 
+@interface ArticleViewController ()
+
+@property UIActivityIndicatorView *loadArticlesIndicator;
+
+@end
+
 @implementation ArticleViewController
 
 -(void)viewDidLoad
@@ -27,10 +33,11 @@
     self.tabBarController.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
     self.tabBarController.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
     
-    
+    self.webView.delegate = self;
     NSURL *urlU = [NSURL URLWithString:self.url];
     NSURLRequest *request = [NSURLRequest requestWithURL:urlU];
     [self.webView loadRequest:request];
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -39,10 +46,35 @@
     {
         [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     }
+
+}
+
+-(void)webViewDidStartLoad:(UIWebView *)webView
+{
+    NSLog(@"Started article load");
+    
+    self.loadArticlesIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    self.loadArticlesIndicator.color = [UIColor blackColor];
+    self.loadArticlesIndicator.center = self.view.center;
+    [self.loadArticlesIndicator startAnimating];
+    [self.view addSubview:self.loadArticlesIndicator];
+    [self.view bringSubviewToFront:self.loadArticlesIndicator];
+    
+}
+
+-(void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    NSLog(@"Finished article load");
+    [self.loadArticlesIndicator stopAnimating];
+    [self.loadArticlesIndicator removeFromSuperview];
 }
 
 - (void)articlesMenuPressed{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)backButtonPressed:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:Nil];
 }
 
 @end

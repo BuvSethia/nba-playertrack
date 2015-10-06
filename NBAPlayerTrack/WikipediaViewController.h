@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WikipediaViewController : UIViewController
+@interface WikipediaViewController : UIViewController <UIWebViewDelegate>
 
 @property NSString *url;
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
