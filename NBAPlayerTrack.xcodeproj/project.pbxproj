@@ -27,6 +27,7 @@
 		39A100AF1AA4EA0D0092F5CF /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 39A100AD1AA4EA0D0092F5CF /* menu.png */; };
 		39A100B01AA4EA0D0092F5CF /* menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39A100AE1AA4EA0D0092F5CF /* menu@2x.png */; };
 		39A100B31AA4F0A70092F5CF /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A100B21AA4F0A70092F5CF /* NavigationViewController.m */; };
+		39A2A5A21BC37BA000E7B128 /* WikipediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A2A5A11BC37BA000E7B128 /* WikipediaViewController.m */; };
 		39A2BA201AB36F34001C905E /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A2BA1F1AB36F34001C905E /* Utility.m */; };
 		39A3890B1AC11DCD009FA8B6 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39A389081AC11DCD009FA8B6 /* TwitterKit.framework */; };
 		39A3890C1AC11DCD009FA8B6 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 39A389091AC11DCD009FA8B6 /* TwitterKitResources.bundle */; };
@@ -175,6 +176,8 @@
 		39A100AE1AA4EA0D0092F5CF /* menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu@2x.png"; sourceTree = "<group>"; };
 		39A100B11AA4F0A70092F5CF /* NavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
 		39A100B21AA4F0A70092F5CF /* NavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationViewController.m; sourceTree = "<group>"; };
+		39A2A5A01BC37BA000E7B128 /* WikipediaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikipediaViewController.h; sourceTree = "<group>"; };
+		39A2A5A11BC37BA000E7B128 /* WikipediaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WikipediaViewController.m; sourceTree = "<group>"; };
 		39A2BA1E1AB36F34001C905E /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utility.h; path = ../Utility.h; sourceTree = "<group>"; };
 		39A2BA1F1AB36F34001C905E /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Utility.m; path = ../Utility.m; sourceTree = "<group>"; };
 		39A389081AC11DCD009FA8B6 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = SOURCE_ROOT; };
@@ -211,8 +214,8 @@
 		39AC2E031AB8C8DA0077D31E /* PlayerNewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerNewsViewController.h; path = NBAPlayerTrack/PlayerNewsViewController.h; sourceTree = "<group>"; };
 		39AC2E041AB8C8DA0077D31E /* PlayerNewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerNewsViewController.m; path = NBAPlayerTrack/PlayerNewsViewController.m; sourceTree = "<group>"; };
 		39B2E8901BAE11EB008B9E96 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		39B2E8921BB10213008B9E96 /* PlayerBioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerBioViewController.h; sourceTree = "<group>"; };
-		39B2E8931BB10213008B9E96 /* PlayerBioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerBioViewController.m; sourceTree = "<group>"; };
+		39B2E8921BB10213008B9E96 /* PlayerBioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerBioViewController.h; path = ../PlayerBioViewController.h; sourceTree = "<group>"; };
+		39B2E8931BB10213008B9E96 /* PlayerBioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerBioViewController.m; path = ../PlayerBioViewController.m; sourceTree = "<group>"; };
 		39BA58121ABA7520007E5F9E /* ArticleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticleViewController.h; path = NBAPlayerTrack/ArticleViewController.h; sourceTree = "<group>"; };
 		39BA58131ABA7520007E5F9E /* ArticleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArticleViewController.m; path = NBAPlayerTrack/ArticleViewController.m; sourceTree = "<group>"; };
 		39F749991B881BB600C6889A /* PopupMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupMenuViewController.h; sourceTree = "<group>"; };
@@ -378,8 +381,6 @@
 				399F9BA01B52514900DF89A0 /* PlayerInfoViewController.m */,
 				399F9BA21B525FBE00DF89A0 /* PlayerStatsViewController.h */,
 				399F9BA31B525FBE00DF89A0 /* PlayerStatsViewController.m */,
-				39B2E8921BB10213008B9E96 /* PlayerBioViewController.h */,
-				39B2E8931BB10213008B9E96 /* PlayerBioViewController.m */,
 			);
 			name = "Stats View";
 			path = ..;
@@ -408,6 +409,17 @@
 			path = SWRevealViewController;
 			sourceTree = "<group>";
 		};
+		39A2A5A31BC37C8100E7B128 /* Player Bio */ = {
+			isa = PBXGroup;
+			children = (
+				39B2E8921BB10213008B9E96 /* PlayerBioViewController.h */,
+				39B2E8931BB10213008B9E96 /* PlayerBioViewController.m */,
+				39A2A5A01BC37BA000E7B128 /* WikipediaViewController.h */,
+				39A2A5A11BC37BA000E7B128 /* WikipediaViewController.m */,
+			);
+			name = "Player Bio";
+			sourceTree = "<group>";
+		};
 		39A7D2411AA25731005210F9 = {
 			isa = PBXGroup;
 			children = (
@@ -431,6 +443,7 @@
 		39A7D24C1AA25731005210F9 /* NBAPlayerTrack */ = {
 			isa = PBXGroup;
 			children = (
+				39A2A5A31BC37C8100E7B128 /* Player Bio */,
 				3906685C1BA1F6A400B74228 /* Core Plot */,
 				390668581B9FFDD900B74228 /* Graphs */,
 				39F749A11B88378B00C6889A /* Player Search */,
@@ -654,6 +667,7 @@
 				39A3D23C1ABB6EDD00AC65E2 /* Article.m in Sources */,
 				39BA58141ABA7520007E5F9E /* ArticleViewController.m in Sources */,
 				39A2BA201AB36F34001C905E /* Utility.m in Sources */,
+				39A2A5A21BC37BA000E7B128 /* WikipediaViewController.m in Sources */,
 				390668571B9FF8F700B74228 /* ReferencesViewController.m in Sources */,
 				39A9CB451AC2446400C9CF3A /* PublicTwitterViewController.m in Sources */,
 				39A100B31AA4F0A70092F5CF /* NavigationViewController.m in Sources */,

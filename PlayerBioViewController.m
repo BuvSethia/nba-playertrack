@@ -7,6 +7,7 @@
 //
 
 #import "PlayerBioViewController.h"
+#import "WikipediaViewController.h"
 
 @interface PlayerBioViewController ()
 
@@ -39,6 +40,14 @@
         [selfController setModalPresentationStyle:UIModalPresentationCurrentContext];
         [selfController.navigationController setModalPresentationStyle:UIModalPresentationCurrentContext];
     }
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    WikipediaViewController *dest = segue.destinationViewController;
+    NSString *wikiPageTitle = [[self.playerBio objectForKey:@"title"] stringByReplacingOccurrencesOfString:@" " withString:@"_"];
+    dest.url = [NSString stringWithFormat:@"https://en.wikipedia.org/wiki/%@", wikiPageTitle];
+    NSLog(@"%@", dest.url);
 }
 
 @end
