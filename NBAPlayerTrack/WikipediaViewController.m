@@ -18,11 +18,13 @@
 
 -(void)viewDidLoad
 {
+    [super viewDidLoad];
+    
     NSURL *urlU = [NSURL URLWithString:[self.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSLog(@"%@", urlU);
     NSURLRequest *request = [NSURLRequest requestWithURL:urlU];
+    self.webView.delegate = self;
     [self.webView loadRequest:request];
-    NSLog(@"Loaded Wikipedia page");
 }
 
 - (IBAction)backButtonPressed:(id)sender {

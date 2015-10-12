@@ -30,6 +30,7 @@ static NSMutableArray *userPlayers = nil;
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    
     SWRevealViewController *revealViewController = self.revealViewController;
     if ( revealViewController )
     {
@@ -37,10 +38,6 @@ static NSMutableArray *userPlayers = nil;
         [self.sidebarButton setAction: @selector( revealToggle: )];
     }
     
-    //Test
-    //self.navigationController.navigationBar.barTintColor = [UIColor blueColor];
-    
-    //self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = [UIColor lightGrayColor];
     //Removes horizontal lines from the table view
@@ -48,27 +45,42 @@ static NSMutableArray *userPlayers = nil;
     //Let the table view use Player Cells
     [self.tableView registerNib:[UINib nibWithNibName:@"PlayerCell" bundle:nil] forCellReuseIdentifier:@"menuCell"];
     
-    if(userPlayers == Nil && [[NSFileManager defaultManager] fileExistsAtPath:[MainMenuViewController userPlayersFilePath]])
-    {
-        userPlayers = [NSKeyedUnarchiver unarchiveObjectWithFile:[MainMenuViewController userPlayersFilePath]];
-        NSLog(@"Loading players from file");
-        for(int i = 0; i < userPlayers.count; i++)
-        {
-            userPlayers[i] = [Utility generateObjectForPlayer:userPlayers[i]];
-
-        }
-        [MainMenuViewController saveUserPlayers];
+    UIActivityIndicatorView *loadPlayersIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    loadPlayersIndicator.color = [UIColor blackColor];
+    loadPlayersIndicator.center = self.view.center;
+    [loadPlayersIndicator startAnimating];
+    [self.view addSubview:loadPlayersIndicator];
+    [self.view bringSubviewToFront:loadPlayersIndicator];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-    }
-    else if(userPlayers != Nil)
-    {
-        NSLog(@"Players already loaded");
-        //[self.tableView reloadData];
-    }
-    else
-    {
-        NSLog(@"userPlayersFile DNE");
-    }
+        if(userPlayers == Nil && [[NSFileManager defaultManager] fileExistsAtPath:[MainMenuViewController userPlayersFilePath]])
+        {
+            userPlayers = [NSKeyedUnarchiver unarchiveObjectWithFile:[MainMenuViewController userPlayersFilePath]];
+            NSLog(@"Loading players from file");
+            for(int i = 0; i < userPlayers.count; i++)
+            {
+                userPlayers[i] = [Utility generateObjectForPlayer:userPlayers[i]];
+                
+            }
+            [MainMenuViewController saveUserPlayers];
+            
+        }
+        else if(userPlayers != Nil)
+        {
+            NSLog(@"Players already loaded");
+        }
+        else
+        {
+            NSLog(@"userPlayersFile DNE");
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [loadPlayersIndicator stopAnimating];
+            [loadPlayersIndicator removeFromSuperview];
+            [self.tableView reloadData];
+        });
+    });
     
 }
 

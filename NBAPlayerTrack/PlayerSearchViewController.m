@@ -79,28 +79,43 @@ NSArray *teamNamesArray;
 }
 
 - (IBAction)addPlayersButtonClicked:(id)sender {
-    for(Player *player in self.selectedPlayers)
-    {
-        if(![MainMenuViewController containsPlayer:player.ID])
+    UIActivityIndicatorView *loadPlayersIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    loadPlayersIndicator.color = [UIColor blackColor];
+    loadPlayersIndicator.center = self.view.center;
+    [loadPlayersIndicator startAnimating];
+    [self.view addSubview:loadPlayersIndicator];
+    [self.view bringSubviewToFront:loadPlayersIndicator];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        for(Player *player in self.selectedPlayers)
         {
-            Player *newPlayer = [Utility generateObjectForPlayer:player];
-            [[MainMenuViewController userPlayers] addObject:newPlayer];
-            [MainMenuViewController saveUserPlayers];
-            NSLog(@"Added player %@ to main menu", newPlayer.name);
+            if(![MainMenuViewController containsPlayer:player.ID])
+            {
+                Player *newPlayer = [Utility generateObjectForPlayer:player];
+                [[MainMenuViewController userPlayers] addObject:newPlayer];
+                [MainMenuViewController saveUserPlayers];
+                NSLog(@"Added player %@ to main menu", newPlayer.name);
+            }
+            else
+            {
+                NSLog(@"Already following that player");
+            }
         }
-        else
-        {
-            NSLog(@"Already following that player");
-        }
-    }
-    [self.selectedPlayers removeAllObjects];
-    [self.tableView reloadData];
-    UIAlertView *confirmation = [[UIAlertView alloc] initWithTitle:@"Players Added"
-                                                               message:@"All selected players have been added to your player list."
-                                                               delegate:nil
-                                                     cancelButtonTitle:@"Okay"
-                                                     otherButtonTitles:nil];
-    [confirmation show];
+        [self.selectedPlayers removeAllObjects];
+        [self.tableView reloadData];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [loadPlayersIndicator stopAnimating];
+            [loadPlayersIndicator removeFromSuperview];
+            UIAlertView *confirmation = [[UIAlertView alloc] initWithTitle:@"Players Added"
+                                                                   message:@"All selected players have been added to your player list."
+                                                                  delegate:nil
+                                                         cancelButtonTitle:@"Okay"
+                                                         otherButtonTitles:nil];
+            [confirmation show];
+        });
+    });
 }
 
 #pragma mark - Table View methods

@@ -11,7 +11,7 @@
 
 @interface ArticleViewController ()
 
-@property UIActivityIndicatorView *loadArticlesIndicator;
+//@property UIActivityIndicatorView *loadArticlesIndicator;
 
 @end
 
@@ -53,20 +53,24 @@
 {
     NSLog(@"Started article load");
     
+    /*
     self.loadArticlesIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     self.loadArticlesIndicator.color = [UIColor blackColor];
     self.loadArticlesIndicator.center = self.view.center;
     [self.loadArticlesIndicator startAnimating];
     [self.view addSubview:self.loadArticlesIndicator];
     [self.view bringSubviewToFront:self.loadArticlesIndicator];
+    */
     
 }
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView
 {
     NSLog(@"Finished article load");
+    /*
     [self.loadArticlesIndicator stopAnimating];
     [self.loadArticlesIndicator removeFromSuperview];
+    */
 }
 
 - (void)articlesMenuPressed{
