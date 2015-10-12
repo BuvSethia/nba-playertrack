@@ -19,6 +19,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.bioTextField.text = [self.playerBio objectForKey:@"extract"];
+    if(!self.bioTextField.text)
+    {
+        self.bioTextField.text = @"There was an error loading player bio data, or it does not exist. Please try again later.";
+    }
 }
 
 - (IBAction)backToStatsPressed:(id)sender {

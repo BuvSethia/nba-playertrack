@@ -73,6 +73,12 @@
     */
 }
 
+-(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was an error loading this page. Please try again later" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+    [alert show];
+}
+
 - (void)articlesMenuPressed{
     [self.navigationController popViewControllerAnimated:YES];
 }

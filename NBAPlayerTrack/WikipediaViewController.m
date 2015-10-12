@@ -23,8 +23,16 @@
     NSURL *urlU = [NSURL URLWithString:[self.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSLog(@"%@", urlU);
     NSURLRequest *request = [NSURLRequest requestWithURL:urlU];
-    self.webView.delegate = self;
-    [self.webView loadRequest:request];
+    if(request)
+    {
+        self.webView.delegate = self;
+        [self.webView loadRequest:request];
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was an error loading the player's extended bio. Please try again later" delegate:Nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        [alert show];
+    }
 }
 
 - (IBAction)backButtonPressed:(id)sender {
@@ -49,6 +57,12 @@
     NSLog(@"Finished article load");
     [self.loadArticlesIndicator stopAnimating];
     [self.loadArticlesIndicator removeFromSuperview];
+}
+
+-(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was an error loading this page. Please try again later" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+    [alert show];
 }
 
 @end

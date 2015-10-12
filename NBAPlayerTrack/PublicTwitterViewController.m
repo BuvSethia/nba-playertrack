@@ -133,7 +133,11 @@ bool retriedTwitterLoad = NO;
         }
     }];
     
-    [self.tableView reloadData];
+    if(!self.tweets && retriedTwitterLoad == YES)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was an error loading the public twitter feed. Please try again later" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+        [alert show];
+    }
 }
 
 #pragma mark Saving and loading tweet file

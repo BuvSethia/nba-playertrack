@@ -140,7 +140,11 @@ bool retriedTwitterLoadPlayer = NO;
         }
     }];
     
-    [self.tableView reloadData];
+    if(!self.tweets && retriedTwitterLoadPlayer == YES)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was an error loading this player's twitter feed. Please try again later" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+        [alert show];
+    }
 }
 
 -(bool)saveTwitter

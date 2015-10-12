@@ -74,6 +74,11 @@ NSArray *teamNamesArray;
         [self loadPlayersToTable];
         dispatch_async(dispatch_get_main_queue(), ^{
             [loadPlayersIndicator removeFromSuperview];
+            if(!self.playerArray)
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was an error loading the list of available players. Please try again later." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+                [alert show];
+            }
         });
     });
 }
