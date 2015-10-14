@@ -58,11 +58,6 @@ NSArray *teamNamesArray;
     self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
     
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
     UIActivityIndicatorView *loadPlayersIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     loadPlayersIndicator.color = [UIColor blackColor];
     loadPlayersIndicator.center = self.view.center;
@@ -79,8 +74,18 @@ NSArray *teamNamesArray;
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was an error loading the list of available players. Please try again later." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
                 [alert show];
             }
+            else
+            {
+                [self.tableView reloadData];
+            }
         });
     });
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
 }
 
 - (IBAction)addPlayersButtonClicked:(id)sender {
@@ -449,7 +454,6 @@ NSArray *teamNamesArray;
     
     //NSLog(@"Number of sections is %ld", [[self.playerListDictionary allKeys] count]);
     
-    [self.tableView reloadData];
 }
 
 #pragma mark - Loading stuff
