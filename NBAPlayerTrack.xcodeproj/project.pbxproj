@@ -31,6 +31,7 @@
 		39A2A5A51BC383FD00E7B128 /* NBA_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 39A2A5A41BC383FD00E7B128 /* NBA_logo.png */; };
 		39A2A5A81BD1B71400E7B128 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A2A5A71BD1B71400E7B128 /* Reachability.m */; };
 		39A2A5AA1BD1B79000E7B128 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39A2A5A91BD1B79000E7B128 /* SystemConfiguration.framework */; };
+		39A2A5AD1BD222F100E7B128 /* UsefulLinksTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A2A5AC1BD222F100E7B128 /* UsefulLinksTableViewController.m */; };
 		39A2BA201AB36F34001C905E /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A2BA1F1AB36F34001C905E /* Utility.m */; };
 		39A3890B1AC11DCD009FA8B6 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39A389081AC11DCD009FA8B6 /* TwitterKit.framework */; };
 		39A3890C1AC11DCD009FA8B6 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 39A389091AC11DCD009FA8B6 /* TwitterKitResources.bundle */; };
@@ -185,6 +186,8 @@
 		39A2A5A61BD1B71400E7B128 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		39A2A5A71BD1B71400E7B128 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		39A2A5A91BD1B79000E7B128 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		39A2A5AB1BD222F100E7B128 /* UsefulLinksTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsefulLinksTableViewController.h; sourceTree = "<group>"; };
+		39A2A5AC1BD222F100E7B128 /* UsefulLinksTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsefulLinksTableViewController.m; sourceTree = "<group>"; };
 		39A2BA1E1AB36F34001C905E /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utility.h; path = ../Utility.h; sourceTree = "<group>"; };
 		39A2BA1F1AB36F34001C905E /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Utility.m; path = ../Utility.m; sourceTree = "<group>"; };
 		39A389081AC11DCD009FA8B6 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = SOURCE_ROOT; };
@@ -482,6 +485,8 @@
 				39F7499A1B881BB600C6889A /* PopupMenuViewController.m */,
 				390668551B9FF8F700B74228 /* ReferencesViewController.h */,
 				390668561B9FF8F700B74228 /* ReferencesViewController.m */,
+				39A2A5AB1BD222F100E7B128 /* UsefulLinksTableViewController.h */,
+				39A2A5AC1BD222F100E7B128 /* UsefulLinksTableViewController.m */,
 				39A7D25A1AA25731005210F9 /* Images.xcassets */,
 				39A7D25C1AA25731005210F9 /* LaunchScreen.xib */,
 				39A7D24D1AA25731005210F9 /* Supporting Files */,
@@ -682,6 +687,7 @@
 				39A2BA201AB36F34001C905E /* Utility.m in Sources */,
 				39A2A5A21BC37BA000E7B128 /* WikipediaViewController.m in Sources */,
 				390668571B9FF8F700B74228 /* ReferencesViewController.m in Sources */,
+				39A2A5AD1BD222F100E7B128 /* UsefulLinksTableViewController.m in Sources */,
 				39A9CB451AC2446400C9CF3A /* PublicTwitterViewController.m in Sources */,
 				39A100B31AA4F0A70092F5CF /* NavigationViewController.m in Sources */,
 				39A7D2501AA25731005210F9 /* main.m in Sources */,

@@ -14,7 +14,7 @@
 -(void)viewDidLoad
 {
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    self.menuItems = [[NSArray alloc] initWithObjects:@"My Players", @"Around the NBA", @"Player Compare", @"Graphs", @"Options", @"References", nil];
+    self.menuItems = [[NSArray alloc] initWithObjects:@"My Players", @"Around the NBA", @"Player Compare", @"Graphs", @"Useful Links", @"References", nil];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -51,9 +51,9 @@
     {
         [self performSegueWithIdentifier:@"GraphSegue" sender:self];
     }
-    else if([selectedOption isEqualToString:@"Options"])
+    else if([selectedOption isEqualToString:@"Useful Links"])
     {
-        [self performSegueWithIdentifier:@"OptionsSegue" sender:self];
+        [self performSegueWithIdentifier:@"LinksSegue" sender:self];
     }
     else if([selectedOption isEqualToString:@"References"])
     {
