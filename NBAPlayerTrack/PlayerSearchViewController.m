@@ -89,43 +89,51 @@ NSArray *teamNamesArray;
 }
 
 - (IBAction)addPlayersButtonClicked:(id)sender {
-    UIActivityIndicatorView *loadPlayersIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    loadPlayersIndicator.color = [UIColor blackColor];
-    loadPlayersIndicator.center = self.view.center;
-    [loadPlayersIndicator startAnimating];
-    [self.view addSubview:loadPlayersIndicator];
-    [self.view bringSubviewToFront:loadPlayersIndicator];
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    if([Utility haveInternet])
+    {
+        UIActivityIndicatorView *loadPlayersIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        loadPlayersIndicator.color = [UIColor blackColor];
+        loadPlayersIndicator.center = self.view.center;
+        [loadPlayersIndicator startAnimating];
+        [self.view addSubview:loadPlayersIndicator];
+        [self.view bringSubviewToFront:loadPlayersIndicator];
         
-        for(Player *player in self.selectedPlayers)
-        {
-            if(![MainMenuViewController containsPlayer:player.ID])
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            for(Player *player in self.selectedPlayers)
             {
-                Player *newPlayer = [Utility generateObjectForPlayer:player];
-                [[MainMenuViewController userPlayers] addObject:newPlayer];
-                [MainMenuViewController saveUserPlayers];
-                NSLog(@"Added player %@ to main menu", newPlayer.name);
+                if(![MainMenuViewController containsPlayer:player.ID])
+                {
+                    Player *newPlayer = [Utility generateObjectForPlayer:player];
+                    [[MainMenuViewController userPlayers] addObject:newPlayer];
+                    [MainMenuViewController saveUserPlayers];
+                    NSLog(@"Added player %@ to main menu", newPlayer.name);
+                }
+                else
+                {
+                    NSLog(@"Already following that player");
+                }
             }
-            else
-            {
-                NSLog(@"Already following that player");
-            }
-        }
-        [self.selectedPlayers removeAllObjects];
-        [self.tableView reloadData];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [loadPlayersIndicator stopAnimating];
-            [loadPlayersIndicator removeFromSuperview];
-            UIAlertView *confirmation = [[UIAlertView alloc] initWithTitle:@"Players Added"
-                                                                   message:@"All selected players have been added to your player list."
-                                                                  delegate:nil
-                                                         cancelButtonTitle:@"Okay"
-                                                         otherButtonTitles:nil];
-            [confirmation show];
+            [self.selectedPlayers removeAllObjects];
+            [self.tableView reloadData];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [loadPlayersIndicator stopAnimating];
+                [loadPlayersIndicator removeFromSuperview];
+                UIAlertView *confirmation = [[UIAlertView alloc] initWithTitle:@"Players Added"
+                                                                       message:@"All selected players have been added to your player list."
+                                                                      delegate:nil
+                                                             cancelButtonTitle:@"Okay"
+                                                             otherButtonTitles:nil];
+                [confirmation show];
+            });
         });
-    });
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was an error connecting to the internet. Please check that either wifi or data is on." delegate:Nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        [alert show];
+    }
 }
 
 #pragma mark - Table View methods
@@ -459,32 +467,54 @@ NSArray *teamNamesArray;
 #pragma mark - Loading stuff
 -(void)loadPlayersToTable
 {
+    self.playerArray = Nil;
+    
     //If an updated version of the player list is already saved as a file, load player list from file
-    if(self.playerArray == Nil && [[NSFileManager defaultManager] fileExistsAtPath:[self playerListFilePath]] && ![self updatePlayerListFile])
+    if([[NSFileManager defaultManager] fileExistsAtPath:[self playerListFilePath]] && ![self updatePlayerListFile])
     {
         NSLog(@"Loading player list from file");
         self.playerArray = [NSKeyedUnarchiver unarchiveObjectWithFile:[self playerListFilePath]];
-        [self createSectionedDictionaryFromPlayerList];
     }
-    //Otherwise, load it from the database.
+    //Otherwise, load it from the database, if we have an internet connection.
     else
     {
-        NSLog(@"Getting player list from database");
-        //Pull a list of all players in the database to show to the user
-        self.playerArray = [NSArray arrayWithArray:[Player generatePlayerList]];
+        if([Utility haveInternet])
+        {
+            NSLog(@"Getting player list from database");
+            //Pull a list of all players in the database to show to the user
+            self.playerArray = [NSArray arrayWithArray:[Player generatePlayerList]];
         
-        //Sort the list of players alphabetically by first name
-        //http://stackoverflow.com/questions/805547/how-to-sort-an-nsmutablearray-with-custom-objects-in-it
-        NSArray *sortedArray;
-        sortedArray = [self.playerArray sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
-            NSString *first = [(Player*)a name];
-            NSString *second = [(Player*)b name];
-            return [first compare:second];
-        }];
-        self.playerArray = sortedArray;
-        [self savePlayerList];
-        [self createSectionedDictionaryFromPlayerList];
+            //Sort the list of players alphabetically by first name
+            //http://stackoverflow.com/questions/805547/how-to-sort-an-nsmutablearray-with-custom-objects-in-it
+            NSArray *sortedArray;
+            sortedArray = [self.playerArray sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+                NSString *first = [(Player*)a name];
+                NSString *second = [(Player*)b name];
+                return [first compare:second];
+            }];
+            self.playerArray = sortedArray;
+            [self savePlayerList];
+        }
+        else
+        {
+            if([[NSFileManager defaultManager] fileExistsAtPath:[self playerListFilePath]])
+            {
+                NSLog(@"Loading player list from file");
+                self.playerArray = [NSKeyedUnarchiver unarchiveObjectWithFile:[self playerListFilePath]];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was an error connecting to the internet, so the list of players may not be up to date. Please turn on wifi or data to update list of players." delegate:Nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+                [alert show];
+            }
+            else
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was an error connecting to the internet and no saved list of players was found. Please turn on wifi or data and click \"Add Player\" to get the list of players." delegate:Nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+                [alert show];
+                
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        }
     }
+    
+    [self createSectionedDictionaryFromPlayerList];
 }
 
 -(void)createDictionaryForFilteredArray

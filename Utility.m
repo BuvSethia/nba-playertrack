@@ -9,25 +9,42 @@
 #import "Utility.h"
 #import "Player.h"
 #import "Article.h"
+#import "Reachability.h"
 
 @implementation Utility
+
++(BOOL)haveInternet
+{
+    // check if we've got network connectivity
+    Reachability *myNetwork = [Reachability reachabilityWithHostname:@"google.com"];
+    NetworkStatus myStatus = [myNetwork currentReachabilityStatus];
+    
+    switch (myStatus) {
+        case NotReachable:
+            NSLog(@"There's no internet connection");
+            return NO;
+            break;
+            
+        case ReachableViaWWAN:
+            NSLog(@"We have internet connection");
+            return YES;
+            break;
+            
+        case ReachableViaWiFi:
+            NSLog(@"We have internet connection.");
+            return YES;
+            break;
+            
+        default:
+            NSLog(@"Something went wrong checking for internet");
+            return NO;
+            break;
+    }
+}
 
 +(Player*)generateObjectForPlayer:(Player*)player
 {
     NSLog(@"Player being updated: %@", player.ID);
-    //Save ourselves a call to a service and the database and check in-app if stats for this player have already been updated today
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    [calendar setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
-    NSDateComponents *components = [calendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[[NSDate alloc] init]];
-    NSInteger day = [components day];
-    NSInteger playerDay = [player.updateDate integerValue];
-    if(day == playerDay)
-    {
-        NSLog(@"Precheck results: No update to player necessary. Not calling updateDBMethod service.");
-        return player;
-    }
-    
-    NSLog(@"Updated: %@", player.updateDate);
     
     NSString *url = [NSString stringWithFormat:@"http://ec2-52-10-76-24.us-west-2.compute.amazonaws.com/Service.svc/UpdateDBMethod/%@/%@", player.updateDate, player.ID];
     NSData *request = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];

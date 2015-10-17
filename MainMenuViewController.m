@@ -58,12 +58,20 @@ static NSMutableArray *userPlayers = nil;
         {
             userPlayers = [NSKeyedUnarchiver unarchiveObjectWithFile:[MainMenuViewController userPlayersFilePath]];
             NSLog(@"Loading players from file");
-            for(int i = 0; i < userPlayers.count; i++)
+            //If there are players being followed by the user and they need to be updated
+            if(userPlayers.count > 0 && [self playersNeedUpdate])
             {
-                userPlayers[i] = [Utility generateObjectForPlayer:userPlayers[i]];
-                
+                //If we have internet, update the players
+                if([Utility haveInternet])
+                {
+                    for(int i = 0; i < userPlayers.count; i++)
+                    {
+                        userPlayers[i] = [Utility generateObjectForPlayer:userPlayers[i]];
+                        
+                    }
+                    [MainMenuViewController saveUserPlayers];
+                }
             }
-            [MainMenuViewController saveUserPlayers];
             
         }
         else if(userPlayers != Nil)
@@ -79,9 +87,37 @@ static NSMutableArray *userPlayers = nil;
             [loadPlayersIndicator stopAnimating];
             [loadPlayersIndicator removeFromSuperview];
             [self.tableView reloadData];
+            //If we have players but they weren't updated b/c of internet connection, let the user know
+            if(userPlayers.count > 0 && [self playersNeedUpdate] && ![Utility haveInternet])
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was an error connecting to the internet, so player information may not be up to date. Please turn on wifi or data and restart the app to update player information." delegate:Nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+                [alert show];
+            }
         });
     });
     
+}
+
+-(BOOL)playersNeedUpdate
+{
+    //Save ourselves a call to a service and the database and check in-app if stats for this player have already been updated today
+    
+    //Since all the players will have the same update date in the app, grab the first player and check against his update date.
+    Player *player = [userPlayers objectAtIndex:0];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    [calendar setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    NSDateComponents *components = [calendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[[NSDate alloc] init]];
+    NSInteger day = [components day];
+    NSInteger playerDay = [player.updateDate integerValue];
+    if(day == playerDay)
+    {
+        NSLog(@"Precheck results: No update to player necessary. Not calling updateDBMethod service.");
+        return NO;
+    }
+    else
+    {
+        return YES;
+    }
 }
 
 +(NSMutableArray*)userPlayers

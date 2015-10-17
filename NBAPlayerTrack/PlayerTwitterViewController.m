@@ -9,6 +9,7 @@
 #import "PlayerTwitterViewController.h"
 #import "SWRevealViewController.h"
 #import "PlayerTabBarController.h"
+#import "Utility.h"
 #import <TwitterKit/TwitterKit.h>
 
 @implementation PlayerTwitterViewController
@@ -26,10 +27,10 @@ bool retriedTwitterLoadPlayer = NO;
     self.tableView.rowHeight = UITableViewAutomaticDimension; // Explicitly set on iOS 8 if using automatic row height calculation
     self.tableView.allowsSelection = NO;
     [self.tableView registerClass:[TWTRTweetTableViewCell class] forCellReuseIdentifier:TweetTableReuseIdentifier];
+    
     if(self.tweets == Nil && [[NSFileManager defaultManager] fileExistsAtPath:[self playerTwitterFilePath]] && ![self updateTwitterFile])
     {
         NSLog(@"Loading tweets from file");
-        // reading back in...
         NSInputStream *is = [[NSInputStream alloc] initWithFileAtPath:[self playerTwitterFilePath]];
         
         [is open];
@@ -39,7 +40,33 @@ bool retriedTwitterLoadPlayer = NO;
     }
     else
     {
-        [self loadTweetsFromTwitter];
+        if([Utility haveInternet])
+        {
+            [self loadTweetsFromTwitter];
+        }
+        else
+        {
+            if([[NSFileManager defaultManager] fileExistsAtPath:[self playerTwitterFilePath]])
+            {
+                NSLog(@"Loading tweets from file");
+                NSInputStream *is = [[NSInputStream alloc] initWithFileAtPath:[self playerTwitterFilePath]];
+                
+                [is open];
+                self.tweets = [NSJSONSerialization JSONObjectWithStream:is options:NSJSONReadingMutableLeaves error:nil];
+                [is close];
+                [self.tableView reloadData];
+                
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was an error connecting to the internet, so the tweets may not be up to date. Please turn on wifi or data to update tweets" delegate:Nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+                [alert show];
+            }
+            else
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was an error connecting to the internet and no saved tweets were found. Please return to \"My Players\", turn on wifi or data, and come back here to get tweets." delegate:Nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+                [alert show];
+                
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        }
     }
     
     UIImage *image = [UIImage imageWithData:self.player.playerImage];
@@ -139,12 +166,7 @@ bool retriedTwitterLoadPlayer = NO;
             NSLog(@"Unable to log in as guest: %@", [error localizedDescription]);
         }
     }];
-    
-    if(!self.tweets && retriedTwitterLoadPlayer == YES)
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was an error loading this player's twitter feed. Please try again later" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
-        [alert show];
-    }
+
 }
 
 -(bool)saveTwitter

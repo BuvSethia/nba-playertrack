@@ -7,6 +7,7 @@
 //
 
 #import "WikipediaViewController.h"
+#import "Utility.h"
 
 @interface WikipediaViewController ()
 
@@ -25,8 +26,16 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:urlU];
     if(request)
     {
-        self.webView.delegate = self;
-        [self.webView loadRequest:request];
+        if([Utility haveInternet])
+        {
+            self.webView.delegate = self;
+            [self.webView loadRequest:request];
+        }
+        else
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was an error connecting to the internet. Please check that either wifi or data is on." delegate:Nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+            [alert show];
+        }
     }
     else
     {

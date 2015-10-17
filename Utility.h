@@ -12,5 +12,6 @@
 @interface Utility : NSObject
 
 +(Player*)generateObjectForPlayer:(Player*)player;
++(BOOL)haveInternet;
 
 @end

@@ -8,6 +8,7 @@
 
 #import "ArticleViewController.h"
 #import "SWRevealViewController.h"
+#import "Utility.h"
 
 @interface ArticleViewController ()
 
@@ -33,10 +34,27 @@
     self.tabBarController.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
     self.tabBarController.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
     
-    self.webView.delegate = self;
     NSURL *urlU = [NSURL URLWithString:self.url];
     NSURLRequest *request = [NSURLRequest requestWithURL:urlU];
-    [self.webView loadRequest:request];
+    
+    if(request)
+    {
+        if([Utility haveInternet])
+        {
+            self.webView.delegate = self;
+            [self.webView loadRequest:request];
+        }
+        else
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was an error connecting to the internet. Please check that either wifi or data is on." delegate:Nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+            [alert show];
+        }
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was an error loading this article. Please try again later" delegate:Nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        [alert show];
+    }
     
 }
 
