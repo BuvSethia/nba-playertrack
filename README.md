@@ -4,7 +4,11 @@ I might bring it back to life one day. For now, it's the biggest individual proj
 
 ## Improvements
 Unit tests
+
 Better architecture to reduce coupling
+
 Integration tests
+
 End to end tests
+
 etc...
